@@ -25,6 +25,6 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: '$APP_NAME'
-        # publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         images: '$CONTAINER_URL.azurecr.io/$APP_NAME:${{ github.sha }}'
         
