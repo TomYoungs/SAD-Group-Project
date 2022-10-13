@@ -19,6 +19,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
+        cd sadtimesapp/
         docker build . -t $CONTAINER_URL/$APP_NAME:${{ github.sha }}
         docker push $CONTAINER_URL/$APP_NAME:${{ github.sha }}
 
