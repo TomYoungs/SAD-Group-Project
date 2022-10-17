@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    
 jobs:
 
   build:
@@ -26,10 +28,10 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./
-          file: ./Dockerfile
+          context: ./sadtimesapp/
+          file: ./sadtimesapp/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/sadtimeapp:latest
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
