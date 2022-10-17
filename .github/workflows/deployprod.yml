@@ -22,4 +22,3 @@ jobs:
       context: .
       push: true
       tags: tomyoungs/sadtimeapp:latest
-        
