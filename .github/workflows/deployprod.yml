@@ -32,6 +32,7 @@ jobs:
           file: ./sadtimesapp/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/sadtimeapp:latest
+          #oof app is called sadtime"s"app but container is called sadtime"_"app DONT touch!  
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

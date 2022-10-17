@@ -16,6 +16,7 @@ function App() {
           rel="noopener noreferrer"
         >
           Hello Team SAD
+          CI test!
         </a>
       </header>
     </div>
