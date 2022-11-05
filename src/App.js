@@ -1,13 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
-import AnimalFunction from './tempcomponent';
+import { Routes, Route } from 'react-router-dom'
+import Login from './features/auth/Login'
 
 function App() {
-  return (
-    <div className="App">
-      <AnimalFunction />
-    </div>
-  );
+    return (
+        <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Public />} />
+          <Route path="login" element={<Login />} />          
+        </Route>
+      </Routes>
+    );
 }
 
 export default App;
