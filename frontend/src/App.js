@@ -1,25 +1,36 @@
-import React from "react";
- 
-// We use Route in order to define the different routes of our application
-import { Route, Routes } from "react-router-dom";
- 
-// We import all the components we need in our app
-import Navbar from "./components/navbar";
-import RecordList from "./components/recordList";
-import Edit from "./components/edit";
-import Create from "./components/create";
- 
-const App = () => {
- return (
-   <div>
-     <Navbar />
-     <Routes>
-       <Route exact path="/" element={<RecordList />} />
-       <Route path="/edit/:id" element={<Edit />} />
-       <Route path="/create" element={<Create />} />
-     </Routes>
-   </div>
- );
-};
- 
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useAuthContext } from './hooks/useAuthContext'
+import Home from './pages/Home'
+import Navbar from  './components/Navbar'
+import Login from './pages/Login'
+import Register from './pages/Register'
+
+function App() {
+  const { user } = useAuthContext()
+
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <div className='pages'>
+          <Routes>
+            <Route
+              path="/"
+              element={user ? <Home /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/login"
+              element={!user ? <Login /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/register"
+              element={!user ? <Register /> : <Navigate to="/" />}
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </div>
+  );
+}
+
 export default App;
