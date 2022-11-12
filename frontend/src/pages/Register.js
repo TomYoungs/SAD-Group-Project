@@ -4,18 +4,25 @@ import { useRegister } from '../hooks/useRegister'
 const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
     const {register, error, isLoading} = useRegister()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await register(email, password)
+        await register(name, email, password)
     }
 
     return (
         <form className='signup' onSubmit={handleSubmit}>
             <h3>Register</h3>
 
+            <label>Full Name:</label>
+            <input
+                type="name"
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+            />
             <label>Email:</label>
             <input
                 type="email"
