@@ -7,7 +7,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   role: {
     type: Number,
-    range: [0, 4],
+    min: 0,
+    max: 4,
+    default: 0
   },
   name: {
     type: String,
@@ -17,15 +19,16 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
   },
   password: {
     type: String,
     required: true,
   },
-  Modules: {
+  Modules: [{
     module: Schema.Types.ObjectId,
     required: false,
-  },
+  }],
 });
 
 // static register method
@@ -57,8 +60,7 @@ userSchema.statics.register = async function (name, email, password) {
   return user;
 }
 
-// statis login method
-
+// static login method
 userSchema.statics.login = async function (email, password) {
   //validation
   if (!email || !password) {
@@ -80,4 +82,5 @@ userSchema.statics.login = async function (email, password) {
 
   return user
 }
+
 module.exports = mongoose.model("User", userSchema);
