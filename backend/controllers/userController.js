@@ -43,51 +43,68 @@ const registerUser = async (req, res) => {
     }
 }
 
+//TODO: use auth since now update is fully open!
+
 // @desc Update a user
-// @route PATCH /users
-// @access Private
-// const updateUser = async (req, res) => {
-//     const {role, name, email, password, Modules} = req.body
-
-//     try {  
-//             //validation
-//             if (!role || !email || !name || !Array.isArray(Modules) || !Modules.length) {//modules is an array so may not work
-//               throw Error("All fields must be filled/valid");
-//             }
+// @route PATCH /updateuser
+// @access Public
+const updateUser = async (req, res) => {
+    const {role, name, email, password, Modules} = req.body
+    try {  
+            //validation
+            if ( typeof role !='number' || !email || !name || !Array.isArray(Modules) || !Modules.length) {//modules is an array so may not work
+              throw Error("All fields must be filled/valid");
+            }
           
-//             const user = await User.findOne({ email });
+            const user = await User.findOne({ email });
           
-//             if (!user) {
-//               throw Error("User not found");
-//             }
+            if (!user) {
+              throw Error("User not found");
+            }
           
-//             //has modules been entered - module is not the name its the _id
-//             if (Modules) {
-//              Modules.map(async (m) => {
-//                 if (!(await Module.findById(m)).exec())
-//                     throw Error("Module not found")
-//              }) 
-//             }
-            
-//             user.role = role
-//             user.email = email
-//             user.name = name
-//             user.Modules = Modules
+            user.role = role
+            user.email = email
+            user.name = name
+            user.Modules = Modules
 
-//             if(password) {
-//                 //hash pwd
-//                 user.password = await bcrypt.hash(password, 10) // salt rounds
-//             }
-//             const updatedUser = await user.save()
+            if(password) {
+                //hash pwd
+                user.password = await bcrypt.hash(password, 10) // salt rounds
+            }
+            const updatedUser = await user.save()
 
-//         res.status(200).json({ message: `${updatedUser.email} updated` })
-//     } catch (error) {
-//         res.status(400).json({error: error.message})
-//     }
-// }
+        res.status(200).json({ message: `${updatedUser.email} updated` })
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+}
+
+// @desc Create a full user
+// @route POST /createuser
+// @access Public
+const createUser = async (req, res) => {
+    const {role, name, email, password, Modules} = req.body
+
+    if ( typeof role !='number' || !email || !name || !Array.isArray(Modules) || !Modules.length) {//modules is an array so may not work
+        return res.status(400).json({ error: 'Please fill in all the fields'})
+    }
+    try {
+        const module_id = req.Modules
+        const user = await User.register(name, email, password, module_id)
+
+        //create a token
+        const token = createToken(user._id)
+
+        res.status(200).json({email, token})
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+
+}
 
 module.exports = {
     loginUser,
     registerUser,
-    updateUser
+    updateUser,
+    createUser
 }

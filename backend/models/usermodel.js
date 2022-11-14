@@ -7,9 +7,8 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   role: {
     type: Number,
-    min: 0,
-    max: 4,
-    default: 0
+    range: [0, 4],
+    default: 0,
   },
   name: {
     type: String,
@@ -26,7 +25,7 @@ const userSchema = new Schema({
     required: true,
   },
   Modules: [{
-    module: Schema.Types.ObjectId,
+    module: String,
     required: false,
   }],
 });
