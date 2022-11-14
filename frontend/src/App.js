@@ -5,6 +5,8 @@ import Navbar from  './components/Navbar'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import StudentPage from './pages/StudentPage'
+import StaffPage from './pages/StaffPage'
+import ErrorPage from './pages/404'
 
 function App() {
   const { user } = useAuthContext()
@@ -30,6 +32,14 @@ function App() {
             <Route
               path="/studentpage" 
               element={<StudentPage />}
+            />
+            <Route 
+              path="/StaffPage"
+              element={<StaffPage />}
+            />
+            <Route
+              path="*"
+              element={<ErrorPage />}
             />
           </Routes>
         </div>
