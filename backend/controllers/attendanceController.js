@@ -8,7 +8,7 @@ const getAttendances = async (req, res) => {
   res.status(200).json(Attendance)
 }
 
-// get all records with specified id
+// get all records with specified moduel id
 const getAttendanceByModuelId = async (req, res) => {
   const { id } = req.params
 
@@ -16,7 +16,7 @@ const getAttendanceByModuelId = async (req, res) => {
     return res.status(404).json({error: 'No such attendance records'})
   }
 
-  const Attendance = await Attendance.find(id)
+  const Attendance = await Attendance.find({"moduleName":id})
 
   if (!Attendance) {
     return res.status(404).json({error: 'No such attendance record'})
