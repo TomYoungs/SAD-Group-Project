@@ -3,13 +3,13 @@ const mongoose = require('mongoose')
 
 //get all
 const getAttendances = async (req, res) => {
-  const Attendance = await Workout.find({}).sort({createdAt: -1})
+  const Attendance = await Attendance.find({}).sort({createdAt: -1})
 
   res.status(200).json(Attendance)
 }
 
 // get all records with specified id
-const getAttendance = async (req, res) => {
+const getAttendanceByModuelId = async (req, res) => {
   const { id } = req.params
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
