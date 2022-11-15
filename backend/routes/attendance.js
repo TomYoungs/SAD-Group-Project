@@ -15,4 +15,4 @@ router.use(requireAuth)
 //get all attendances
 router.get('/', getAttendance)
 //get all attendances with a specified id
-router.get('/:id', getAttendance)
+router.get('/:id', getAttendanceByModuelId)
