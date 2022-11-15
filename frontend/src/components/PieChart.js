@@ -7,14 +7,14 @@ ChartJs.register(
 );
 
 
-//AttendanceForModuel is an object with 2 atributes present and Absent
+//AttendanceForModule is an object with 2 atributes present and Absent
 //these two variables are the number of present and absent stundent throughout
-//the moduels runtime
-const PieChart = (AttendanceForModuel) => {
-  console.log(AttendanceForModuel)
+//the modules runtime
+const PieChart = (AttendanceForModule) => {
+  console.log(AttendanceForModule)
   const data= {
   datasets: [{
-      data: [AttendanceForModuel.present, AttendanceForModuel.absent],
+      data: [AttendanceForModule.present, AttendanceForModule.absent],
       //ToDo green and red look ugly maybe check with others for better schema?
       backgroundColor:[
         'Green',
