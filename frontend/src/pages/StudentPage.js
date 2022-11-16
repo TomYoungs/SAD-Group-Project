@@ -1,13 +1,28 @@
 // import {useState} from 'react'
-// import { useLogin } from '../hooks/useLogin'
+import { useSubmitCode } from '../hooks/useSubmitCode'
 
 const StudentPage = () => {
+    const [code, setCode] = useState('')
+    const {submitcode, error, isLoading} = useSubmitCode()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        await submitcode(code)
+    }
+
     return (
-        <div className='StudentPage'>
+        <form className="Submit Code" onSubmit={handleSubmit}>
             <h2>Report attendance</h2>
-            <button>attandance code</button>
-            <button>submit</button>
-        </div>
+
+            <input 
+                type="code"
+                onChange={(e) => setCode(e.target.value)}
+                value={code}
+            />
+            <button disabled={isLoading}>Submit Code</button>
+            {error && <div className='error'>{error}</div>}
+        </form>
     )
 }
 
