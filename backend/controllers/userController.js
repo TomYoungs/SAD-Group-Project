@@ -18,8 +18,10 @@ const loginUser = async (req, res) => {
 
         //create a token
         const token = createToken(user._id)
+        const role = user.role
+        console.log(role)
 
-        res.status(200).json({email, token})
+        res.status(200).json({email, token, role})
     } catch (error) {
         res.status(400).json({error: error.message})
     }
@@ -90,7 +92,7 @@ const createUser = async (req, res) => {
     }
     try {
         const module_id = req.Modules
-        const user = await User.register(name, email, password, module_id)
+        const user = await User.register(name, role, email, password, module_id)
 
         //create a token
         const token = createToken(user._id)
