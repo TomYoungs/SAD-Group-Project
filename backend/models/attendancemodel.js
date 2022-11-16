@@ -1,21 +1,22 @@
 const mongoose = require("mongoose");
 const usermodel = require("./usermodel");
+const modulemodel = require("./modulemodel");
 
 const Schema = mongoose.Schema;
 
 const attendanceSchema = new Schema({
-  moduleName: {
-    type: Schema.Types.ObjectId,
+  moduleID: {
+    type: String,
     required: true,
   },
-  user: {
-    type: Schema.Types.ObjectId,
+  userID: {
+    type: String,
     required: true,
   },
-  attendance: [{
-    type: Boolean,
+  attendance: {
+    type: Array,
     required: false,
-  }],
+  },
 });
 
 module.exports = mongoose.model("Attendance", attendanceSchema);

@@ -3,14 +3,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const moduleSchema = new Schema({
-    nameOfModule: {
+  `name: {
       type: String,
       required: true,
     },
-    tutors: {
-      lecturer: [userSchema],
-      required: true,
-    }
+    Tutors: [String],
   });
+
+
 
 module.exports = mongoose.model("Module", moduleSchema);
