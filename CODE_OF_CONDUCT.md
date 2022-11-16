@@ -19,3 +19,8 @@ PR naming scheme:
 feat/homepage
 
 ⬆️ A feature to add a homepage or change it drastically
+
+
+### models/controllers:
+
+for models capitals are used when linking to other docs e.g. Tutors links to the users model
