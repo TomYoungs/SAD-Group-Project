@@ -9,21 +9,41 @@ export const useSubmitCode = () => {
         setError(null)
 
         //proxy to localhost:4000
-        const response = await fetch('/api/codes/getacode', {
+        const coderesponse = await fetch('/api/codes/getacode', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({code})
         })
-        const json = await response.json()
+        const json = await coderesponse.json()
 
-        if (!response.ok) {
+        if (!coderesponse.ok) {
             setIsLoading(false)
             setError(json.error)
         }
-        if (response.ok) {
+        if (coderesponse.ok) {
             setIsLoading(false)
         }
+        
+        const userid = localStorage.getItem('user').id
+        const moduleName = json.moduleName 
+        const weekid = json.weekid
+
+        const attendanceresponse = await fetch('/api/attendance/updateuserattendance', {
+            method: 'PATCH',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({userid, moduleName, weekid})
+        })
+        const resjson = await attendanceresponse.json()
+
+        if (!resjson.ok) {
+            setIsLoading(false)
+            setError(json.error)
+        }
+        if (resjson.ok) {
+            setIsLoading(false)
+        }
+
     }
 
-    return { submitCode, isLoading, error}
+    return { submitCode, isLoading, error }
 }

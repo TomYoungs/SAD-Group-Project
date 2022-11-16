@@ -1,15 +1,14 @@
 const mongoose = require("mongoose");
-const usermodel = require("./usermodel");
 
 const Schema = mongoose.Schema;
 
 const attendanceSchema = new Schema({
   moduleName: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
   },
-  user: {
-    type: Schema.Types.ObjectId,
+  userid: {
+    type: String,
     required: true,
   },
   attendance: [{
