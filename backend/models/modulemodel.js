@@ -10,6 +10,4 @@ const moduleSchema = new Schema({
   Tutors: [String],
 });
 
-
-
 module.exports = mongoose.model("Module", moduleSchema);
