@@ -1,14 +1,14 @@
-// import {useState} from 'react'
+import {useState} from 'react'
 import { useSubmitCode } from '../hooks/useSubmitCode'
 
 const StudentPage = () => {
     const [code, setCode] = useState('')
-    const {submitcode, error, isLoading} = useSubmitCode()
+    const {submitCode, error, isLoading} = useSubmitCode()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await submitcode(code)
+        await submitCode(code)
     }
 
     return (

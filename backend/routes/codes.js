@@ -6,7 +6,7 @@ const { getallCodes, getaCode, createaCode } = require('../controllers/codesCont
 
 router.get('/getallcodes', getallCodes)
 
-router.get('/getacode', getaCode)
+router.post('/getacode', getaCode)
 
 router.post('/createacode', createaCode)
 

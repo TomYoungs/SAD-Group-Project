@@ -1,4 +1,4 @@
-const Attendance = require("../models/attendancemodel"); //change file name to fit cammel case and refactor later
+const Attendancemodel = require("../models/attendancemodel"); //change file name to fit cammel case and refactor later
 const mongoose = require("mongoose");
 
 //get all
@@ -29,14 +29,12 @@ const mongoose = require("mongoose");
 const updateUserAttendance = async (req, res) => {
   const { weekid, moduleid, userid } = req.body;
 
-  if (!weekid || !moduleid || !userid) {
+  if (!weekid ||  typeof weekid !='number'  || !moduleid || !userid) {
     return res.status(404).json({ error: "missing values" });
   }
 
-  const Attendance = await Attendance.find({"moduleName":id},{"attendance": false})
-
   console.log("HERE")
-  console.log(attendance)
+  const attendance = await Attendancemodel.findOne({"moduleName": moduleid})
 
   if (!attendance)
   {
@@ -47,7 +45,7 @@ const updateUserAttendance = async (req, res) => {
   weeks[weekid -1] = true
 
   //TODO: may change names
-  const updateuserattendance = await Attendance.findOneAndUpdate(
+  const updateuserattendance = await Attendancemodel.findOneAndUpdate(
     { _id: attendance._id },
     {
       attendance: weeks,
