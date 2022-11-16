@@ -58,10 +58,28 @@ const getAttendanceByUserId = async (req, res) => {
   res.status(200).json(attendances)
 }
 
+// get all attendance records with specified user && module id
+const getAttendanceByUserAndModuleId = async (req, res) => {
+  const { userID, moduleID } = req.params
+  console.log(userID);
+  console.log(moduleID);
+  if (!mongoose.Types.ObjectId.isValid(userID)&&!mongoose.Types.ObjectId.isValid(moduleID)) {
+    return res.status(404).json({error: 'No such attendance records'})
+  }
+
+  const attendances = await Attendance.find({userID:userID,moduleID:moduleID},{attendance:1 , _id: 0});
+
+  if (!Attendance) {
+    return res.status(404).json({error: 'No such attendance record'})
+  }
+
+  res.status(200).json(attendances)
+}
 
 module.exports = {
   getAttendances,
   getAttendanceByObjectId,
   getAttendanceByModuleId,
-  getAttendanceByUserId
+  getAttendanceByUserId,
+  getAttendanceByUserAndModuleId
 }

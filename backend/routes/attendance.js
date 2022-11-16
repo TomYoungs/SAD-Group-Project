@@ -3,7 +3,8 @@ const {
   getAttendances,
   getAttendanceByObjectId,
   getAttendanceByModuleId,
-  getAttendanceByUserId
+  getAttendanceByUserId,
+  getAttendanceByUserAndModuleId
 } = require('../controllers/attendanceController')
 const requireAuth = require('../middleware/requireAuth')
 
@@ -19,5 +20,8 @@ router.get('/getByObjectId/:id', getAttendanceByObjectId)
 router.get('/getByModuleId/:id', getAttendanceByModuleId)
 //get all attendances with a User id
 router.get('/getByUserId/:id', getAttendanceByUserId)
+//get all attendances with a User id & a module id
+router.get('/getByUserIdModuleID/:userID/:moduleID', getAttendanceByUserAndModuleId)
+
 
 module.exports = router
