@@ -3,21 +3,21 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const codesSchema = new Schema({
-  code: {
+  codeid: {
     type: String,
     required: true,
   },
-  modulename: {
+  moduleName: {
     type: String,
     required: true,
   },
   weekid: {
-    type: number,
+    type: Number,
     required: true,
   }
 });
 
 
 
-module.exports = mongoose.model("Module", moduleSchema);
+module.exports = mongoose.model("Codes", codesSchema);
 
