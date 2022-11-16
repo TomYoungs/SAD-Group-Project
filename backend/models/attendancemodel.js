@@ -15,6 +15,7 @@ const attendanceSchema = new Schema({
   attendance: [{
     type: Boolean,
     required: false,
+    default: false,
   }],
 });
 
