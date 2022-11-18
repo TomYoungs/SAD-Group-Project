@@ -1,18 +1,23 @@
 const express = require('express')
 const {
-  getWorkouts,
-  getWorkout,
-  createWorkout,
-  deleteWorkout,
-  updateWorkout
-} = require('../controllers/workoutController')
+  getAttendances,
+  getAttendanceByObjectId,
+  getAttendanceByModuleId,
+  getAttendanceByUserId
+} = require('../controllers/attendanceController')
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
 
 //verifies that the user exists so they can do stuff
-router.use(requireAuth)
+//router.use(requireAuth) //disabled during testing
 //get all attendances
-router.get('/', getAttendance)
+router.get('/getAll', getAttendances)
 //get all attendances with a specified id
-router.get('/:id', getAttendanceByModuelId)
+router.get('/getByObjectId/:id', getAttendanceByObjectId)
+//get all attendances with a module id
+router.get('/getByModuleId/:id', getAttendanceByModuleId)
+//get all attendances with a User id
+router.get('/getByUserId/:id', getAttendanceByUserId)
+
+module.exports = router
