@@ -32,6 +32,18 @@ const getAttendanceByModuleId = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: 'No such attendance records'})
   }
+  const attendances = await Attendance.find({moduleID:id}); {
+    return res.status(404).json({error: 'No such attendance record'})
+  }
+  res.status(200).json(attendances)
+}
+
+// get all attendance records with specified module id
+const getAttendanceByModuleIdForCharts = async (req, res) => {
+  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such attendance records'})
+  }
   let attendances =[]
   const results = await Attendance.find({moduleID:id});
   {results.map((attendance) => (
@@ -43,7 +55,6 @@ const getAttendanceByModuleId = async (req, res) => {
 
   res.status(200).json(attendances)
 }
-
 // get all attendance records with specified User id
 const getAttendanceByUserId = async (req, res) => {
   const { id } = req.params
@@ -83,5 +94,6 @@ module.exports = {
   getAttendanceByObjectId,
   getAttendanceByModuleId,
   getAttendanceByUserId,
-  getAttendanceByUserAndModuleId
+  getAttendanceByUserAndModuleId,
+  getAttendanceByModuleIdForCharts
 }

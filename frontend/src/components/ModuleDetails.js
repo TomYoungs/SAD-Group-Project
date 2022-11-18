@@ -8,7 +8,7 @@ const ModuleDetails = ({module}) => {
   const [attendance, setAttendance] = useState(null)
   const { user } = useAuthContext()
   useEffect(() => {
-    let query = '/api/attendance/getByModuleId/'+module._id
+    let query = '/api/attendance/getByModuleIdForCharts/'+module._id
     const fetchModuleAttendance = async () => {
       const response = await fetch(query, {
           headers: {
