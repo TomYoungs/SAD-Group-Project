@@ -3,19 +3,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const attendanceSchema = new Schema({
-  moduleName: {
+  moduleID: {
     type: String,
     required: true,
   },
-  userid: {
+  userID: {
     type: String,
     required: true,
   },
-  attendance: [{
-    type: Boolean,
+  attendance: {
+    type: Array,
     required: false,
-    default: false,
-  }],
+  },
 });
 
 module.exports = mongoose.model("Attendance", attendanceSchema);

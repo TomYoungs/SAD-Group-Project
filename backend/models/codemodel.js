@@ -3,15 +3,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const codesSchema = new Schema({
-  codeid: {
+  codeID: {
     type: String,
     required: true,
   },
-  moduleName: {
+  moduleID: {
     type: String,
     required: true,
   },
-  weekid: {
+  weekID: {
     type: Number,
     required: true,
   }

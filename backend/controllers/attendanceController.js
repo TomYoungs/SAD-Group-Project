@@ -1,48 +1,88 @@
 const Attendancemodel = require("../models/attendancemodel"); //change file name to fit cammel case and refactor later
 const mongoose = require("mongoose");
 
-//get all
-// const getAttendances = async (req, res) => {
-//   const Attendance = await Attendance.find({}).sort({ createdAt: -1 });
+// @desc Get all Attendances
+// @route GET /getall
+// @access Public
+const getAttendances = async (req, res) => {
+  const attendances = await Attendance.find({});
 
-//   res.status(200).json(Attendance);
-// };
+  res.status(200).json(attendances);
+};
 
-// get all records with specified moduel id
-// const getAttendanceByModuelId = async (req, res) => {
-//   const { id } = req.params;
+// @desc Get a Attendance with a attendance ID
+// @route GET /getByObjectId/:id
+// @access Public
+const getAttendanceByObjectId = async (req, res) => {
+  const { id } = req.params;
+};
 
-//   if (!mongoose.Types.ObjectId.isValid(id)) {
-//     return res.status(404).json({ error: "No such attendance records" });
-//   }
+// @desc Get a Attendance with a module ID
+// @route GET /getByModuleId/:id
+// @access Public
+const getAttendanceByModuleId = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such attendance records" });
+  }
 
-//   const Attendance = await Attendance.find({ moduleName: id });
+  const attendances = await Attendance.find(
+    { moduleID: id },
+    { attendance: 1, _id: 0 }
+  );
 
-//   if (!Attendance) {
-//     return res.status(404).json({ error: "No such attendance record" });
-//   }
+  if (!Attendance) {
+    return res.status(404).json({ error: "No such attendance record" });
+  }
 
-//   res.status(200).json(Attendance);
-// };
+  res.status(200).json(attendances);
+};
 
-//patch
-const updateUserAttendance = async (req, res) => {
-  const { weekid, moduleid, userid } = req.body;
-
-  if (!weekid ||  typeof weekid !='number'  || !moduleid || !userid) {
+// @desc Get a Attendance with a user ID
+// @route GET /getByUserId/:id
+// @access Public
+const getAttendanceByUserId = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectdI.isValid(id)) {
+    return res.status(404).json({ error: "No such attendance records" });
+  }
+  if (!weekID || typeof weekID != "number" || !moduleID || !userID) {
     return res.status(404).json({ error: "missing values" });
   }
 
-  console.log("HERE")
-  const attendance = await Attendancemodel.findOne({"moduleName": moduleid})
+  const attendances = await Attendance.find(
+    { userID: id },
+    { attendance: 1, _id: 0 }
+  );
+  console.log("HERE");
+  const attendance = await Attendancemodel.findOne({ moduleID: moduleid });
 
-  if (!attendance)
-  {
+  if (!attendance) {
+    return res.status(404).json({ error: "No such attendance record" });
+  }
+
+  res.status(200).json(attendances);
+};
+
+// @desc Update a users+module attendance
+// @route PATCH /updateuserattendance
+// @access Public
+const updateUserAttendance = async (req, res) => {
+  const { weekID, moduleID, userID } = req.body;
+
+  if (!weekID || typeof weekID != "number" || !moduleID || !userID) {
+    return res.status(404).json({ error: "missing values" });
+  }
+
+  console.log("HERE");
+  const attendance = await Attendancemodel.findOne({ moduleID: moduleID });
+
+  if (!attendance) {
     return res.status(404).json({ error: "No such attendance record" });
   }
 
   const weeks = attendance.attendance;
-  weeks[weekid -1] = true
+  weeks[weekID - 1] = true;
 
   //TODO: may change names
   const updateuserattendance = await Attendancemodel.findOneAndUpdate(
@@ -55,7 +95,10 @@ const updateUserAttendance = async (req, res) => {
   res.status(200).json(updateuserattendance);
 };
 
-
 module.exports = {
-  updateUserAttendance
+  getAttendances,
+  getAttendanceByObjectId,
+  getAttendanceByModuleId,
+  getAttendanceByUserId,
+  updateUserAttendance,
 };

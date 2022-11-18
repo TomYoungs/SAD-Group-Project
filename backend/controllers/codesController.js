@@ -1,20 +1,27 @@
 const Codes = require("../models/codemodel");
 const mongoose = require("mongoose");
 
-// get all Codes
+
+// @desc Get all codes
+// @route GET /getallcodes
+// @access Public
 const getallCodes = async (req, res) => {
   const codes = await Codes.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(codes);
 };
 
+//TODO: currently a post needs to be updated
+// @desc Get a codes
+// @route POST /getacode
+// @access Public
 const getaCode = async (req, res) => {
-  const { codeid } = req.body;
-  if (!codeid ){
+  const { codeID } = req.body;
+  if (!codeID) {
     return res.status(404).json({ error: "please enter code" });
   }
 
-  const resultcode = await Codes.findOne({codeid});
+  const resultcode = await Codes.findOne({ codeID });
 
   if (!resultcode) {
     return res.status(404).json({ error: "invalid code" });
@@ -27,24 +34,24 @@ const getaCode = async (req, res) => {
 // @route POST /getacode
 // @access Public
 const createaCode = async (req, res) => {
-  const { moduleName, weekid } = req.body
-  
-  if (!moduleName || !weekid) {
+  const { moduleID, weekID } = req.body;
+
+  if (!moduleID || !weekID) {
     return res.status(404).json({ error: "please enter all fields" });
   }
-  const codeid = (Math.random() * 1000000000)
-  //check if seed is unique
-  try {
-    const code = await Codes.create({codeid, moduleName, weekid})
-    res.status(200).json(code);
 
+  //TODO: check if seed is unique
+  const codeID = Math.random().toString(36).slice(6)
+  try {
+    const code = await Codes.create({ codeID, moduleID, weekID });
+    res.status(200).json(code);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-}
+};
 
 module.exports = {
   getallCodes,
   getaCode,
-  createaCode
+  createaCode,
 };

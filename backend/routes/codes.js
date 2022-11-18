@@ -1,13 +1,21 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 //controller functions
-const { getallCodes, getaCode, createaCode } = require('../controllers/codesController')
+const {
+  getallCodes,
+  getaCode,
+  createaCode,
+} = require("../controllers/codesController");
 
-router.get('/getallcodes', getallCodes)
+//get all codes route
+router.get("/getallcodes", getallCodes);
 
-router.post('/getacode', getaCode)
+//TODO: needs to be updated to work with :id and not be a POST
+//get a spesific code based on codeID (seed not _id)
+router.post("/getacode", getaCode);
 
-router.post('/createacode', createaCode)
+//create a new code
+router.post("/createacode", createaCode);
 
-module.exports = router
+module.exports = router;

@@ -1,49 +1,53 @@
 import { useState } from "react";
 
 export const useSubmitCode = () => {
-    const [error, setError] = useState(null)
-    const [isLoading, setIsLoading] = useState(null)
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
 
-    const submitCode = async (codeid) => {
-        setIsLoading(true)
-        setError(null)
-        //proxy to localhost:4000
-        const coderesponse = await fetch('/api/codes/getacode', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({codeid})
-        })
-        const json = await coderesponse.json()
+  const submitCode = async (codeid) => {
+    setIsLoading(true);
+    setError(null);
 
-        if (!coderesponse.ok) {
-            setIsLoading(false)
-            setError(json.error)
-        }
-        if (coderesponse.ok) {
-            setIsLoading(false)
-        }
-        //^nest the below into the above
-        const userid = JSON.parse(localStorage.getItem('user')).id
-        const moduleid = json.moduleName 
-        const weekid = json.weekid
-        console.log("HERE!!!!!")
-        console.log(JSON.stringify({userid, moduleid, weekid}))
+    //proxy to localhost:4000
+    const coderesponse = await fetch("/api/codes/getacode", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ codeid }),
+    });
+    const json = await coderesponse.json();
 
-        const attendanceresponse = await fetch('/api/attendance/updateuserattendance', {
-            method: 'PATCH',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({userid, moduleid, weekid})
-        })
-        const resjson = await attendanceresponse.json()
-        if (!resjson.ok) {
-            setIsLoading(false)
-            setError(json.error)
-        }
-        if (resjson.ok) {
-            setIsLoading(false)
-        }
-
+    if (!coderesponse.ok) {
+      setIsLoading(false);
+      setError(json.error);
     }
+    if (coderesponse.ok) {
+      setIsLoading(false);
+      updateattendance()
+    }
+  };
+//errors might not work
+  const updateattendance = async () => {
+    const userID = JSON.parse(localStorage.getItem("user")).id;
+    const moduleID = json.moduleName;
+    const weekID = json.weekID;
 
-    return { submitCode, isLoading, error }
-}
+    const attendanceresponse = await fetch(
+      "/api/attendance/updateuserattendance",
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userID, moduleID, weekID }),
+      }
+    );
+    const resjson = await attendanceresponse.json();
+    if (!resjson.ok) {
+      setIsLoading(false);
+      setError(json.error);
+    }
+    if (resjson.ok) {
+      setIsLoading(false);
+    }
+  };
+
+  return { submitCode, isLoading, error };
+};

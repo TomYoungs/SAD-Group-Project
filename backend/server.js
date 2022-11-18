@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 
 const workoutRoutes = require('./routes/workouts')//change to whatever in future
 const userRoutes = require('./routes/user')
+const attendanceRoutes = require('./routes/attendance')
 const moduleRoutes = require('./routes/module')
 const attedanceRoutes = require('./routes/attendance')
 const codesRoutes = require('./routes/codes')
@@ -24,8 +25,8 @@ app.use((req, res, next) => {
 //routes
 app.use('/api/workouts', workoutRoutes)
 app.use('/api/user', userRoutes)
+app.use('/api/attendance', attendanceRoutes)
 app.use('/api/module', moduleRoutes)
-app.use('/api/attendance', attedanceRoutes)
 app.use('/api/codes', codesRoutes)
 
 //connect to db
@@ -39,6 +40,3 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((error) => {
         console.log(error)
     })
-
-
-
