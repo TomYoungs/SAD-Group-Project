@@ -1,27 +1,41 @@
-const express = require('express')
+const express = require("express");
+const router = express.Router();
+
 const {
   getAttendances,
   getAttendanceByObjectId,
   getAttendanceByModuleId,
   getAttendanceByUserId,
-  getAttendanceByUserAndModuleId
-} = require('../controllers/attendanceController')
-const requireAuth = require('../middleware/requireAuth')
+  getAttendanceByUserAndModuleId,
+  updateUserAttendance,
+  createAttendance,
+  deleteAttendance
+} = require("../controllers/attendanceController");
 
-const router = express.Router()
+//Get all attendances
+router.get("/getall", getAttendances);
 
-//verifies that the user exists so they can do stuff
-//router.use(requireAuth) //disabled during testing
-//get all attendances
-router.get('/getAll', getAttendances)
-//get all attendances with a specified id
-router.get('/getByObjectId/:id', getAttendanceByObjectId)
+//Get a attendances with a attendance id
+router.get("/getbyobjectid/:id", getAttendanceByObjectId);
+
 //get all attendances with a module id
-router.get('/getByModuleId/:id', getAttendanceByModuleId)
+router.get("/getbymoduleid/:id", getAttendanceByModuleId);
+
 //get all attendances with a User id
-router.get('/getByUserId/:id', getAttendanceByUserId)
+router.get("/getbyuserid/:id", getAttendanceByUserId);
+
 //get all attendances with a User id & a module id
 router.get('/getByUserIdModuleID/:userID/:moduleID', getAttendanceByUserAndModuleId)
 
+//update attendace using a userID moduleID & weekID
+router.patch("/updateuserattendance", updateUserAttendance);
 
-module.exports = router
+//create a attendance
+router.post("/createattendance", createAttendance)
+
+//delete a attendance
+router.delete("/deleteattendance/:id", deleteAttendance)
+
+
+
+module.exports = router;
