@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const usermodel = require("./usermodel");
-const modulemodel = require("./modulemodel");
 
 const Schema = mongoose.Schema;
 

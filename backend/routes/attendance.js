@@ -1,23 +1,27 @@
-const express = require('express')
+const express = require("express");
+const router = express.Router();
+
 const {
   getAttendances,
   getAttendanceByObjectId,
   getAttendanceByModuleId,
-  getAttendanceByUserId
-} = require('../controllers/attendanceController')
-const requireAuth = require('../middleware/requireAuth')
+  getAttendanceByUserId,
+  updateUserAttendance,
+} = require("../controllers/attendanceController");
 
-const router = express.Router()
+//Get all attendances
+router.get("/getall", getAttendances);
 
-//verifies that the user exists so they can do stuff
-//router.use(requireAuth) //disabled during testing
-//get all attendances
-router.get('/getAll', getAttendances)
-//get all attendances with a specified id
-router.get('/getByObjectId/:id', getAttendanceByObjectId)
+//Get a attendances with a attendance id
+router.get("/getbyobjectid/:id", getAttendanceByObjectId);
+
 //get all attendances with a module id
-router.get('/getByModuleId/:id', getAttendanceByModuleId)
-//get all attendances with a User id
-router.get('/getByUserId/:id', getAttendanceByUserId)
+router.get("/getbymoduleid/:id", getAttendanceByModuleId);
 
-module.exports = router
+//get all attendances with a User id
+router.get("/getbyuserid/:id", getAttendanceByUserId);
+
+//update attendace using a userID moduleID & weekID
+router.patch("/updateuserattendance", updateUserAttendance);
+
+module.exports = router;

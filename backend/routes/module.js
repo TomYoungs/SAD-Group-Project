@@ -6,7 +6,7 @@ const { getModules, getaModule, createModule, deleteModule, updateModule } = req
 
 router.get('/getmodules', getModules)
 
-router.get('/getamodule', getaModule)
+router.get('/getamodule/:id', getaModule)
 
 router.post('/createmodule', createModule)
 
