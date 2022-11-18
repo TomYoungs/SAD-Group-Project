@@ -4,7 +4,7 @@ export const useSubmitCode = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
-  const submitCode = async (codeid) => {
+  const submitCode = async (codeID) => {
     setIsLoading(true);
     setError(null);
 
@@ -12,7 +12,7 @@ export const useSubmitCode = () => {
     const coderesponse = await fetch("/api/codes/getacode", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ codeid }),
+      body: JSON.stringify({ codeID }),
     });
     const json = await coderesponse.json();
 

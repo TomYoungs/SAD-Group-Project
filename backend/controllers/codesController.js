@@ -40,6 +40,8 @@ const createaCode = async (req, res) => {
     return res.status(404).json({ error: "please enter all fields" });
   }
 
+  //TODO: check if module ID exists
+
   //TODO: check if seed is unique
   const codeID = Math.random().toString(36).slice(6)
   try {
