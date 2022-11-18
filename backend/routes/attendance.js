@@ -7,6 +7,8 @@ const {
   getAttendanceByModuleId,
   getAttendanceByUserId,
   updateUserAttendance,
+  createAttendance,
+  deleteAttendance
 } = require("../controllers/attendanceController");
 
 //Get all attendances
@@ -23,5 +25,12 @@ router.get("/getbyuserid/:id", getAttendanceByUserId);
 
 //update attendace using a userID moduleID & weekID
 router.patch("/updateuserattendance", updateUserAttendance);
+
+//create a attendance
+router.post("/createattendance", createAttendance)
+
+//delete a attendance
+router.delete("/deleteattendance/:id", deleteAttendance)
+
 
 module.exports = router;

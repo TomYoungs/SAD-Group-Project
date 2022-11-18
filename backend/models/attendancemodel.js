@@ -14,6 +14,20 @@ const attendanceSchema = new Schema({
   attendance: {
     type: Array,
     required: false,
+    default: [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
   },
 });
 
