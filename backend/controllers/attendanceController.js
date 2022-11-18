@@ -45,13 +45,14 @@ const getAttendanceByModuleId = async (req, res) => {
 // @access Public
 const getAttendanceByUserId = async (req, res) => {
   const { id } = req.params;
-  if (!mongoose.Types.ObjectdI.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such attendance records" });
   }
-  if (!weekID || typeof weekID != "number" || !moduleID || !userID) {
-    return res.status(404).json({ error: "missing values" });
-  }
-  const attendances = await Attendance.find({moduleID:id}); {
+  // if (!weekID || typeof weekID != "number" || !moduleID || !userID) {
+  //   return res.status(404).json({ error: "missing values" });
+  // }
+  const attendances = await Attendancemodel.find({userID:id});
+  if (!attendances) {
     return res.status(404).json({error: 'No such attendance record'})
   }
   res.status(200).json(attendances)
@@ -64,11 +65,11 @@ const getAttendanceByModuleIdForCharts = async (req, res) => {
     return res.status(404).json({error: 'No such attendance records'})
   }
   let attendances =[]
-  const results = await Attendance.find({moduleID:id});
+  const results = await Attendancemodel.find({moduleID:id});
   {results.map((attendance) => (
       attendances.push(attendance.attendance)
   ))}
-  if (!Attendance) {
+  if (!results) {
     return res.status(404).json({error: 'No such attendance record'})
   }
 
@@ -154,9 +155,9 @@ const getAttendanceByUserAndModuleId = async (req, res) => {
     return res.status(404).json({error: 'No such attendance records'})
   }
 
-  const attendances = await Attendance.find({userID:userID,moduleID:moduleID},{attendance:1 , _id: 0});
+  const attendances = await Attendancemodel.find({userID:userID,moduleID:moduleID},{attendance:1 , _id: 0});
 
-  if (!Attendance) {
+  if (!attendances) {
     return res.status(404).json({error: 'No such attendance record'})
   }
 
