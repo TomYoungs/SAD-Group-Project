@@ -6,7 +6,7 @@ const { getModules, getaModule, createModule, deleteModule, updateModule, getMod
 
 router.get('/getmodules', getModules)
 
-router.get('/getamodule', getaModule)
+router.get('/getamodule/:id', getaModule)
 
 router.get('/getModulesByTutor/:tutor', getModulesByTutor)
 

@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const usermodel = require("./usermodel");
-const modulemodel = require("./modulemodel");
 
 const Schema = mongoose.Schema;
 
@@ -16,6 +14,20 @@ const attendanceSchema = new Schema({
   attendance: {
     type: Array,
     required: false,
+    default: [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
   },
 });
 
