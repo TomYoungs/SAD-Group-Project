@@ -32,9 +32,11 @@ const getAttendanceByModuleId = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: 'No such attendance records'})
   }
-
-  const attendances = await Attendance.find({moduleID:id},{attendance:1 , _id: 0});
-
+  let attendances =[]
+  const results = await Attendance.find({moduleID:id});
+  {results.map((attendance) => (
+      attendances.push(attendance.attendance)
+  ))}
   if (!Attendance) {
     return res.status(404).json({error: 'No such attendance record'})
   }

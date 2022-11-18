@@ -12,16 +12,17 @@ const createToken = (_id) => {
 // @access Public
 const loginUser = async (req, res) => {
     const {email, password} = req.body
-    
+
     try {
         const user = await User.login(email, password)
 
         //create a token
         const token = createToken(user._id)
         const role = user.role
+        const id = user._id
         console.log(role)
 
-        res.status(200).json({email, token, role})
+        res.status(200).json({email, token, id , role})
     } catch (error) {
         res.status(400).json({error: error.message})
     }
@@ -38,8 +39,8 @@ const registerUser = async (req, res) => {
 
         //create a token
         const token = createToken(user._id)
-
-        res.status(200).json({email, token})
+        const id = user._id
+        res.status(200).json({email, id, token})
     } catch (error) {
         res.status(400).json({error: error.message})
     }
@@ -52,18 +53,18 @@ const registerUser = async (req, res) => {
 // @access Public
 const updateUser = async (req, res) => {
     const {role, name, email, password, Modules} = req.body
-    try {  
+    try {
             //validation
             if ( typeof role !='number' || !email || !name || !Array.isArray(Modules) || !Modules.length) {//modules is an array so may not work
               throw Error("All fields must be filled/valid");
             }
-          
+
             const user = await User.findOne({ email });
-          
+
             if (!user) {
               throw Error("User not found");
             }
-          
+
             user.role = role
             user.email = email
             user.name = name
