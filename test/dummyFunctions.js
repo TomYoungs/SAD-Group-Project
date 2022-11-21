@@ -2,8 +2,6 @@
 //const bcrypt = require("bcrypt");
 const validator = require("validator");
 
-
-
 module.exports = {
   checkPassword: function(){
     const pword = "StrongPass63!";
@@ -12,9 +10,15 @@ module.exports = {
   validEmail:function(){
     const email = "johndoe@gmail.com";
     return validator.isEmail(email);
+  },
+  validhashedpass:function(){
+    const hashpass = $2b$10$IYCw7eb.xdg5F8Qgt/ifBe5LLL99Kdi48PxDlkVo706Ufm2lUz79m
   }
 }
+//dev@dev.com
+//Mypass#123 
 
+//$2b$10$IYCw7eb.xdg5F8Qgt/ifBe5LLL99Kdi48PxDlkVo706Ufm2lUz79m
 
 /*// static register method
 userSchema.statics.register = async function (name, email, password) {
