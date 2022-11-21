@@ -7,7 +7,6 @@ const {loginUser, registerUser, updateUser, createUser} = require('../controller
 //login Route
 router.post('/login', loginUser)
 
-
 //register Route
 router.post('/register', registerUser)
 
