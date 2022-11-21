@@ -45,7 +45,7 @@ const getAttendanceByModuleId = async (req, res) => {
 // @access Public
 const getAttendanceByUserId = async (req, res) => {
   const { id } = req.params;
-  if (!mongoose.Types.ObjectdI.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such attendance records" });
   }
   if (!weekID || typeof weekID != "number" || !moduleID || !userID) {

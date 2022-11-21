@@ -24,10 +24,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  Modules: [{
-    module: String,
-    required: false,
-  }],
+  Modules: [String],
 });
 
 // static register method

@@ -80,10 +80,31 @@ const updateModule = async (req, res) => {
   res.status(200).json(module);
 };
 
+// @desc get a module based on userid (a teacher)
+// @route GET /getausersmodule
+// @access Public
+const getaUsersModule = async (req, res) => {
+  //TODO: might need a check of 'role'
+  const { id } = req.params;
+  console.log("HERE")
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "invalid userID" });
+  }
+
+  const module = await Module.find({ Tutors: id});
+
+  if (!module) {
+    return res.status(404).json({ error: "No such module found" });
+  }
+
+  res.status(200).json(module);
+}
+
 module.exports = {
   getModules,
   getaModule,
   createModule,
   deleteModule,
-  updateModule
+  updateModule,
+  getaUsersModule
 };
