@@ -1,6 +1,9 @@
 //const mongoose = require("mongoose");
-//const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const validator = require("validator");
+const jwt = require('jsonwebtoken')
+
+
 
 module.exports = {
   checkPassword: function(){
@@ -11,15 +14,22 @@ module.exports = {
     const email = "johndoe@gmail.com";
     return validator.isEmail(email);
   },
-  validhashedpass:function(){
-    const hashpass = $2b$10$IYCw7eb.xdg5F8Qgt/ifBe5LLL99Kdi48PxDlkVo706Ufm2lUz79m
+  checkHashPassword: function(){
+    const password = "Mypass#123";
+    const salt = bcrypt.genSalt(10);
+    const hash = bcrypt.hash(password, salt);
+    return hash;
+  },
+  createToken: function(){
+    const _id =  5;
+    return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
   }
 }
+
 //dev@dev.com
 //Mypass#123 
 
 //$2b$10$IYCw7eb.xdg5F8Qgt/ifBe5LLL99Kdi48PxDlkVo706Ufm2lUz79m
-
 /*// static register method
 userSchema.statics.register = async function (name, email, password) {
   
