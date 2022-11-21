@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 //controller functions
-const { getModules, getaModule, createModule, deleteModule, updateModule } = require('../controllers/moduleController')
+const { getModules, getaModule, createModule, deleteModule, updateModule, getaUsersModule } = require('../controllers/moduleController')
 
 router.get('/getmodules', getModules)
 
@@ -13,6 +13,8 @@ router.post('/createmodule', createModule)
 router.delete('/deletemodule', deleteModule)
 
 router.patch('/updatemodule', updateModule)
+
+router.get('/getausersmodule/:id', getaUsersModule)
 
 
 module.exports = router

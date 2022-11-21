@@ -14,7 +14,7 @@ const StudentPage = () => {
     return (
         <form className="Submit Code" onSubmit={handleSubmit}>
             <h2>Report attendance</h2>
-
+            
             <input 
                 type="code"
                 onChange={(e) => setCode(e.target.value)}
