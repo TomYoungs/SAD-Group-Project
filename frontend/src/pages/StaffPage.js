@@ -1,5 +1,5 @@
-import { ModulePicker } from "../components/ModulePicker";
-import { WeekPicker } from "../components/WeekPicker";
+// import { ModulePicker } from "../components/ModulePicker";
+// import { WeekPicker } from "../components/WeekPicker";
 import { useEffect, useState } from "react";
 import { useGenerateCode } from "../hooks/useGenerateCode";
 

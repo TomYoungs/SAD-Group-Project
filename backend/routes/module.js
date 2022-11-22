@@ -2,9 +2,6 @@ const express = require('express')
 const router = express.Router()
 
 //controller functions
-
-const { getModules, getaModule, createModule, deleteModule, updateModule, getModulesByTutor } = require('../controllers/moduleController')
-
 const { getModules, getaModule, createModule, deleteModule, updateModule, getModulesByTutor, getaUsersModule } = require('../controllers/moduleController')
 
 
