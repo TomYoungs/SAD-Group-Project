@@ -48,19 +48,27 @@ const getAttendanceByUserId = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such attendance records" });
   }
-  if (!weekID || typeof weekID != "number" || !moduleID || !userID) {
-    return res.status(404).json({ error: "missing values" });
+  const attendance = await Attendancemodel.find({userID:id});
+  if (!attendance) {
+    return res.status(404).json({error: 'No such attendance record'})
   }
 
-  const attendances = await Attendancemodel.find(
-    { userID: id },
-    { attendance: 1, _id: 0 }
-  );
-  console.log("HERE");
-  const attendance = await Attendancemodel.findOne({ moduleID: moduleid });
+  res.status(200).json(attendance)
+}
 
-  if (!attendance) {
-    return res.status(404).json({ error: "No such attendance record" });
+// get all attendance records with specified module id
+const getAttendanceByModuleIdForCharts = async (req, res) => {
+  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such attendance records'})
+  }
+  let attendances =[]
+  const results = await Attendancemodel.find({moduleID:id});
+  {results.map((attendance) => (
+      attendances.push(attendance.attendance)
+  ))}
+  if (!results) {
+    return res.status(404).json({error: 'No such attendance record'})
   }
 
   res.status(200).json(attendances);
@@ -121,6 +129,7 @@ const createAttendance = async (req, res) => {
 const deleteAttendance = async (req, res) => {
   const { id } = req.params;
 
+
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such attendance" });
   }
@@ -134,11 +143,32 @@ const deleteAttendance = async (req, res) => {
   res.status(200).json(attendance);
 }
 
+
+// get all attendance records with specified user && module id
+const getAttendanceByUserAndModuleId = async (req, res) => {
+  const { userID, moduleID } = req.params
+  console.log(userID);
+  console.log(moduleID);
+  if (!mongoose.Types.ObjectId.isValid(userID)&&!mongoose.Types.ObjectId.isValid(moduleID)) {
+    return res.status(404).json({error: 'No such attendance records'})
+  }
+
+  const attendances = await Attendancemodel.find({userID:userID,moduleID:moduleID},{attendance:1 , _id: 0});
+
+  if (!attendances) {
+    return res.status(404).json({error: 'No such attendance record'})
+  }
+
+  res.status(200).json(attendances)
+}
+
 module.exports = {
   getAttendances,
   getAttendanceByObjectId,
   getAttendanceByModuleId,
   getAttendanceByUserId,
+  getAttendanceByUserAndModuleId,
+  getAttendanceByModuleIdForCharts,
   updateUserAttendance,
   createAttendance,
   deleteAttendance
