@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 import ModuleDetails from '../components/ModuleDetails'
+import AllAttendancePieChart from '../components/AllAttendancePieChart'
 import { useAuthContext } from '../hooks/useAuthContext'
-
 
 const StaffPage = () => {
   const [modules, setModules] = useState(null)
   const { user } = useAuthContext()
 
-  let query = '/api/module/getModulesByTutor/'+user.id
-  useEffect(() => {
-    const fetchModules = async () => {
 
+  useEffect(() => {
+
+    const fetchModules = async () => {
+      let query = '/api/module/getModulesByTutor/'+user.id
       const response = await fetch(query, {
           headers: {
               'Authorization': `Bearer ${user.token}`
@@ -40,7 +41,10 @@ const StaffPage = () => {
                 <ModuleDetails key={module._id} module={module} />
             ))}
             </div>
+            <div>
+            {modules && <AllAttendancePieChart modules={modules} />}
 
+            </div>
         </div>
     )
 }
