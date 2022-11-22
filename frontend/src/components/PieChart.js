@@ -17,7 +17,7 @@ const PieChart = (AttendanceForModule) => {
       //ToDo green and red look ugly maybe check with others for better schema?
       backgroundColor:[
         'Green',
-        'Red',
+        'LightGreen',
       ]
   },
 ],
