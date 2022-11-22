@@ -6,15 +6,92 @@ $green4: #abbcaf;
 $beige: #eae1cc;
 $paleblue: #9ccbc4;
 
+$font1: 'Montserrat', sans-serif;
+$font2: 'Cabin', sans-serif;
+
 /*FONTS*/
-@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
-html {
+.App, html {
   background-color: $beige !important ;
+}
 
-  body {
-    .pages {
-      background-color: $beige ;
-    }
+h2 {
+  font-family: $font1;
+  font-weight: 700;
+}
+
+.defaultButton {
+  background-color: $green2;
+  color: white;
+  margin: auto;
+  border-radius: 20px;
+  width: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*LOG IN PAGE*/
+.Login {
+  background-color: $paleblue;
+  margin: auto;
+  width: 50%;
+  max-width: 300px;
+  height: 300px;
+  padding: 50px;
+  border-radius: 50px;
+
+  font-family: $font2;
+
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+
+
+  ::placeholder {
+    color: white;
+    font-family: $font2;
+  }
+
+  input {
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-color: $green1;
+    color: white;
+    font-family: $font2;
+    height: 40px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    width: 100%;
+  }
+}
+
+/*Chrome auto-fill fixes*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px $green1 inset !important;
+    box-shadow: 0 0 0 30px $green1 inset !important;
+    border: none;
+    font-family: $font2;
+}
+
+input:-webkit-autofill{
+  -webkit-text-fill-color: white !important;
+  padding-left: 20px;
+  font-family: $font2 !important;
+}
+
+input:-webkit-autofill::first-line,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  font-family: $font2 !important;
+  border: none;
 }
