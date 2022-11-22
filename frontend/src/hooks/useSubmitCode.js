@@ -22,30 +22,27 @@ export const useSubmitCode = () => {
     }
     if (coderesponse.ok) {
       setIsLoading(false);
-      updateattendance()
-    }
-  };
-//errors might not work
-  const updateattendance = async () => {
-    const userID = JSON.parse(localStorage.getItem("user")).id;
-    const moduleID = json.moduleName;
-    const weekID = json.weekID;
-
-    const attendanceresponse = await fetch(
-      "/api/attendance/updateuserattendance",
-      {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userID, moduleID, weekID }),
+      //TODO: update this to be better
+      const userID = JSON.parse(localStorage.getItem("user")).id;
+      const moduleID = json.moduleName;
+      const weekID = json.weekID;
+  
+      const attendanceresponse = await fetch(
+        "/api/attendance/updateuserattendance",
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userID, moduleID, weekID }),
+        }
+      );
+      const resjson = await attendanceresponse.json();
+      if (!resjson.ok) {
+        setIsLoading(false);
+        setError(json.error);
       }
-    );
-    const resjson = await attendanceresponse.json();
-    if (!resjson.ok) {
-      setIsLoading(false);
-      setError(json.error);
-    }
-    if (resjson.ok) {
-      setIsLoading(false);
+      if (resjson.ok) {
+        setIsLoading(false);
+      }
     }
   };
 
