@@ -48,14 +48,12 @@ const getAttendanceByUserId = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such attendance records" });
   }
-  // if (!weekID || typeof weekID != "number" || !moduleID || !userID) {
-  //   return res.status(404).json({ error: "missing values" });
-  // }
-  const attendances = await Attendancemodel.find({userID:id});
-  if (!attendances) {
+  const attendance = await Attendancemodel.find({userID:id});
+  if (!attendance) {
     return res.status(404).json({error: 'No such attendance record'})
   }
-  res.status(200).json(attendances)
+
+  res.status(200).json(attendance)
 }
 
 // get all attendance records with specified module id
