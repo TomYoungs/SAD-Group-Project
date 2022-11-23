@@ -13,6 +13,8 @@ const StaffPage = () => {
   const [moduleID, setModuleID] = useState("");
   const [codeID, setCodeID ] = useState("")
   const [weekID, setWeekID] = useState("");
+  const [attendanceWeekStart, setAttendanceWeekStartID] = useState(0);
+  const [attendanceWeekEnd, setAttendanceWeekEndID] = useState(8);
   const { generateCode, error, isLoading } = useGenerateCode();
 
 
@@ -46,13 +48,48 @@ const StaffPage = () => {
     <>
 
         <h2>StaffPage</h2>
+        <div class="grid-container">
+        <div class="grid-item">
+        <p>Starting Week</p>
+        <select
+          onChange={(e) => {
+            const selectedWeek = e.target.value -1;
+            setAttendanceWeekStartID(selectedWeek);
+          }}
+        >
+
+          <option key="empty" value=""></option>
+          {items.map((item) => (
+            <option key={item} value={item}>
+              Week: {item}
+            </option>
+          ))}
+        </select>
+        </div>
+        <div class="grid-item">
+        <p>Ending Week</p>
+        <select
+          onChange={(e) => {
+            const selectedWeek = e.target.value -1;
+            setAttendanceWeekEndID(selectedWeek);
+          }}
+        >
+          <option key="empty" value=""></option>
+          {items.map((item) => (
+            <option key={item} value={item}>
+              Week: {item}
+            </option>
+          ))}
+        </select>
+        </div>
+        </div>
         <div>
         {modules &&modules.map((module) => (
-            <ModuleDetails key={module._id} module={module} />
+            <ModuleDetails key={module._id} module={module} weekStart = {attendanceWeekStart} weekEnd={attendanceWeekEnd} />
         ))}
         </div>
         <div>
-        {modules && <AllAttendancePieChart modules={modules} />}
+        {modules && <AllAttendancePieChart key={[attendanceWeekStart,attendanceWeekEnd]} modules={modules} weekStart = {attendanceWeekStart} weekEnd={attendanceWeekEnd} />}
 
         </div>
 

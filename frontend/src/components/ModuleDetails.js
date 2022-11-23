@@ -4,7 +4,7 @@ import PieChart from '../components/PieChart'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 
-const ModuleDetails = ({module}) => {
+const ModuleDetails = ({module, weekStart, weekEnd}) => {
   const [attendance, setAttendance] = useState(null)
   const { user } = useAuthContext()
   useEffect(() => {
@@ -27,13 +27,13 @@ const ModuleDetails = ({module}) => {
     }, [user])
 
     const getPresentInModuel = (attendance) => {
-      //code for getting data from database  
+      //code for getting data from database
 
       let present = 0;
       //code to calculate number of students present in a given moduel here
       for (let x in attendance) {
          for (let y in attendance[x]) {
-           if (attendance[x][y] == true) {
+           if ((attendance[x][y] == true) && (y<=weekEnd) && (y>=weekStart)) {
              present++
            }
          }
@@ -48,7 +48,7 @@ const ModuleDetails = ({module}) => {
      //code to calculate number of students absent in a given moduel here
      for (let x in attendance) {
         for (let y in attendance[x]) {
-          if (attendance[x][y] == false) {
+          if ((attendance[x][y] == false) && (y<=weekEnd)&& (y>=weekStart)) {
             absent++
           }
         }
