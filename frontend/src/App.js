@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import StudentPage from './pages/StudentPage'
 import StaffPage from './pages/StaffPage'
 import ErrorPage from './pages/404'
+import AdminPage from './pages/AdminPage'
 
 function App() {
   const { user } = useAuthContext()
@@ -36,6 +37,10 @@ function App() {
             <Route 
               path="/staffpage"
               element={<StaffPage />}
+            />
+            <Route
+              path="AdminPage"
+              element={<AdminPage />}
             />
             <Route
               path="*"
