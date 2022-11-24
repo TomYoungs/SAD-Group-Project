@@ -63,20 +63,20 @@ userSchema.statics.register = async function (name, email, password) {
 userSchema.statics.login = async function (email, password) {
   //validation
   if (!email || !password) {
-    throw Error("All field must be filled");
+    throw Error("All fields must be filled");
   }
 
   
   const user = await this.findOne({ email });
 
   if (!user) {
-    throw Error("Email not found");
+    throw Error("User Credentials Not Correct");
   }
 
   const match = await bcrypt.compare(password, user.password)
 
   if (!match){
-    throw Error('password go brrrr')
+    throw Error('User Credentials Not Correct')
   }
 
   return user
