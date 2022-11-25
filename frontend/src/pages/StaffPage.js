@@ -49,8 +49,8 @@ const StaffPage = () => {
       <div id="staffTabs">
       <Tabs>
         <div label="Today's Code">
-          <div className="tab1">
-        <form className="module-picker tab-content" onSubmit={handleGenerate}>
+          <div className="default-tab tab1">
+        <form className="module-picker" onSubmit={handleGenerate}>
           <h2>Generate Code</h2>
           <div className="module-selector">
         <label>Choose one of your Modules:</label>
@@ -87,7 +87,7 @@ const StaffPage = () => {
         ))}
       </select>
     </div>
-      <button className="defaultButton" type="submit" disabled={isLoading}>
+      <button className="default-button" type="submit" disabled={isLoading}>
         Generate
       </button>
       {error && <div className="error">{error}</div>}
@@ -96,15 +96,18 @@ const StaffPage = () => {
     </div>
         </div>
         <div label="Modules">
-          <h2>StaffPage</h2>
-            <div>
-            {modules &&modules.map((module) => (
-              <ModuleDetails key={module._id} module={module} />
-            ))}
+          <div className='default-tab tab2'>
+            <div className='module-info'>
+              <div className='module-list'>
+                {modules &&modules.map((module) => (
+                  <ModuleDetails key={module._id} module={module} />
+                ))}
+              </div>
+              <div className='attendance-pie'>
+                {modules && <AllAttendancePieChart modules={modules} />}
+              </div>
             </div>
-            <div>
-              {modules && <AllAttendancePieChart modules={modules} />}
-            </div>
+          </div>
         </div>
         <div label="Students">
           Nothing to see here, this tab is <em>extinct</em>!

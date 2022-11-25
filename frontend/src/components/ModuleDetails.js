@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import React from 'react'
 import PieChart from '../components/PieChart'
+import MiniPieChart from './MiniPieChart'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 
@@ -70,11 +71,11 @@ const ModuleDetails = ({module}) => {
   return (
     <div className='workout-details' style ={{display: 'grid', 'grid-template-columns': 'auto auto'}}>
         <div>
-        <h4>{module.name}</h4>
+        <h3>{module.name}</h3>
         <br/>
         </div>
-        <div classname="PieChart" style ={{width:'6%', height:'100%', position: 'absolute',right: '100px'}}>
-          <PieChart present = {getPresentInModuel(attendance)} absent = {getAbsentInModuel(attendance)} />
+        <div classname="MiniPieChart" style ={{width:'80px', height:'80px', position: 'absolute',right: '100px'}}>
+          <MiniPieChart present = {getPresentInModuel(attendance)} absent = {getAbsentInModuel(attendance)} />
         </div>
     </div>
   )
