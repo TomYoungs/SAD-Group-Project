@@ -1,5 +1,8 @@
-import { ModulePicker } from "../components/ModulePicker";
-import { WeekPicker } from "../components/WeekPicker";
+// import { ModulePicker } from "../components/ModulePicker";
+// import { WeekPicker } from "../components/WeekPicker";
+import ModuleDetails from '../components/ModuleDetails'
+import PieChart from '../components/PieChart'
+import AllAttendancePieChart from '../components/AllAttendancePieChart'
 import { useEffect, useState } from "react";
 import { useGenerateCode } from "../hooks/useGenerateCode";
 import Tabs from "../components/Tabs";
@@ -36,6 +39,7 @@ const StaffPage = () => {
         setModule(json);
       }
     };
+
     fetchModules();
   }, []);
 
@@ -92,7 +96,15 @@ const StaffPage = () => {
     </div>
         </div>
         <div label="Modules">
-          After 'while, <em>Crocodile</em>!
+          <h2>StaffPage</h2>
+            <div>
+            {modules &&modules.map((module) => (
+              <ModuleDetails key={module._id} module={module} />
+            ))}
+            </div>
+            <div>
+              {modules && <AllAttendancePieChart modules={modules} />}
+            </div>
         </div>
         <div label="Students">
           Nothing to see here, this tab is <em>extinct</em>!
