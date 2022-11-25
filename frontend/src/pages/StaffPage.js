@@ -5,6 +5,7 @@ import PieChart from '../components/PieChart'
 import AllAttendancePieChart from '../components/AllAttendancePieChart'
 import { useEffect, useState } from "react";
 import { useGenerateCode } from "../hooks/useGenerateCode";
+import Tabs from "../components/Tabs";
 
 const StaffPage = () => {
   let items = [1,2,3,4,5,6,7,8];
@@ -42,24 +43,16 @@ const StaffPage = () => {
     fetchModules();
   }, []);
 
+
   return (
     <>
-
-        <h2>StaffPage</h2>
-        <div>
-        {modules &&modules.map((module) => (
-            <ModuleDetails key={module._id} module={module} />
-        ))}
-        </div>
-        <div>
-        {modules && <AllAttendancePieChart modules={modules} />}
-
-        </div>
-
-
-    <form className="module-picker" onSubmit={handleGenerate}>
-      <h3>Module Code Generator</h3>
-      <div className="module-selector">
+      <div id="staffTabs">
+      <Tabs>
+        <div label="Today's Code">
+          <div className="tab1">
+        <form className="module-picker tab-content" onSubmit={handleGenerate}>
+          <h2>Generate Code</h2>
+          <div className="module-selector">
         <label>Choose one of your Modules:</label>
         <select
           onChange={(e) => {
@@ -76,6 +69,7 @@ const StaffPage = () => {
             ))}
         </select>
       </div>
+      
 
       <div className="week-selector">
       <label>Choose a week:</label>
@@ -93,13 +87,30 @@ const StaffPage = () => {
         ))}
       </select>
     </div>
-      <button type="submit" disabled={isLoading}>
+      <button className="defaultButton" type="submit" disabled={isLoading}>
         Generate
       </button>
       {error && <div className="error">{error}</div>}
+      {codeID && <div className="generated-code">{codeID}</div>}
     </form>
-
-    <div>{codeID}</div>
+    </div>
+        </div>
+        <div label="Modules">
+          <h2>StaffPage</h2>
+            <div>
+            {modules &&modules.map((module) => (
+              <ModuleDetails key={module._id} module={module} />
+            ))}
+            </div>
+            <div>
+              {modules && <AllAttendancePieChart modules={modules} />}
+            </div>
+        </div>
+        <div label="Students">
+          Nothing to see here, this tab is <em>extinct</em>!
+        </div>
+      </Tabs>
+    </div>
     </>
   );
 };
