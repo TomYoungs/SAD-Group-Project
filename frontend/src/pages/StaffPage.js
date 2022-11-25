@@ -122,7 +122,7 @@ const StaffPage = () => {
             <div>{modules && <AllAttendancePieChart modules={modules} />}</div>
           </div>
           <div label="Students">
-            <div className="list-of-students">
+            <div className="studentstab">
               {tutorsUsers &&
                 tutorsUsers.map((users, index) => (
                   <div>
@@ -137,14 +137,14 @@ const StaffPage = () => {
                     ))}
                   </div>
                 ))}
-            </div>
-            <div className="attendancezone">
-              {selectedUser && (
-                <>
-                  <h2>{selectedUser.name}</h2>
-                  <p>Here there would be a graph</p>
-                </>
-              )}
+              <div className="attendancezone">
+                {selectedUser && (
+                  <>
+                    <h2>{selectedUser.name}</h2>
+                    <p>Here there would be a graph</p>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </Tabs>
