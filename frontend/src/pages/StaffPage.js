@@ -14,6 +14,8 @@ const StaffPage = () => {
   const [moduleID, setModuleID] = useState("");
   const [codeID, setCodeID ] = useState("")
   const [weekID, setWeekID] = useState("");
+  const [attendanceWeekStart, setAttendanceWeekStartID] = useState(0);
+  const [attendanceWeekEnd, setAttendanceWeekEndID] = useState(8);
   const { generateCode, error, isLoading } = useGenerateCode();
 
 
@@ -53,6 +55,7 @@ const StaffPage = () => {
         <form className="module-picker tab-content" onSubmit={handleGenerate}>
           <h2>Generate Code</h2>
           <div className="module-selector">
+
         <label>Choose one of your Modules:</label>
         <select
           onChange={(e) => {
@@ -97,14 +100,50 @@ const StaffPage = () => {
         </div>
         <div label="Modules">
           <h2>StaffPage</h2>
-            <div>
-            {modules &&modules.map((module) => (
-              <ModuleDetails key={module._id} module={module} />
-            ))}
-            </div>
-            <div>
-              {modules && <AllAttendancePieChart modules={modules} />}
-            </div>
+            <div class="grid-container">
+        <div class="grid-item">
+        <p>Starting Week</p>
+        <select
+          onChange={(e) => {
+            const selectedWeek = e.target.value -1;
+            setAttendanceWeekStartID(selectedWeek);
+          }}
+        >
+
+          <option key="empty" value=""></option>
+          {items.map((item) => (
+            <option key={item} value={item}>
+              Week: {item}
+            </option>
+          ))}
+        </select>
+        </div>
+        <div class="grid-item">
+        <p>Ending Week</p>
+        <select
+          onChange={(e) => {
+            const selectedWeek = e.target.value -1;
+            setAttendanceWeekEndID(selectedWeek);
+          }}
+        >
+          <option key="empty" value=""></option>
+          {items.map((item) => (
+            <option key={item} value={item}>
+              Week: {item}
+            </option>
+          ))}
+        </select>
+        </div>
+        </div>
+        <div>
+        {modules &&modules.map((module) => (
+            <ModuleDetails key={module._id} module={module} weekStart = {attendanceWeekStart} weekEnd={attendanceWeekEnd} />
+        ))}
+        </div>
+        <div>
+        {modules && <AllAttendancePieChart key={[attendanceWeekStart,attendanceWeekEnd]} modules={modules} weekStart = {attendanceWeekStart} weekEnd={attendanceWeekEnd} />}
+
+        </div>
         </div>
         <div label="Students">
           Nothing to see here, this tab is <em>extinct</em>!
