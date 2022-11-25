@@ -2,6 +2,7 @@
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 const jwt = require('jsonwebtoken')
+const Codes = require("../models/codemodel");
 
 
 
@@ -23,6 +24,10 @@ module.exports = {
   createToken: function(){
     const _id =  5;
     return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })
+  },
+  getCode: async function(){
+    const resultcode = await Codes.findOne({ codeID });
+    return resultcode;
   }
 }
 
