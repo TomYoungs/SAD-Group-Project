@@ -2,6 +2,7 @@ import { ModulePicker } from "../components/ModulePicker";
 import { WeekPicker } from "../components/WeekPicker";
 import { useEffect, useState } from "react";
 import { useGenerateCode } from "../hooks/useGenerateCode";
+import Tabs from "../components/Tabs";
 
 const StaffPage = () => {
   let items = [1,2,3,4,5,6,7,8];
@@ -38,11 +39,16 @@ const StaffPage = () => {
     fetchModules();
   }, []);
 
+
   return (
     <>
-    <form className="module-picker" onSubmit={handleGenerate}>
-      <h3>Module Code Generator</h3>
-      <div className="module-selector">
+      <div id="staffTabs">
+      <Tabs>
+        <div label="Today's Code">
+          <div className="tab1">
+        <form className="module-picker tab-content" onSubmit={handleGenerate}>
+          <h3>Generate Code</h3>
+          <div className="module-selector">
         <label>Choose one of your Modules:</label>
         <select
           onChange={(e) => {
@@ -59,6 +65,7 @@ const StaffPage = () => {
             ))}
         </select>
       </div>
+      
 
       <div className="week-selector">
       <label>Choose a week:</label>
@@ -81,6 +88,16 @@ const StaffPage = () => {
       </button>
       {error && <div className="error">{error}</div>}
     </form>
+    </div>
+        </div>
+        <div label="Modules">
+          After 'while, <em>Crocodile</em>!
+        </div>
+        <div label="Students">
+          Nothing to see here, this tab is <em>extinct</em>!
+        </div>
+      </Tabs>
+    </div>
 
     <div>{codeID}</div>
     </>
