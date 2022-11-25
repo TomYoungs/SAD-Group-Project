@@ -2,6 +2,17 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+//lines 9-11 used as example. Taken from https://tecadmin.net/get-current-date-time-javascript/
+const hoursBeforeDeletion = 2
+var today = new Date();
+const month = today.toLocaleString('default', { month: 'long' });
+// const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+// const expireTime = today.getHours()+2 + ":" + today.getMinutes() + ":" + today.getSeconds();
+// var dateTime = date +' '+ expireTime;
+
+//getDate() returns day number in month. getDay() returns day of the week. getDate() should be used
+const expireTime = month + " " + today.getDate() + ", " + today.getFullYear() + " " + (today.getHours()+hoursBeforeDeletion) + ":" + today.getMinutes() + ":" + today.getSeconds();
+
 const codesSchema = new Schema({
   codeID: {
     type: String,
@@ -14,7 +25,8 @@ const codesSchema = new Schema({
   weekID: {
     type: Number,
     required: true,
-  }
+  },
+  "expireAt": new Date(expireTime)// <Month Day, Year Hour Minute Second> format
 });
 
 
