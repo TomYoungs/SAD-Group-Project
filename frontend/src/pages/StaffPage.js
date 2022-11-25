@@ -47,7 +47,7 @@ const StaffPage = () => {
         <div label="Today's Code">
           <div className="tab1">
         <form className="module-picker tab-content" onSubmit={handleGenerate}>
-          <h3>Generate Code</h3>
+          <h2>Generate Code</h2>
           <div className="module-selector">
         <label>Choose one of your Modules:</label>
         <select
@@ -83,10 +83,11 @@ const StaffPage = () => {
         ))}
       </select>
     </div>
-      <button type="submit" disabled={isLoading}>
+      <button className="defaultButton" type="submit" disabled={isLoading}>
         Generate
       </button>
       {error && <div className="error">{error}</div>}
+      {codeID && <div className="generated-code">{codeID}</div>}
     </form>
     </div>
         </div>
@@ -98,8 +99,6 @@ const StaffPage = () => {
         </div>
       </Tabs>
     </div>
-
-    <div>{codeID}</div>
     </>
   );
 };

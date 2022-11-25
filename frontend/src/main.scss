@@ -140,11 +140,21 @@ ol {
 
 .module-picker {
   background-color: $beige;
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 25px;
+  padding: 25px 50px;
   font-family: $font2;
-  
-  h3 {
-    align-self: center;
+  text-align: center;
+  width: 200px;
+  height: 300px;
+
+  .module-selector, .week-selector {
+    padding: 10px 0px;
+  }
+
+  .generated-code {
+    margin-top: 10px;
+    padding: 10px 0px;
+    font-size: xx-large;
+    background: $green3;
   }
 }
