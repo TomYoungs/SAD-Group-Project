@@ -13,7 +13,7 @@ router.get("/getallcodes", getallCodes);
 
 //TODO: needs to be updated to work with :id and not be a POST
 //get a spesific code based on codeID (seed not _id)
-router.post("/getacode", getaCode);
+router.get("/getacode/:id", getaCode);
 
 //create a new code
 router.post("/createacode", createaCode);

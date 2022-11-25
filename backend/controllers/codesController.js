@@ -1,7 +1,6 @@
 const Codes = require("../models/codemodel");
 const mongoose = require("mongoose");
 
-
 // @desc Get all codes
 // @route GET /getallcodes
 // @access Public
@@ -15,7 +14,7 @@ const getallCodes = async (req, res) => {
 // @desc Get a codes
 // @route POST /getacode
 // @access Public
-const getaCode = async (req, res) => {
+const getaCodeold = async (req, res) => {
   const { codeID } = req.body;
   if (!codeID) {
     return res.status(404).json({ error: "please enter code" });
@@ -30,8 +29,20 @@ const getaCode = async (req, res) => {
   res.status(200).json(resultcode);
 };
 
+const getaCode = async (req, res) => {
+  const { id } = req.params;
+
+  const code = await Codes.findOne({codeID: id});
+
+  if (!code) {
+    return res.status(404).json({ error: "No such code" });
+  }
+
+  res.status(200).json(code);
+}
+
 // @desc Create a code
-// @route POST /getacode
+// @route POST /createacode
 // @access Public
 const createaCode = async (req, res) => {
   const { moduleID, weekID } = req.body;
