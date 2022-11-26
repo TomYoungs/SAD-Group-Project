@@ -6,17 +6,18 @@ import AllAttendancePieChart from "../components/AllAttendancePieChart";
 import { useEffect, useState } from "react";
 import { useGenerateCode } from "../hooks/useGenerateCode";
 import Tabs from "../components/Tabs";
+import StudentTab from "../components/StudentTab";
 
 const StaffPage = () => {
   let items = [1, 2, 3, 4, 5, 6, 7, 8];
-  const [modules, setModule] = useState(null);
-  const [tutorsUsers, setTutorsUsers] = useState(null);
   const userid = JSON.parse(localStorage.getItem("user")).id;
   const [moduleID, setModuleID] = useState("");
   const [codeID, setCodeID] = useState("");
   const [weekID, setWeekID] = useState("");
-  const [studentWeekID, setStudentWeekID] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null);
+
+  const [modules, setModule] = useState(null);
+  const [tutorsUsers, setTutorsUsers] = useState(null);
+
   const { generateCode, error, isLoading } = useGenerateCode();
 
   const handleGenerate = async (e) => {
@@ -50,7 +51,6 @@ const StaffPage = () => {
     };
 
     //search for users based on moduleID
-
     fetchModules();
     fetchModulesStudents();
   }, []);
@@ -123,46 +123,9 @@ const StaffPage = () => {
             <div>{modules && <AllAttendancePieChart modules={modules} />}</div>
           </div>
           <div label="Students">
-            <div className="week-selector">
-              <label>Select Current Week:</label>
-              <select
-                onChange={(e) => {
-                  const selectedWeek = e.target.value;
-                  setStudentWeekID(selectedWeek);
-                }}
-              >
-                <option key="empty" value=""></option>
-                {items.map((item) => (
-                  <option key={item} value={item}>
-                    Week: {item}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="studentstab">
-              {tutorsUsers &&
-                tutorsUsers.map((users, index) => (
-                  <div>
-                    <h3 key={modules[index]._id}>{modules[index].name}</h3>
-                    {users.map((user) => (
-                      <button
-                        key={user._id}
-                        onClick={() => setSelectedUser(user)}
-                      >
-                        {user.name}
-                      </button>
-                    ))}
-                  </div>
-                ))}
-              <div>
-                {selectedUser && (
-                  <div className="attendancezone">
-                    <h2>{selectedUser.name}</h2>
-                    <p>Here there would be a graph</p>
-                  </div>
-                )}
-              </div>
-            </div>
+            {tutorsUsers && (
+              <StudentTab modules={modules} tutorsUsers={tutorsUsers} />
+            )}
           </div>
         </Tabs>
       </div>
