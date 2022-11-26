@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
+import { checkLogin } from './hooks/checkLogin'
 import Home from './pages/Home'
 import Navbar from  './components/Navbar'
 import Login from './pages/Login'
@@ -12,19 +13,19 @@ function App() {
   const { user } = useAuthContext()
 
   return (
-    <div className="App">
+    <div className="App" onload = "checkLogin()">
       <BrowserRouter>
-        <Navbar />
+      <Navbar />
         <div className='pages'>
           <Routes>
             <Route
               path="/"
               element={user ? <Home /> : <Navigate to="/login" />}
-            />
+              />
             <Route
               path="/register"
               element={!user ? <Register /> : <Navigate to="/" />}
-            />
+              />
             <Route
               path = "/login"
               element={!user ? <Login /> :
