@@ -4,7 +4,7 @@ import PieChart from '../components/PieChart'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 
-const AllAttendancePieChart = ({modules}) => {
+const AllAttendancePieChart = ({modules, weekStart, weekEnd}) => {
   const [present, setPresent] = useState(0)
   const [absent, setAbsent] = useState(0)
   const { user } = useAuthContext()
@@ -51,7 +51,7 @@ const AllAttendancePieChart = ({modules}) => {
       for (let x in attendance) {
          for (let y in attendance[x]) {
            for (let z in attendance[x][y]) {
-             if (attendance[x][y][z] == true) {
+             if ((attendance[x][y][z] == true) && (z<=weekEnd)&& (z>=weekStart)) {
                present++
              }
            }
@@ -68,13 +68,13 @@ const AllAttendancePieChart = ({modules}) => {
      for (let x in attendance) {
         for (let y in attendance[x]) {
           for (let z in attendance[x][y]) {
-            if (attendance[x][y][z] == false) {
+            if ((attendance[x][y][z] == false) && (z<=weekEnd)&& (z>=weekStart)) {
               absent++
             }
           }
         }
       }
-
+      console.log(weekEnd);
       return absent
     }
 
