@@ -16,7 +16,6 @@ const ModuleDetails = ({module}) => {
           }
       })
       const json = await response.json()
-      console.log(json[0]);
       if (response.ok) {
           setAttendance(json)
       }
@@ -28,7 +27,7 @@ const ModuleDetails = ({module}) => {
     }, [user])
 
     const getPresentInModuel = (attendance) => {
-      //code for getting data from database
+      //code for getting data from database  
 
       let present = 0;
       //code to calculate number of students present in a given moduel here

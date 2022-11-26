@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+
 const {
   getAttendances,
   getAttendanceByObjectId,
@@ -8,6 +9,10 @@ const {
   getAttendanceByUserId,
   getAttendanceByUserAndModuleId,
   getAttendanceByModuleIdForCharts,
+  updateUserAttendance,
+  createAttendance,
+  deleteAttendance
+} = require("../controllers/attendanceController");
 
 //Get all attendances
 router.get("/getall", getAttendances);
@@ -20,7 +25,7 @@ router.get('/getByModuleId/:id', getAttendanceByModuleId)
 //get all attendances with a module id
 router.get('/getByModuleIdForCharts/:id', getAttendanceByModuleIdForCharts)
 //get all attendances with a User id
-router.get("/getbyuserid/:id", getAttendanceByUserId);
+router.get("/getByUserId/:id", getAttendanceByUserId);
 
 //get all attendances with a User id & a module id
 router.get('/getByUserIdModuleID/:userID/:moduleID', getAttendanceByUserAndModuleId)
