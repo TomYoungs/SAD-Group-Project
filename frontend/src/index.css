@@ -43,6 +43,11 @@ header a {
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
+.grid-container {
+  grid-template-columns: auto auto auto;
+  display: grid;
+  column-gap: 50px;
+}
 .workout-details h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
