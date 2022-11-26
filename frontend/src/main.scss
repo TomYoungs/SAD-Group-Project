@@ -132,18 +132,18 @@ ol {
   height: 100%;
   min-height: 500px;
   padding: 0 !important;
-}
-
-.tab1 {
-  background-color: $green1 !important;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.tab2 {
-  background-color: $green2 !important;
+.tab1 {
+  background-color: $green1 !important;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
 }
+
 
 .module-picker {
   background-color: $beige;
@@ -166,48 +166,96 @@ ol {
   }
 }
 
+.tab2 {
+  background-color: $green2 !important;
+}
 
 .module-info {
   display: flex;
   font-family: $font2;
+  overflow: auto;
 
   .module-list {
-    flex: 1;
+    overflow-y: scroll;
+    height: 60vh;
   }
 
-  .workout-details {
+  .individual-module {
     background-color: $beige;
     border-bottom: black 1px solid;
     margin: 0;
-    padding: 30px;
+    padding: 20px;
     position: relative;
-  }
 
-  .workout-details h3 {
-    margin: 0 0 10px 0;
+    h3 {
+      // margin: 0 0 10px 0;
+      max-width: 75%;
+    }
+
+    .MiniPieChart {
+      position: relative;
+    }
   }
 
   .attendance-pie {
-    width: 250px;
+    width: 350px;
+    height: 60vh;
+    margin: 10px;
+    background-color: $beige;
+    display: flex;
+    border-radius: 20px;
+    border: $beige 10px solid;
+  }
+
+  .individual-module:first-child {
+    border-radius: 20px 20px 0 0;
+  }
+
+  .individual-module:last-child {
+    border-radius: 0 0 20px 20px;
   }
 }
 
+@media only screen and (min-width: 801px) {
+  .module-info {
+    display: flex;
+    font-family: $font2;
+    width: 95%;
+    
+    .module-list {
+      flex: 1;
+      max-width: 1000px;
+      width: 75%;
+      margin: 10px;
+      padding-bottom: 20px;
+    }
+  } 
+  
+  .attendance-pie-mobile {
+    display: none !important;
+  }
 
-// #parent {
-//   display: flex;
-// }
-// #narrow {
-//   width: 200px;
-//   background: lightblue;
-//   /* Just so it's visible */
-// }
-// #wide {
-//   flex: 1;
-//   /* Grow to rest of container */
-//   background: lightgreen;
-//   /* Just so it's visible */
-// }
-// <div id="parent">
-//   <div id="wide">Wide (rest of width)</div>
-//   <div id="narrow">Narrow (200px)</div>
-// </div>
+}
+
+@media only screen and (max-width: 800px) {
+  .attendance-pie {
+    display: none !important;
+  }
+
+  .attendance-pie-mobile {
+    margin: 10px 0;
+    background: $beige;
+    border-radius: 20px;
+    border: $beige 5px solid;
+  }
+
+  .module-list {
+    width: 85vw;
+    margin-top: 20px;
+    border-radius: 20px;
+  }
+
+  .module-info {
+    display: block;
+  }
+}

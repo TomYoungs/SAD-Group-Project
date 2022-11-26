@@ -46,6 +46,9 @@ const StaffPage = () => {
 
   return (
     <>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    </head>
       <div id="staffTabs">
       <Tabs>
         <div label="Today's Code">
@@ -104,6 +107,9 @@ const StaffPage = () => {
                 ))}
               </div>
               <div className='attendance-pie'>
+                {modules && <AllAttendancePieChart modules={modules} />}
+              </div>
+              <div className='attendance-pie-mobile'>
                 {modules && <AllAttendancePieChart modules={modules} />}
               </div>
             </div>

@@ -69,12 +69,12 @@ const ModuleDetails = ({module}) => {
 
 
   return (
-    <div className='workout-details' style ={{display: 'grid', 'grid-template-columns': 'auto auto'}}>
+     <div className='individual-module' style ={{display: 'grid', 'grid-template-columns': 'auto auto'}}>
         <div>
         <h3>{module.name}</h3>
         <br/>
         </div>
-        <div classname="MiniPieChart" style ={{width:'80px', height:'80px', position: 'absolute',right: '100px'}}>
+        <div classname="MiniPieChart" style ={{width:'80px', height:'80px', position: 'absolute',right: '10px'}}>
           <MiniPieChart present = {getPresentInModuel(attendance)} absent = {getAbsentInModuel(attendance)} />
         </div>
     </div>

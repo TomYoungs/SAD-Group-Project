@@ -83,10 +83,14 @@ const AllAttendancePieChart = ({modules}) => {
 
   return (
 
-        <div classname="PieChart" style ={{width:'100%', height:'100%'}}>
+        <div classname="PieChart" style ={{height: '80%', display: 'block', margin: '0 auto 20px auto', width: '65vw'}}>
           Total Attendance Statistics
           <PieChart present = {present} absent = {absent} />
         </div>
+        // <div classname="PieChart" style ={{width:'80%', height:'80%'}}>
+        //   Total Attendance Statistics
+        //   <PieChart present = {present} absent = {absent} />
+        // </div>
   )
 }
 

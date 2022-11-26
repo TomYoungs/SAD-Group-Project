@@ -16,8 +16,8 @@ const MiniPieChart = (AttendanceForModule) => {
       data: [AttendanceForModule.present, AttendanceForModule.absent],
       //ToDo green and red look ugly maybe check with others for better schema?
       backgroundColor:[
-        'Green',
-        'LightGreen',
+        'Blue',
+        'LightBlue',
       ]
   },
 ],
