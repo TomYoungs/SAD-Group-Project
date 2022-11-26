@@ -38,7 +38,7 @@ function App() {
             />
             <Route
               path="/staffpage"
-              element={!user ? <Login /> : user.role <4 && user.role >0 ? <Navigate to="/staffpage" /> : <Navigate to="/login" />}    
+              element={!user ? <Login /> : user.role < 4 && user.role > 0 ? <Navigate to="/staffpage" /> : <Navigate to="/login" />}
             />
             {/* <Route UNCOMMENT WHEN ADMIN PAGE UP AND RUNNING
               path="/adminpage"

@@ -43,13 +43,13 @@ const registerUser = async (req, res) => {
 
   try {
     const user = await User.register(name, email, password);
-        //create a token
-        const token = createToken(user._id)
-        const id = user._id
-        res.status(200).json({email, id, token})
-    } catch (error) {
-        res.status(400).json({error: error.message})
-    }
+    //create a token
+    const token = createToken(user._id)
+    const id = user._id
+    res.status(200).json({ email, id, token })
+  } catch (error) {
+    res.status(400).json({ error: error.message })
+  }
 };
 
 

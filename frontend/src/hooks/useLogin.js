@@ -14,8 +14,8 @@ export const useLogin = () => {
         //proxy to localhost:4000
         const response = await fetch('/api/user/login', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password})
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
         })
         const json = await response.json()
 
@@ -28,11 +28,11 @@ export const useLogin = () => {
             localStorage.setItem('user', JSON.stringify(json))
 
             //update the auth context
-            dispatch({type: 'LOGIN', payload: json})
+            dispatch({ type: 'LOGIN', payload: json })
 
             setIsLoading(false)
         }
     }
 
-    return { login, isLoading, error}
+    return { login, isLoading, error }
 }
