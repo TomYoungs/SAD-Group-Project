@@ -1,3 +1,7 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import { act } from "react-dom/test-utils"
+
 const validator = require("validator");
 const Codes = require("../models/codemodel");
 
@@ -25,5 +29,12 @@ describe('Attendance Tests', function(){
     it('app should find answer', async()=>{
         const codes = await Codes.find({}).sort({ createdAt: -1 });
         codes.should.have.status(200);
+    })
+})
+describe('User Interactions', ()=>{
+    it('bs test', ()=>{
+        act(() =>{
+            ReactDOM.render()
+        })
     })
 })
