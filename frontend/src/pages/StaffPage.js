@@ -15,6 +15,7 @@ const StaffPage = () => {
   const [moduleID, setModuleID] = useState("");
   const [codeID, setCodeID] = useState("");
   const [weekID, setWeekID] = useState("");
+  const [studentWeekID, setStudentWeekID] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
   const { generateCode, error, isLoading } = useGenerateCode();
 
@@ -122,6 +123,22 @@ const StaffPage = () => {
             <div>{modules && <AllAttendancePieChart modules={modules} />}</div>
           </div>
           <div label="Students">
+            <div className="week-selector">
+              <label>Select Current Week:</label>
+              <select
+                onChange={(e) => {
+                  const selectedWeek = e.target.value;
+                  setStudentWeekID(selectedWeek);
+                }}
+              >
+                <option key="empty" value=""></option>
+                {items.map((item) => (
+                  <option key={item} value={item}>
+                    Week: {item}
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="studentstab">
               {tutorsUsers &&
                 tutorsUsers.map((users, index) => (
@@ -137,12 +154,12 @@ const StaffPage = () => {
                     ))}
                   </div>
                 ))}
-              <div className="attendancezone">
+              <div>
                 {selectedUser && (
-                  <>
+                  <div className="attendancezone">
                     <h2>{selectedUser.name}</h2>
                     <p>Here there would be a graph</p>
-                  </>
+                  </div>
                 )}
               </div>
             </div>

@@ -56,17 +56,6 @@ const ModuleDetails = ({module}) => {
 
       return absent
     }
-
-
-
-
-
-
-
-
-
-
-
   return (
     <div className='workout-details' style ={{display: 'grid', 'grid-template-columns': 'auto auto'}}>
         <div>
