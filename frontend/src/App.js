@@ -28,17 +28,23 @@ function App() {
             <Route
               path = "/login"
               element={!user ? <Login /> :
-              //if there is a user, performs checks below, role being 0 means student, 4 means admin, rest are a tutor
-              user.role == 0 ? <Navigate to="/studentpage" /> : user.role == 4? <Navigate to="/" /> : <Navigate to="/staffpage" />}
+                //if there is a user, performs checks below, role being 0 means student, 4 means admin, rest are a tutor
+                user.role === 0 ? <StudentPage  /> : user.role === 4 ? <Navigate to="/" /> : <Navigate to="/staffpage" />}
             />
             <Route
-              path="/studentpage" 
-              element={<StudentPage />}
+              path="/studentpage"
+              element={!user ? <Login /> :
+                user.role === 0 ? <Navigate to="/" /> : <Navigate to="/login" />}
             />
             <Route 
               path="/staffpage"
-              element={<StaffPage />}
+              element={!user ? <Login /> :
+                 user.role <4 && user.role >0 ? <StaffPage  /> : <Navigate to="/login" />}
             />
+            {/* { <Route UNCOMMENT WHEN ADMIN PAGE UP AND RUNNING
+              path="/adminpage"
+              element={!user ? <Login /> : user.role === 4 ? <Navigate to="/adminpage" /> : <Navigate to="/login" />}
+            /> } */}
             <Route
               path="*"
               element={<ErrorPage />}

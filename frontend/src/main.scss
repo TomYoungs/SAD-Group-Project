@@ -1,18 +1,19 @@
 /*VARIABLES*/
-$green1: #37413e; 
-$green2: #687C71; 
-$green3: #8a9c90; 
+$green1: #37413e;
+$green2: #687c71;
+$green3: #8a9c90;
 $green4: #abbcaf;
 $beige: #eae1cc;
 $paleblue: #9ccbc4;
 
-$font1: 'Montserrat', sans-serif;
-$font2: 'Cabin', sans-serif;
+$font1: "Montserrat", sans-serif;
+$font2: "Cabin", sans-serif;
 
 /*FONTS*/
-@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap");
 
-.App, html {
+.App,
+html {
   background-color: $beige !important ;
 }
 
@@ -21,7 +22,7 @@ h2 {
   font-weight: 700;
 }
 
-.defaultButton {
+.default-button {
   background-color: $green2;
   color: white;
   margin: auto;
@@ -51,7 +52,6 @@ h2 {
     align-items: center;
   }
 
-
   ::placeholder {
     color: white;
     font-family: $font2;
@@ -72,16 +72,16 @@ h2 {
 
 /*Chrome auto-fill fixes*/
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px $green1 inset !important;
-    box-shadow: 0 0 0 30px $green1 inset !important;
-    border: none;
-    font-family: $font2;
+  -webkit-box-shadow: 0 0 0 30px $green1 inset !important;
+  box-shadow: 0 0 0 30px $green1 inset !important;
+  border: none;
+  font-family: $font2;
 }
 
-input:-webkit-autofill{
+input:-webkit-autofill {
   -webkit-text-fill-color: white !important;
   padding-left: 20px;
   font-family: $font2 !important;
@@ -115,7 +115,6 @@ input:-webkit-autofill:active {
   border-width: 1px 1px 0 1px;
 }
 
-
 .tab-list {
   display: flex;
   justify-content: left;
@@ -126,16 +125,22 @@ ol {
   padding-inline-start: 0;
 }
 
-.tab1 {
-  background-color: $green1 !important;
+.default-tab {
   width: 100%;
   min-width: 100%;
   height: 100%;
   min-height: 500px;
+  padding: 0 !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 !important;
+}
+
+.tab1 {
+  background-color: $green1 !important;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
 }
 
 .module-picker {
@@ -147,7 +152,8 @@ ol {
   width: 200px;
   height: 300px;
 
-  .module-selector, .week-selector {
+  .module-selector,
+  .week-selector {
     padding: 10px 0px;
   }
 
@@ -156,5 +162,108 @@ ol {
     padding: 10px 0px;
     font-size: xx-large;
     background: $green3;
+  }
+}
+
+.tab2 {
+  background-color: $green2 !important;
+}
+
+.module-info {
+  display: flex;
+  font-family: $font2;
+  overflow: auto;
+
+  .module-list {
+    overflow-y: scroll;
+    height: 60vh;
+  }
+
+  .individual-module {
+    background-color: $beige;
+    border-bottom: black 1px solid;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+
+    h3 {
+      // margin: 0 0 10px 0;
+      max-width: 75%;
+    }
+
+    .MiniPieChart {
+      position: relative;
+    }
+  }
+
+  .attendance-pie {
+    width: 350px;
+    height: 60vh;
+    margin: 10px;
+    background-color: $beige;
+    display: flex;
+    border-radius: 20px;
+    border: $beige 10px solid;
+  }
+
+  .individual-module:first-child {
+    border-radius: 20px 20px 0 0;
+  }
+
+  .individual-module:last-child {
+    border-radius: 0 0 20px 20px;
+  }
+}
+
+@media only screen and (min-width: 801px) {
+  .module-info {
+    display: flex;
+    font-family: $font2;
+    width: 95%;
+
+    .module-list {
+      flex: 1;
+      max-width: 1000px;
+      width: 75%;
+      margin: 10px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .attendance-pie-mobile {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .attendance-pie {
+    display: none !important;
+  }
+
+  .attendance-pie-mobile {
+    margin: 10px 0;
+    background: $beige;
+    border-radius: 20px;
+    border: $beige 5px solid;
+  }
+
+  .module-list {
+    width: 85vw;
+    margin-top: 20px;
+    border-radius: 20px;
+  }
+
+  .module-info {
+    display: block;
+  }
+
+  .week-selector-container {
+    display: flex;
+    justify-content: center;
+    width: inherit;
+  }
+
+  .week-selector-item {
+    padding: 0 20px;
   }
 }
