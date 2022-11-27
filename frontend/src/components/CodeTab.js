@@ -2,14 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useGenerateCode } from "../hooks/useGenerateCode";
 
-
 export const CodeTab = ({ modules }) => {
   const { generateCode, error, isLoading } = useGenerateCode();
   const [moduleID, setModuleID] = useState("");
   const [codeID, setCodeID] = useState("");
   const [weekID, setWeekID] = useState("");
   let items = [1, 2, 3, 4, 5, 6, 7, 8];
-
 
   const handleGenerate = async (e) => {
     e.preventDefault();
@@ -19,8 +17,8 @@ export const CodeTab = ({ modules }) => {
   };
 
   return (
-    <div className="tab1">
-      <form className="module-picker tab-content" onSubmit={handleGenerate}>
+    <div className="default-tab tab1">
+      <form className="module-picker" onSubmit={handleGenerate}>
         <h2>Generate Code</h2>
         <div className="module-selector">
           <label>Choose one of your Modules:</label>
@@ -56,7 +54,7 @@ export const CodeTab = ({ modules }) => {
             ))}
           </select>
         </div>
-        <button className="defaultButton" type="submit" disabled={isLoading}>
+        <button className="default-button" type="submit" disabled={isLoading}>
           Generate
         </button>
         {error && <div className="error">{error}</div>}

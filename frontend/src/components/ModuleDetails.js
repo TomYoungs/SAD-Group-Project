@@ -62,7 +62,7 @@ const ModuleDetails = ({module}) => {
         <h4>{module.name}</h4>
         <br/>
         </div>
-        <div classname="PieChart" style ={{width:'6%', height:'100%', position: 'absolute',right: '100px'}}>
+        <div className="PieChart" style ={{width:'6%', height:'100%', position: 'absolute',right: '100px'}}>
           <PieChart present = {getPresentInModuel(attendance)} absent = {getAbsentInModuel(attendance)} />
         </div>
     </div>
