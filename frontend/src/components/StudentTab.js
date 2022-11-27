@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useStudentAttendance } from "../hooks/useStudentAttedance";
 import PieChart from "./PieChart";
 
@@ -8,15 +8,13 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   // const [userID, setUserID] = useState(null);
   // const [moduleID, setmoduleID] = useState(null);
-  const [selectedModule, setSelectedModule] = useState(null);
-  const {studentAttendance, error, isLoading, attendance} = useStudentAttendance()
+  const {studentAttendance, attendance} = useStudentAttendance()
   
   let items = [1, 2, 3, 4, 5, 6, 7, 8];
 
 
   const handleSubmit = async (userID, moduleID) => {
     
-    console.log("🚀 ~ file: StudentTab.js ~ line 21 ~ handleSubmit ~ handleSubmit")
     await studentAttendance(userID, moduleID);
   };
 
@@ -27,7 +25,7 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
     //code to calculate number of students present in a given moduel here
     for (let x in attendance) {
       for (let y in attendance[x]) {
-        if (attendance[x][y] == true) {
+        if (attendance[x][y] === true) {
           present++;
         }
       }
@@ -42,7 +40,7 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
     //code to calculate number of students absent in a given moduel here
     for (let x in attendance) {
       for (let y in attendance[x]) {
-        if (attendance[x][y] == false) {
+        if (attendance[x][y] === false) {
           absent++;
         }
       }
@@ -61,7 +59,7 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
             setStudentWeekID(selectedWeek);
           }}
         >
-          <option key="empty" value=""></option>
+          <option value=""></option>
           {items.map((item) => (
             <option key={item} value={item}>
               Week: {item}
@@ -73,11 +71,13 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
         {tutorsUsers &&
           tutorsUsers.map((users, index) => (
             <div>
-              <h3 key={modules[index]._id}>{modules[index].name}</h3>
-              {users.map((user) => (
-                <button key={user._id} onClick={() => (handleSubmit(user._id,modules[index]._id), setSelectedUser(user))}>
+              <h3 key={index} >{modules[index].name}</h3>
+              {users.map((user, counter) => (
+                <p key={counter} onClick={() => {
+                  handleSubmit(user._id, modules[index]._id)
+                  setSelectedUser(user)}}>
                   {user.name}
-                </button>
+                </p>
               ))}
             </div>
           ))}

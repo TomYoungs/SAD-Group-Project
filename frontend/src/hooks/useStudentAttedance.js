@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
 
 export const useStudentAttendance = () => {
   const [error, setError] = useState(null);

@@ -127,7 +127,6 @@ const StaffPage = () => {
               </div>
             </div>
           </div>
-
           <div label="Students">
             {tutorsUsers && (
               <StudentTab modules={modules} tutorsUsers={tutorsUsers} />

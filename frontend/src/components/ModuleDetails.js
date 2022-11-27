@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import React from 'react'
 import PieChart from '../components/PieChart'
+import MiniPieChart from './MiniPieChart'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 
-const ModuleDetails = ({module}) => {
+const ModuleDetails = ({module, weekStart, weekEnd}) => {
   const [attendance, setAttendance] = useState(null)
   const { user } = useAuthContext()
   useEffect(() => {
@@ -27,13 +28,13 @@ const ModuleDetails = ({module}) => {
     }, [user])
 
     const getPresentInModuel = (attendance) => {
-      //code for getting data from database  
+      //code for getting data from database
 
       let present = 0;
       //code to calculate number of students present in a given moduel here
       for (let x in attendance) {
          for (let y in attendance[x]) {
-           if (attendance[x][y] == true) {
+           if ((attendance[x][y] == true) && (y<=weekEnd) && (y>=weekStart)) {
              present++
            }
          }
@@ -48,7 +49,7 @@ const ModuleDetails = ({module}) => {
      //code to calculate number of students absent in a given moduel here
      for (let x in attendance) {
         for (let y in attendance[x]) {
-          if (attendance[x][y] == false) {
+          if ((attendance[x][y] == false) && (y<=weekEnd)&& (y>=weekStart)) {
             absent++
           }
         }
@@ -57,13 +58,13 @@ const ModuleDetails = ({module}) => {
       return absent
     }
   return (
-    <div className='workout-details' style ={{display: 'grid', 'grid-template-columns': 'auto auto'}}>
+     <div className='individual-module' style ={{display: 'grid', 'grid-template-columns': 'auto auto'}}>
         <div>
-        <h4>{module.name}</h4>
+        <h3>{module.name}</h3>
         <br/>
         </div>
-        <div className="PieChart" style ={{width:'6%', height:'100%', position: 'absolute',right: '100px'}}>
-          <PieChart present = {getPresentInModuel(attendance)} absent = {getAbsentInModuel(attendance)} />
+        <div className="MiniPieChart" style ={{width:'80px', height:'80px', position: 'absolute',right: '10px'}}>
+          <MiniPieChart present = {getPresentInModuel(attendance)} absent = {getAbsentInModuel(attendance)} />
         </div>
     </div>
   )

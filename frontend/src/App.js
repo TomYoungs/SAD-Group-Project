@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
+import { checkLogin } from './hooks/checkLogin'
 import Home from './pages/Home'
-import Navbar from  './components/Navbar'
+import Navbar from './components/Navbar'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import StudentPage from './pages/StudentPage'
@@ -26,19 +27,25 @@ function App() {
               element={!user ? <Register /> : <Navigate to="/" />}
             />
             <Route
-              path = "/login"
+              path="/login"
               element={!user ? <Login /> :
-              //if there is a user, performs checks below, role being 0 means student, 4 means admin, rest are a tutor
-              user.role == 0 ? <Navigate to="/studentpage" /> : user.role == 4? <Navigate to="/" /> : <Navigate to="/staffpage" />}
+                //if there is a user, performs checks below, role being 0 means student, 4 means admin, rest are a tutor
+                user.role === 0 ? <StudentPage  /> : user.role === 4 ? <Navigate to="/" /> : <Navigate to="/staffpage" />}
             />
             <Route
-              path="/studentpage" 
-              element={<StudentPage />}
+              path="/studentpage"
+              element={!user ? <Login /> :
+                user.role === 0 ? <Navigate to="/" /> : <Navigate to="/login" />}
             />
-            <Route 
+            <Route
               path="/staffpage"
-              element={<StaffPage />}
+              element={!user ? <Login /> :
+                 user.role <4 && user.role >0 ? <StaffPage  /> : <Navigate to="/login" />}
             />
+            {/* { <Route UNCOMMENT WHEN ADMIN PAGE UP AND RUNNING
+              path="/adminpage"
+              element={!user ? <Login /> : user.role === 4 ? <Navigate to="/adminpage" /> : <Navigate to="/login" />}
+            /> } */}
             <Route
               path="*"
               element={<ErrorPage />}

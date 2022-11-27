@@ -30,7 +30,7 @@ const Login = () => {
                 value={password}
                 placeholder="password"
             />
-            <button className='defaultButton' disabled={isLoading}>Log In</button>
+            <button className='default-button' disabled={isLoading}>Log In</button>
             {error && <div className='error'>{error}</div>}
         </form>
     )
