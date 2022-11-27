@@ -20,7 +20,7 @@ const StudentPage = () => {
                 onChange={(e) => setCode(e.target.value)}
                 value={code}
             />
-            <button disabled={isLoading}>Submit Code</button>
+            <button disabled={isLoading} className="submitCodeButton">Submit Code</button>
             {error && <div className='error'>{error}</div>}
         </form>
     )

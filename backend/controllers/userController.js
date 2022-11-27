@@ -2,6 +2,7 @@ const User = require("../models/usermodel");
 const Module = require("../models/modulemodel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 
 const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "3d" });
@@ -126,6 +127,44 @@ const createUser = async (req, res) => {
   }
 };
 
+// @desc Search for users based on moduleID
+// @route get /modulesusers
+// @access Public
+const modulesUsers = async (req, res) => {
+  //take in an array of TutorsID
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(404).json({ error: "invalid user ID" });
+  }
+
+  const listmodules = await Module.find({ Tutors: id});
+
+  if (!listmodules) {
+    return res.status(404).json({ error: "no modules found" });
+  }
+
+  async function getTutorUsers(module, index){ 
+    return await User.find({ Modules: module._id})
+  }
+
+  const tutorusers = await Promise.all(
+    listmodules.map(getTutorUsers)
+  )
+
+  if (!tutorusers) {
+    return res.status(404).json({ error: "No users found" });
+  }
+
+  
+  const filtTutorUsers = tutorusers.filter(el => {
+    return !(el.every(element => element === (undefined || null || '')));
+  })
+
+  res.status(200).json(filtTutorUsers)
+}
+
+
 module.exports = {
 
   loginUser,
@@ -133,4 +172,5 @@ module.exports = {
   updateUser,
   createUser,
   getUsers,
+  modulesUsers,
 };

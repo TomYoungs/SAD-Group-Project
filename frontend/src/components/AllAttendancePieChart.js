@@ -77,13 +77,10 @@ const AllAttendancePieChart = ({modules, weekStart, weekEnd}) => {
       console.log(weekEnd);
       return absent
     }
-
-
-
-
+    
   return (
 
-        <div classname="PieChart" style ={{height: '80%', display: 'block', margin: '0 auto 20px auto', width: '65vw'}}>
+        <div className="PieChart" style ={{height: '80%', display: 'block', margin: '0 auto 20px auto', width: '65vw'}}>
           Total Attendance Statistics
           <PieChart present = {present} absent = {absent} />
         </div>
