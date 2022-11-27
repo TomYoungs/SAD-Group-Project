@@ -2,12 +2,12 @@ const express = require('express')
 const router = express.Router()
 
 //controller functions
-const { getModules, getaModule, createModule, deleteModule, updateModule, getModulesByTutor, getaUsersModule } = require('../controllers/moduleController')
+const { getAllModules, getModulesById, createModule, deleteModule, updateModule, getModulesByTutor, getaUsersModule } = require('../controllers/moduleController')
 
 
-router.get('/getallmodules', getModules)
+router.get('/getallmodules', getAllModules)
 
-router.get('/getbyid/:id', getaModule)
+router.get('/getbyid/:id', getModulesById)
 
 router.get('/getbytutor/:tutor', getModulesByTutor)
 

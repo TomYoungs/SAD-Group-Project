@@ -3,8 +3,8 @@ const router = express.Router();
 
 
 const {
-  getAttendances,
-  getAttendanceByObjectId,
+  getAllAttendance,
+  getAttendanceById,
   getAttendanceByModuleId,
   getAttendanceByUserId,
   getAttendanceByUserAndModuleId,
@@ -15,10 +15,10 @@ const {
 } = require("../controllers/attendanceController");
 
 //Get all attendances
-router.get("/getallattendance", getAttendances);
+router.get("/getallattendance", getAllAttendance);
 
 //Get a attendances with a attendance id
-router.get("/getattendancebyid/:id", getAttendanceByObjectId);
+router.get("/getattendancebyid/:id", getAttendanceById);
 
 //get all attendances with a module id
 router.get('/getbymoduleid/:id', getAttendanceByModuleId)

@@ -8,7 +8,7 @@ const createToken = (_id) => {
 };
 
 // get all Modules
-const getUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
   const users = await User.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(users);
@@ -132,5 +132,5 @@ module.exports = {
   registerUser,
   updateUser,
   createUser,
-  getUsers,
+  getAllUsers,
 };

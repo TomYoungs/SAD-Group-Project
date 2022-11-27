@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 // @desc Get all Attendances
 // @route GET /getallattendance
 // @access Public
-const getAttendances = async (req, res) => {
+const getAllAttendance = async (req, res) => {
   const attendances = await Attendancemodel.find({});
   if(!attendances){
     res.status(404).json({ error: "no attendances found"})
@@ -15,7 +15,7 @@ const getAttendances = async (req, res) => {
 // @desc Get a Attendance with a attendance ID
 // @route GET /getattendancebyid/:id 
 // @access Public
-const getAttendanceByObjectId = async (req, res) => {
+const getAttendanceById = async (req, res) => {
   const { id } = req.params;
 };
 
@@ -163,8 +163,8 @@ const getAttendanceByUserAndModuleId = async (req, res) => {
 }
 
 module.exports = {
-  getAttendances,
-  getAttendanceByObjectId,
+  getAllAttendance,
+  getAttendanceById,
   getAttendanceByModuleId,
   getAttendanceByUserId,
   getAttendanceByUserAndModuleId,

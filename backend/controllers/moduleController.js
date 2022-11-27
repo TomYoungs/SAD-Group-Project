@@ -2,14 +2,14 @@ const Module = require("../models/modulemodel");
 const mongoose = require("mongoose");
 
 // get all Modules
-const getModules = async (req, res) => {
+const getAllModules = async (req, res) => {
   const modules = await Module.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(modules);
 };
 
 // get a single module
-const getaModule = async (req, res) => {
+const getModulesById = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -120,8 +120,8 @@ const getaUsersModule = async (req, res) => {
 
 
 module.exports = {
-  getModules,
-  getaModule,
+  getAllModules,
+  getModulesById,
   createModule,
   deleteModule,
   updateModule,
