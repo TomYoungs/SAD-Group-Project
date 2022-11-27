@@ -1,18 +1,19 @@
 /*VARIABLES*/
-$green1: #37413e; 
-$green2: #687C71; 
-$green3: #8a9c90; 
+$green1: #37413e;
+$green2: #687c71;
+$green3: #8a9c90;
 $green4: #abbcaf;
 $beige: #eae1cc;
 $paleblue: #9ccbc4;
 
-$font1: 'Montserrat', sans-serif;
-$font2: 'Cabin', sans-serif;
+$font1: "Montserrat", sans-serif;
+$font2: "Cabin", sans-serif;
 
 /*FONTS*/
-@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap");
 
-.App, html {
+.App,
+html {
   background-color: $beige !important ;
 }
 
@@ -51,7 +52,6 @@ h2 {
     align-items: center;
   }
 
-
   ::placeholder {
     color: white;
     font-family: $font2;
@@ -72,16 +72,16 @@ h2 {
 
 /*Chrome auto-fill fixes*/
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px $green1 inset !important;
-    box-shadow: 0 0 0 30px $green1 inset !important;
-    border: none;
-    font-family: $font2;
+  -webkit-box-shadow: 0 0 0 30px $green1 inset !important;
+  box-shadow: 0 0 0 30px $green1 inset !important;
+  border: none;
+  font-family: $font2;
 }
 
-input:-webkit-autofill{
+input:-webkit-autofill {
   -webkit-text-fill-color: white !important;
   padding-left: 20px;
   font-family: $font2 !important;
@@ -115,7 +115,6 @@ input:-webkit-autofill:active {
   border-width: 1px 1px 0 1px;
 }
 
-
 .tab-list {
   display: flex;
   justify-content: left;
@@ -144,7 +143,6 @@ ol {
   // justify-content: center;
 }
 
-
 .module-picker {
   background-color: $beige;
   border-radius: 25px;
@@ -154,7 +152,8 @@ ol {
   width: 200px;
   height: 300px;
 
-  .module-selector, .week-selector {
+  .module-selector,
+  .week-selector {
     padding: 10px 0px;
   }
 
@@ -221,7 +220,7 @@ ol {
     display: flex;
     font-family: $font2;
     width: 95%;
-    
+
     .module-list {
       flex: 1;
       max-width: 1000px;
@@ -229,12 +228,11 @@ ol {
       margin: 10px;
       padding-bottom: 20px;
     }
-  } 
-  
+  }
+
   .attendance-pie-mobile {
     display: none !important;
   }
-
 }
 
 @media only screen and (max-width: 800px) {
