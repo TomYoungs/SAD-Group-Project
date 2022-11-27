@@ -14,6 +14,9 @@ const {
   deleteAttendance
 } = require("../controllers/attendanceController");
 
+const requireAuth = require('../middleware/requireAuth')
+
+router.use(requireAuth)
 //Get all attendances
 router.get("/getall", getAttendances);
 

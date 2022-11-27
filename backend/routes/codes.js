@@ -8,6 +8,10 @@ const {
   createaCode,
 } = require("../controllers/codesController");
 
+const requireAuth = require('../middleware/requireAuth')
+
+router.use(requireAuth)
+
 //get all codes route
 router.get("/getallcodes", getallCodes);
 

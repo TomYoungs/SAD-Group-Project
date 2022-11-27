@@ -6,11 +6,13 @@ import AllAttendancePieChart from "../components/AllAttendancePieChart";
 import { useEffect, useState } from "react";
 import { useGenerateCode } from "../hooks/useGenerateCode";
 import Tabs from "../components/Tabs";
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const StaffPage = () => {
   let items = [1, 2, 3, 4, 5, 6, 7, 8];
   const [modules, setModule] = useState(null);
   const userid = JSON.parse(localStorage.getItem("user")).id;
+  const userToken =JSON.parse(localStorage.getItem("user")).token;
   const [moduleID, setModuleID] = useState("");
   const [codeID, setCodeID] = useState("");
   const [weekID, setWeekID] = useState("");
@@ -33,6 +35,9 @@ const StaffPage = () => {
     const fetchModules = async () => {
       const response = await fetch("/api/module/getausersmodule/" + userid, {
         method: "GET",
+        headers: {
+                    'Authorization': `Bearer ${userToken}`
+                }
       });
       const json = await response.json();
 

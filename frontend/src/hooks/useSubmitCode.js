@@ -4,6 +4,8 @@ export const useSubmitCode = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
+  const userToken =JSON.parse(localStorage.getItem("user")).token;
+
   const submitCode = async (codeID) => {
     setIsLoading(true);
     setError(null);
@@ -11,7 +13,7 @@ export const useSubmitCode = () => {
     //proxy to localhost:4000
     const coderesponse = await fetch("/api/codes/getacode", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json" ,'Authorization': `Bearer ${userToken}`},
       body: JSON.stringify({ codeID }),
     });
     const json = await coderesponse.json();
@@ -26,7 +28,7 @@ export const useSubmitCode = () => {
       const userID = JSON.parse(localStorage.getItem("user")).id;
       const moduleID = json.moduleName;
       const weekID = json.weekID;
-  
+
       const attendanceresponse = await fetch(
         "/api/attendance/updateuserattendance",
         {
