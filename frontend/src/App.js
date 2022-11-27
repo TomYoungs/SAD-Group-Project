@@ -30,12 +30,12 @@ function App() {
               path="/login"
               element={!user ? <Login /> :
                 //if there is a user, performs checks below, role being 0 means student, 4 means admin, rest are a tutor
-                user.role === 0 ? <StudentPage  /> : user.role === 4 ? <Navigate to="/" /> : <Navigate to="/staffpage" />}
+                user.role === 0 ? <Navigate to="/studentpage"  /> : user.role === 4 ? <Navigate to="/" /> : <Navigate to="/staffpage" />}
             />
             <Route
               path="/studentpage"
               element={!user ? <Login /> :
-                user.role === 0 ? <Navigate to="/" /> : <Navigate to="/login" />}
+                user.role === 0 ? <StudentPage /> : <Navigate to="/login" />}
             />
             <Route
               path="/staffpage"
