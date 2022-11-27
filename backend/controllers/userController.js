@@ -139,7 +139,6 @@ const modulesUsers = async (req, res) => {
   }
 
   const listmodules = await Module.find({ Tutors: id});
-  console.log("🚀 ~ file: userController.js ~ line 142 ~ modulesUsers ~ listmodules", listmodules)
 
   if (!listmodules) {
     return res.status(404).json({ error: "no modules found" });
@@ -152,7 +151,6 @@ const modulesUsers = async (req, res) => {
   const tutorusers = await Promise.all(
     listmodules.map(getTutorUsers)
   )
-  console.log("🚀 ~ file: userController.js ~ line 155 ~ modulesUsers ~ tutorusers", tutorusers)
 
   if (!tutorusers) {
     return res.status(404).json({ error: "No users found" });

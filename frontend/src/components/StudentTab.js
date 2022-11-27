@@ -85,7 +85,6 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
           {selectedUser && (
             <div className="attendancezone">
               <h2>{selectedUser.name}</h2>
-              <p>Here there would be a graph</p>
               <PieChart
                 present={getPresentInModule(attendance)}
                 absent={getAbsentInModule(attendance)}
