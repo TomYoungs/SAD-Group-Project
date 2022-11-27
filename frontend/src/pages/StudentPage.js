@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import { useSubmitCode } from '../hooks/useSubmitCode'
 
 const StudentPage = () => {
     const [code, setCode] = useState('')
-    const { submitCode, error, isLoading } = useSubmitCode()
+    const {submitCode, error, isLoading} = useSubmitCode()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -14,8 +14,8 @@ const StudentPage = () => {
     return (
         <form className="Submit Code" onSubmit={handleSubmit}>
             <h2>Report attendance</h2>
-
-            <input
+            
+            <input 
                 type="code"
                 onChange={(e) => setCode(e.target.value)}
                 value={code}

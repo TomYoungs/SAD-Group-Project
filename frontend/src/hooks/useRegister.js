@@ -14,8 +14,8 @@ export const useRegister = () => {
         //proxy to localhost:4000
         const response = await fetch('/api/user/register', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password })
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({name, email, password})
         })
         const json = await response.json()
 
@@ -28,11 +28,11 @@ export const useRegister = () => {
             localStorage.setItem('user', JSON.stringify(json))
 
             //update the auth context
-            dispatch({ type: 'LOGIN', payload: json })
+            dispatch({type: 'LOGIN', payload: json})
 
             setIsLoading(false)
         }
     }
 
-    return { register, isLoading, error }
+    return { register, isLoading, error}
 }

@@ -4,58 +4,58 @@ import PieChart from '../components/PieChart'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 
-const ModuleDetails = ({ module, weekStart, weekEnd }) => {
+const ModuleDetails = ({module, weekStart, weekEnd}) => {
   const [attendance, setAttendance] = useState(null)
   const { user } = useAuthContext()
   useEffect(() => {
-    let query = '/api/attendance/getByModuleIdForCharts/' + module._id
+    let query = '/api/attendance/getByModuleIdForCharts/'+module._id
     const fetchModuleAttendance = async () => {
       const response = await fetch(query, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
+          headers: {
+              'Authorization': `Bearer ${user.token}`
+          }
       })
       const json = await response.json()
       if (response.ok) {
-        setAttendance(json)
+          setAttendance(json)
       }
     }
     if (user) {
-      fetchModuleAttendance()
+        fetchModuleAttendance()
     }
 
-  }, [user])
+    }, [user])
 
-  const getPresentInModuel = (attendance) => {
-    //code for getting data from database
+    const getPresentInModuel = (attendance) => {
+      //code for getting data from database
 
-    let present = 0;
-    //code to calculate number of students present in a given moduel here
-    for (let x in attendance) {
-      for (let y in attendance[x]) {
-        if ((attendance[x][y] == true) && (y <= weekEnd) && (y >= weekStart)) {
-          present++
+      let present = 0;
+      //code to calculate number of students present in a given moduel here
+      for (let x in attendance) {
+         for (let y in attendance[x]) {
+           if ((attendance[x][y] == true) && (y<=weekEnd) && (y>=weekStart)) {
+             present++
+           }
+         }
+       }
+
+      return present
+    }
+    const getAbsentInModuel = (attendance) => {
+      //code for getting data from database
+
+     let absent = 0
+     //code to calculate number of students absent in a given moduel here
+     for (let x in attendance) {
+        for (let y in attendance[x]) {
+          if ((attendance[x][y] == false) && (y<=weekEnd)&& (y>=weekStart)) {
+            absent++
+          }
         }
       }
+
+      return absent
     }
-
-    return present
-  }
-  const getAbsentInModuel = (attendance) => {
-    //code for getting data from database
-
-    let absent = 0
-    //code to calculate number of students absent in a given moduel here
-    for (let x in attendance) {
-      for (let y in attendance[x]) {
-        if ((attendance[x][y] == false) && (y <= weekEnd) && (y >= weekStart)) {
-          absent++
-        }
-      }
-    }
-
-    return absent
-  }
 
 
 
@@ -68,14 +68,14 @@ const ModuleDetails = ({ module, weekStart, weekEnd }) => {
 
 
   return (
-    <div className='workout-details' style={{ display: 'grid', 'grid-template-columns': 'auto auto' }}>
-      <div>
+    <div className='workout-details' style ={{display: 'grid', 'grid-template-columns': 'auto auto'}}>
+        <div>
         <h4>{module.name}</h4>
-        <br />
-      </div>
-      <div classname="PieChart" style={{ width: '6%', height: '100%', position: 'absolute', right: '100px' }}>
-        <PieChart present={getPresentInModuel(attendance)} absent={getAbsentInModuel(attendance)} />
-      </div>
+        <br/>
+        </div>
+        <div classname="PieChart" style ={{width:'6%', height:'100%', position: 'absolute',right: '100px'}}>
+          <PieChart present = {getPresentInModuel(attendance)} absent = {getAbsentInModuel(attendance)} />
+        </div>
     </div>
   )
 }

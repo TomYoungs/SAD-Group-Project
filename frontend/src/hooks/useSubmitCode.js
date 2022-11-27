@@ -26,7 +26,7 @@ export const useSubmitCode = () => {
       const userID = JSON.parse(localStorage.getItem("user")).id;
       const moduleID = json.moduleName;
       const weekID = json.weekID;
-
+  
       const attendanceresponse = await fetch(
         "/api/attendance/updateuserattendance",
         {

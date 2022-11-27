@@ -88,9 +88,9 @@ const getModulesByTutor = async (req, res) => {
   if (!tutor) {
     return res.status(400).json({ error: "Invalid name" });
   }
-  const results = await Module.find({ Tutors: tutor });
+  const results = await Module.find({Tutors:tutor});
   if (!results) {
-    return res.status(404).json({ error: 'No modules found for user' })
+    return res.status(404).json({error: 'No modules found for user'})
   }
 
   res.status(200).json(results)
@@ -109,7 +109,7 @@ const getaUsersModule = async (req, res) => {
     return res.status(404).json({ error: "invalid userID" });
   }
 
-  const module = await Module.find({ Tutors: id });
+  const module = await Module.find({ Tutors: id});
 
   if (!module) {
     return res.status(404).json({ error: "No such module found" });

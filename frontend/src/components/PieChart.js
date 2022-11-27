@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { Chart as ChartJs, Tooltip, Title, ArcElement, Legend } from 'chart.js';
+import {Chart as ChartJs, Tooltip, Title, ArcElement, Legend} from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 ChartJs.register(
   Tooltip, Title, ArcElement, Legend
@@ -11,26 +11,26 @@ ChartJs.register(
 //these two variables are the number of present and absent stundent throughout
 //the modules runtime
 const PieChart = (AttendanceForModule) => {
-  const data = {
-    datasets: [{
+  const data= {
+  datasets: [{
       data: [AttendanceForModule.present, AttendanceForModule.absent],
       //ToDo green and red look ugly maybe check with others for better schema?
-      backgroundColor: [
+      backgroundColor:[
         'Green',
         'LightGreen',
       ]
-    },
-    ],
-    //These are purely for the key
-    labels: [
-      'Present',
-      'Absent',
-    ],
-  }
+  },
+],
+//These are purely for the key
+labels: [
+    'Present',
+    'Absent',
+],
+}
 
   return (
     <div className='pie-chart'>
-      <Pie data={data} />
+      <Pie data={data}/>
     </div>
   )
 }
