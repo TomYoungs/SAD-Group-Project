@@ -1,15 +1,56 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useStudentAttendance } from "../hooks/useStudentAttedance";
 import PieChart from "./PieChart";
 
 export const StudentTab = ({ modules, tutorsUsers }) => {
   const [studentWeekID, setStudentWeekID] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+  // const [userID, setUserID] = useState(null);
+  // const [moduleID, setmoduleID] = useState(null);
+  const [selectedModule, setSelectedModule] = useState(null);
+  const {studentAttendance, error, isLoading, attendance} = useStudentAttendance()
+  
   let items = [1, 2, 3, 4, 5, 6, 7, 8];
 
-  useEffect(() => {
-    console.log("studenttab component created");
-  }, []);
+
+  const handleSubmit = async (userID, moduleID) => {
+    
+    console.log("🚀 ~ file: StudentTab.js ~ line 21 ~ handleSubmit ~ handleSubmit")
+    await studentAttendance(userID, moduleID);
+  };
+
+  const getPresentInModule = (attendance) => {
+    //code for getting data from database
+
+    let present = 0;
+    //code to calculate number of students present in a given moduel here
+    for (let x in attendance) {
+      for (let y in attendance[x]) {
+        if (attendance[x][y] == true) {
+          present++;
+        }
+      }
+    }
+
+    return present;
+  };
+  const getAbsentInModule = (attendance) => {
+    //code for getting data from database
+
+    let absent = 0;
+    //code to calculate number of students absent in a given moduel here
+    for (let x in attendance) {
+      for (let y in attendance[x]) {
+        if (attendance[x][y] == false) {
+          absent++;
+        }
+      }
+    }
+
+    return absent;
+  };
+
   return (
     <>
       <div className="week-selector">
@@ -34,7 +75,7 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
             <div>
               <h3 key={modules[index]._id}>{modules[index].name}</h3>
               {users.map((user) => (
-                <button key={user._id} onClick={() => setSelectedUser(user)}>
+                <button key={user._id} onClick={() => (handleSubmit(user._id,modules[index]._id), setSelectedUser(user))}>
                   {user.name}
                 </button>
               ))}
@@ -45,7 +86,10 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
             <div className="attendancezone">
               <h2>{selectedUser.name}</h2>
               <p>Here there would be a graph</p>
-                <PieChart present={} absent={}/>
+              <PieChart
+                present={getPresentInModule(attendance)}
+                absent={getAbsentInModule(attendance)}
+              />
             </div>
           )}
         </div>
@@ -55,3 +99,4 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
 };
 
 export default StudentTab;
+//get attendance of user based off UserID and ModuleID

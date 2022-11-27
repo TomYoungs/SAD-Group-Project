@@ -6,7 +6,6 @@ const workoutRoutes = require('./routes/workouts')//change to whatever in future
 const userRoutes = require('./routes/user')
 const attendanceRoutes = require('./routes/attendance')
 const moduleRoutes = require('./routes/module')
-const attedanceRoutes = require('./routes/attendance')
 const codesRoutes = require('./routes/codes')
 
 var PORT = process.env.PORT || 4000
