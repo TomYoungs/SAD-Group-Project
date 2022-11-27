@@ -14,21 +14,23 @@ const Login = () => {
 
     return (
         <form className='Login' onSubmit={handleSubmit}>
-            <h3>Login</h3>
+            <h2>Log In</h2>
             
-            <label>Email:</label>
+            {/* <label>Email:</label> */}
             <input
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
+                placeholder="email address"
             />
-            <label>Password:</label>
+            {/* <label>Password:</label> */}
             <input
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                placeholder="password"
             />
-            <button disabled={isLoading}>Login in</button>
+            <button className='default-button' disabled={isLoading}>Log In</button>
             {error && <div className='error'>{error}</div>}
         </form>
     )

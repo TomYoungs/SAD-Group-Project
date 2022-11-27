@@ -10,21 +10,16 @@ ChartJs.register(
 //AttendanceForModule is an object with 2 atributes present and Absent
 //these two variables are the number of present and absent stundent throughout
 //the modules runtime
-const PieChart = (AttendanceForModule) => {
+const MiniPieChart = (AttendanceForModule) => {
   const data= {
   datasets: [{
       data: [AttendanceForModule.present, AttendanceForModule.absent],
       //ToDo green and red look ugly maybe check with others for better schema?
       backgroundColor:[
-        'Green',
-        'LightGreen',
+        'Blue',
+        'LightBlue',
       ]
   },
-],
-//These are purely for the key
-labels: [
-    'Present',
-    'Absent',
 ],
 }
 
@@ -35,4 +30,4 @@ labels: [
   )
 }
 
-export default PieChart
+export default MiniPieChart
