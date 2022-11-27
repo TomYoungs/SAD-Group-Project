@@ -5,7 +5,7 @@ const router = express.Router()
 const {loginUser, registerUser, updateUser, createUser, getUsers} = require('../controllers/userController')
 
 //get all users
-router.get('/getall', getUsers)
+router.get('/getallusers', getUsers)
 
 //login Route
 router.post('/login', loginUser)

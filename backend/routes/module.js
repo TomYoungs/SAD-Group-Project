@@ -5,11 +5,11 @@ const router = express.Router()
 const { getModules, getaModule, createModule, deleteModule, updateModule, getModulesByTutor, getaUsersModule } = require('../controllers/moduleController')
 
 
-router.get('/getmodules', getModules)
+router.get('/getallmodules', getModules)
 
-router.get('/getamodule/:id', getaModule)
+router.get('/getbyid/:id', getaModule)
 
-router.get('/getModulesByTutor/:tutor', getModulesByTutor)
+router.get('/getbytutor/:tutor', getModulesByTutor)
 
 router.post('/createmodule', createModule)
 
@@ -17,7 +17,7 @@ router.delete('/deletemodule', deleteModule)
 
 router.patch('/updatemodule', updateModule)
 
-router.get('/getausersmodule/:id', getaUsersModule)
+router.get('/getbyuser/:id', getaUsersModule)
 
 
 module.exports = router
