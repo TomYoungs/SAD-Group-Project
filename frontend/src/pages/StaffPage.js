@@ -107,45 +107,40 @@ const StaffPage = () => {
           <div label="Modules">
             <div className="default-tab tab2">
               <div className="module-info">
-{/* ////////////////////////////////////////////////////////////////////////////////////// */}
-
-              <div class="grid-container">
-              <div class="grid-item">
-                <p>Starting Week</p>
-                <select
-                  onChange={(e) => {
-                    const selectedWeek = e.target.value - 1;
-                    setAttendanceWeekStartID(selectedWeek);
-                  }}
-                >
-                  <option key="empty" value=""></option>
-                  {items.map((item) => (
-                    <option key={item} value={item}>
-                      Week: {item}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div class="grid-item">
-                <p>Ending Week</p>
-                <select
-                  onChange={(e) => {
-                    const selectedWeek = e.target.value - 1;
-                    setAttendanceWeekEndID(selectedWeek);
-                  }}
-                >
-                  <option key="empty" value=""></option>
-                  {items.map((item) => (
-                    <option key={item} value={item}>
-                      Week: {item}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-{/* ////////////////////////////////////////////////////////////////////////////////////// */}
-
-
+                <div class="week-selector-container">
+                  <div class="week-selector-item">
+                    <p>Starting Week</p>
+                    <select
+                      onChange={(e) => {
+                        const selectedWeek = e.target.value - 1;
+                        setAttendanceWeekStartID(selectedWeek);
+                      }}
+                    >
+                      <option key="empty" value=""></option>
+                      {items.map((item) => (
+                        <option key={item} value={item}>
+                          Week: {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div class="week-selector-item">
+                    <p>Ending Week</p>
+                    <select
+                      onChange={(e) => {
+                        const selectedWeek = e.target.value - 1;
+                        setAttendanceWeekEndID(selectedWeek);
+                      }}
+                    >
+                      <option key="empty" value=""></option>
+                      {items.map((item) => (
+                        <option key={item} value={item}>
+                          Week: {item}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
                 <div className="module-list">
                   {modules &&
                     modules.map((module) => (
