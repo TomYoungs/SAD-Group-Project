@@ -42,10 +42,10 @@ function App() {
               element={!user ? <Login /> :
                  user.role <4 && user.role >0 ? <StaffPage  /> : <Navigate to="/login" />}
             />
-            /*{ <Route UNCOMMENT WHEN ADMIN PAGE UP AND RUNNING
+            {/* { <Route UNCOMMENT WHEN ADMIN PAGE UP AND RUNNING
               path="/adminpage"
               element={!user ? <Login /> : user.role === 4 ? <Navigate to="/adminpage" /> : <Navigate to="/login" />}
-            /> }*/
+            /> } */}
             <Route
               path="*"
               element={<ErrorPage />}
