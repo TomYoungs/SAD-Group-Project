@@ -263,10 +263,10 @@ db.users.insert(user);
 //report and the user into there respective database
 
 for (x =0; x< userList.length; x++){
-  for (y =0; y< moduleList.length; y++){
+  for (y =0; y< userList[x].Modules.length; y++){
     let  attendance =
     {
-      moduleID:moduleList[y]._id.toString(),
+      moduleID:userList[x].Modules[y],
       userID:userList[x]._id.toString(),
       attendance:[
         true,
@@ -286,27 +286,6 @@ for (x =0; x< userList.length; x++){
     db.attendances.insert(attendance);
   }
 }
-//generates attendance report for academic session
-attendance =
-{
-  moduleID:academicSession[0]._id.toString(),
-  userID:userList[0]._id.toString(),
-  attendance:[
-    true,
-    true,
-    true,
-    true,
-    true,
-    false,
-    false,
-    true,
-    false,
-    false,
-    false,
-    true,
-  ]
-}
-db.attendances.insert(attendance);
 
 
 
