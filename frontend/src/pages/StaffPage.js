@@ -25,7 +25,7 @@ const StaffPage = () => {
 
   useEffect(() => {
     const fetchModules = async () => {
-      const response = await fetch("/api/module/getausersmodule/" + userid, {
+      const response = await fetch("/api/module/getbyuser/" + userid, {
         method: "GET",
         headers: {
           'Authorization': `Bearer ${userToken}`
