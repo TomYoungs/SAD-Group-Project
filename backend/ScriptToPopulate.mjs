@@ -70,10 +70,21 @@ let  moduleDetails =
 }
 moduleList.push(moduleDetails);
 db.modules.insert(moduleDetails);
-
+//creates course lead
+user =
+{
+  _id: ObjectId(),
+  name: "Josh",
+  email: "josh"+"@gmail.com",
+  password: hash,
+  role: 3,
+  Modules:[]
+}
+staffList.push(user);
+db.users.insert(user);
 // generates 6 modules and assigns 2 lectures to them
 
-let  moduleDetails =
+moduleDetails =
 {
   _id: ObjectId(),
   name: "Computer Science",
@@ -144,7 +155,7 @@ user =
   email: "richard"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -155,7 +166,7 @@ user =
   email: "john"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[3]._id.toString(),moduleList[4]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[3]._id.toString(),moduleList[4]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -166,7 +177,7 @@ user =
   email: "ben"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -177,7 +188,7 @@ user =
   email: "matt"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -188,7 +199,7 @@ user =
   email: "jacob"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[1]._id.toString(),moduleList[5]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[1]._id.toString(),moduleList[5]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -199,7 +210,7 @@ user =
   email: "tom"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[1]._id.toString(),moduleList[2]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[1]._id.toString(),moduleList[2]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -210,7 +221,7 @@ user =
   email: "jessica"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -221,7 +232,7 @@ user =
   email: "david"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[3]._id.toString(),moduleList[4]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[3]._id.toString(),moduleList[4]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -232,7 +243,7 @@ user =
   email: "james"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -243,7 +254,7 @@ user =
   email: "rob"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
