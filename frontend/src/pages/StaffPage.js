@@ -4,14 +4,21 @@ import ModuleDetails from "../components/ModuleDetails";
 import AllAttendancePieChart from "../components/AllAttendancePieChart";
 import { useEffect, useState } from "react";
 import Tabs from "../components/Tabs";
+import { useAuthContext } from '../hooks/useAuthContext'
 import StudentTab from "../components/StudentTab";
 import CodeTab from "../components/CodeTab";
+
 
 const StaffPage = () => {
   const [modules, setModule] = useState(null);
   const [tutorsUsers, setTutorsUsers] = useState(null);
   const userid = JSON.parse(localStorage.getItem("user")).id;
+  const userToken =JSON.parse(localStorage.getItem("user")).token;
+  const [moduleID, setModuleID] = useState("");
+  const [codeID, setCodeID] = useState("");
+  const [weekID, setWeekID] = useState("");
   let items = [1, 2, 3, 4, 5, 6, 7, 8];
+
   const [attendanceWeekStart, setAttendanceWeekStartID] = useState(0);
   const [attendanceWeekEnd, setAttendanceWeekEndID] = useState(8);
 
@@ -19,6 +26,9 @@ const StaffPage = () => {
     const fetchModules = async () => {
       const response = await fetch("/api/module/getausersmodule/" + userid, {
         method: "GET",
+        headers: {
+                    'Authorization': `Bearer ${userToken}`
+                }
       });
       const json = await response.json();
 
@@ -30,6 +40,9 @@ const StaffPage = () => {
     const fetchModulesStudents = async () => {
       const response = await fetch("/api/user/modulesusers/" + userid, {
         method: "GET",
+        headers: {
+                    'Authorization': `Bearer ${userToken}`
+                }
       });
       const json = await response.json();
 
