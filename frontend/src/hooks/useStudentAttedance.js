@@ -4,6 +4,7 @@ export const useStudentAttendance = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
   const [attendance, setAttendance] = useState(null);
+  const userToken =JSON.parse(localStorage.getItem("user")).token;
 
   const studentAttendance = async (userID, moduleID) => {
     setError(null);
@@ -11,7 +12,7 @@ export const useStudentAttendance = () => {
 
     const response = await fetch("/api/attendance/getbyuseridmoduleid", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${userToken}` },
       body: JSON.stringify({ userID, moduleID }),
       // headers: {
       //     'Authorization': `Bearer ${user.token}`

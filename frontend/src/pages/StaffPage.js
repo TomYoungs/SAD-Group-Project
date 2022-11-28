@@ -40,6 +40,9 @@ const StaffPage = () => {
     const fetchModulesStudents = async () => {
       const response = await fetch("/api/user/modulesusers/" + userid, {
         method: "GET",
+        headers: {
+                    'Authorization': `Bearer ${userToken}`
+                }
       });
       const json = await response.json();
 
