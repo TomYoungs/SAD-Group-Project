@@ -2,16 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 //controller functions
-const {loginUser, registerUser, updateUser, createUser, getAllUsers, modulesUsers} = require('../controllers/userController')
+const {
+  updateUser,
+  createUser,
+  getAllUsers,
+  modulesUsers,
+} = require("../controllers/userController");
 
 //get all users
-router.get('/getallusers', getAllUsers)    //new change
+router.get("/getallusers", getAllUsers); //new change
 
-//login Route
-router.post("/login", loginUser);
-
-//register Route
-router.post("/register", registerUser);
+//require a valid token
+router.use(requireAuth);
 
 //update Route
 router.patch("/updateuser", updateUser);
