@@ -28,7 +28,7 @@ router.get('/getbymoduleidforcharts/:id', getAttendanceByModuleIdForCharts)
 router.get("/getbyuserid/:id", getAttendanceByUserId);
 
 //get all attendances with a User id & a module id
-router.post('/getbyuseridmoduleid', getAttendanceByUserAndModuleId)
+router.post('/getbyuseridmoduleid', getByUserIDmoduleID)
 
 //update attendace using a userID moduleID & weekID
 router.patch("/updateuserattendance", updateUserAttendance);
