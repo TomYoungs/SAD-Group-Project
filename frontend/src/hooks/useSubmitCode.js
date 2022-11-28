@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-import { useAuthContext } from './useAuthContext'
+import { useAuthContext } from "./useAuthContext";
 export const useSubmitCode = () => {
   const [error, setError] = useState(null);
+  const [accepted, setAccepted] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
-  const userToken =JSON.parse(localStorage.getItem("user")).token;
+  const userToken = JSON.parse(localStorage.getItem("user")).token;
 
   const submitCode = async (codeID) => {
     setIsLoading(true);
@@ -12,7 +13,10 @@ export const useSubmitCode = () => {
     //proxy to localhost:4000
     const coderesponse = await fetch("/api/codes/getacode", {
       method: "POST",
-      headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${userToken}` },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
       body: JSON.stringify({ codeID }),
     });
     const json = await coderesponse.json();
@@ -20,6 +24,7 @@ export const useSubmitCode = () => {
     if (!coderesponse.ok) {
       setIsLoading(false);
       setError(json.error);
+      setAccepted("no");
     }
     if (coderesponse.ok) {
       setIsLoading(false);
@@ -32,20 +37,25 @@ export const useSubmitCode = () => {
         "/api/attendance/updateuserattendance",
         {
           method: "PATCH",
-          headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${userToken}` },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userToken}`,
+          },
           body: JSON.stringify({ userID, moduleID, weekID }),
         }
       );
       const resjson = await attendanceresponse.json();
-      if (!resjson.ok) {
+      if (!attendanceresponse.ok) {
         setIsLoading(false);
         setError(json.error);
+        setAccepted("no");
       }
-      if (resjson.ok) {
+      if (attendanceresponse.ok) {
         setIsLoading(false);
+        setAccepted("yes");
       }
     }
   };
 
-  return { submitCode, isLoading, error };
+  return { submitCode, isLoading, error, accepted };
 };

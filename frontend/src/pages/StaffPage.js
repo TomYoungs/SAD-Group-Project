@@ -19,14 +19,14 @@ const StaffPage = () => {
   const [moduleID, setModuleID] = useState("");
   const [codeID, setCodeID] = useState("");
   const [weekID, setWeekID] = useState("");
-  let items = [1, 2, 3, 4, 5, 6, 7, 8];
+  let items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   const [attendanceWeekStart, setAttendanceWeekStartID] = useState(0);
   const [attendanceWeekEnd, setAttendanceWeekEndID] = useState(8);
 
   useEffect(() => {
     const fetchModules = async () => {
-      const response = await fetch("/api/module/getausersmodule/" + userid, {
+      const response = await fetch("/api/module/getbyuser/" + userid, {
         method: "GET",
         headers: {
           'Authorization': `Bearer ${userToken}`
