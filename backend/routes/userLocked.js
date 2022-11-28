@@ -8,10 +8,11 @@ const {
   createUser,
   getAllUsers,
   modulesUsers,
+  deleteUser,
 } = require("../controllers/userController");
 
 //get all users
-router.get("/getallusers", getAllUsers); //new change
+router.get("/getallusers", getAllUsers);
 
 //require a valid token
 router.use(requireAuth);
