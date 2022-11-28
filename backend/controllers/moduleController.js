@@ -1,4 +1,5 @@
 const Module = require("../models/modulemodel");
+const User = require("../models/usermodel");
 const mongoose = require("mongoose");
 
 // get all Modules
@@ -50,7 +51,9 @@ const deleteModule = async (req, res) => {
   }
 
   const module = await Module.findOneAndDelete({ _id: id });
-
+  const attendance = await Attendance.deleteMany({ moduleID: _id });
+  const user = await User.updateMany({},
+    { $pull: { Modules: id }});
   if (!module) {
     return res.status(404).json({ error: "No such module" });
   }
