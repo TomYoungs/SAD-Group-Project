@@ -7,7 +7,7 @@ const {
   getAttendanceById,
   getAttendanceByModuleId,
   getAttendanceByUserId,
-  getAttendanceByUserAndModuleId,
+  getByUserIDmoduleID,
   getAttendanceByModuleIdForCharts,
   updateUserAttendance,
   createAttendance,
@@ -28,7 +28,7 @@ router.get('/getbymoduleidforcharts/:id', getAttendanceByModuleIdForCharts)
 router.get("/getbyuserid/:id", getAttendanceByUserId);
 
 //get all attendances with a User id & a module id
-router.get('/getbyuseridmoduleid/:userID/:moduleID', getAttendanceByUserAndModuleId)
+router.post('/getbyuseridmoduleid', getAttendanceByUserAndModuleId)
 
 //update attendace using a userID moduleID & weekID
 router.patch("/updateuserattendance", updateUserAttendance);

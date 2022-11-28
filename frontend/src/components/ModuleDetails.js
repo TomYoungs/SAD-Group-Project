@@ -57,24 +57,13 @@ const ModuleDetails = ({module, weekStart, weekEnd}) => {
 
       return absent
     }
-
-
-
-
-
-
-
-
-
-
-
   return (
      <div className='individual-module' style ={{display: 'grid', 'grid-template-columns': 'auto auto'}}>
         <div>
         <h3>{module.name}</h3>
         <br/>
         </div>
-        <div classname="MiniPieChart" style ={{width:'80px', height:'80px', position: 'absolute',right: '10px'}}>
+        <div className="MiniPieChart" style ={{width:'80px', height:'80px', position: 'absolute',right: '10px'}}>
           <MiniPieChart present = {getPresentInModuel(attendance)} absent = {getAbsentInModuel(attendance)} />
         </div>
     </div>

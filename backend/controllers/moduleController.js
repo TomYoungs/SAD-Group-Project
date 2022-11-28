@@ -84,7 +84,6 @@ const updateModule = async (req, res) => {
 // search for all modules with one specified tutor
 const getModulesByTutor = async (req, res) => {
   const { tutor } = req.params;
-  console.log(tutor);
   if (!tutor) {
     return res.status(400).json({ error: "Invalid name" });
   }
@@ -104,7 +103,6 @@ const getModulesByTutor = async (req, res) => {
 const getaUsersModule = async (req, res) => {
   //TODO: might need a check of 'role'
   const { id } = req.params;
-  console.log("HERE")
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "invalid userID" });
   }

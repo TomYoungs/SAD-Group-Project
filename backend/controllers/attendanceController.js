@@ -145,21 +145,20 @@ const deleteAttendance = async (req, res) => {
 
 
 // get all attendance records with specified user && module id
-const getAttendanceByUserAndModuleId = async (req, res) => {
-  const { userID, moduleID } = req.params
-  console.log(userID);
-  console.log(moduleID);
-  if (!mongoose.Types.ObjectId.isValid(userID)&&!mongoose.Types.ObjectId.isValid(moduleID)) {
+const getByUserIDmoduleID = async (req, res) => {
+  const { userID, moduleID } = req.body
+  
+  if (!userID || !moduleID) {
     return res.status(404).json({error: 'No such attendance records'})
   }
 
-  const attendances = await Attendancemodel.find({userID:userID,moduleID:moduleID},{attendance:1 , _id: 0});
+  const attendance = await Attendancemodel.findOne({userID:userID, moduleID:moduleID},{attendance:1 , _id: 0});
 
-  if (!attendances) {
+  if (!attendance) {
     return res.status(404).json({error: 'No such attendance record'})
   }
 
-  res.status(200).json(attendances)
+  res.status(200).json(attendance)
 }
 
 module.exports = {
@@ -167,7 +166,7 @@ module.exports = {
   getAttendanceById,
   getAttendanceByModuleId,
   getAttendanceByUserId,
-  getAttendanceByUserAndModuleId,
+  getByUserIDmoduleID,
   getAttendanceByModuleIdForCharts,
   updateUserAttendance,
   createAttendance,
