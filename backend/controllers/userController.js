@@ -1,5 +1,6 @@
 const User = require("../models/usermodel");
 const Module = require("../models/modulemodel");
+const Attendance = require("../models/attendancemodel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
@@ -165,14 +166,17 @@ const modulesUsers = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
-  const { email } = req.params;
+  const { _id } = req.params;
 
-  if (!email) {
+  if (!_id) {
     return res.status(404).json({ error: "please enter all fields" });
   }
 
   try {
-    const user = await User.findOneAndDelete({ email: email });
+    const user = await User.findOneAndDelete({ _id: _id });
+    const attendance = await Attendance.deleteMany({ userID: _id });
+    const modules = await Module.updateMany({},
+      { $pull: { Tutors: _id }});
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });

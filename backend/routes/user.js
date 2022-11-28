@@ -22,6 +22,6 @@ router.post("/createuser", createUser);
 //get a modules users
 router.get("/modulesusers/:id", modulesUsers);
 
-router.delete("/deleteuser/:email", deleteUser);
+router.delete("/deleteuser/:_id", deleteUser);
 
 module.exports = router;
