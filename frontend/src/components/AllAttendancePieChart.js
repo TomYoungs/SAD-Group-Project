@@ -15,7 +15,9 @@ const AllAttendancePieChart = ({modules, weekStart, weekEnd}) => {
        urls.push('/api/attendance/getByModuleIdForCharts/'+module._id)
       ))}
       const response = Promise.all(urls.map(url =>
-                   fetch(url)
+                   fetch(url ,{
+                     headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${user.token}` },
+                   })
                       .then(checkStatus)  // check the response of our APIs
                       .then(parseJSON)    // parse it to Json
                       .catch(error => console.log('There was a problem!', error))
@@ -78,12 +80,9 @@ const AllAttendancePieChart = ({modules, weekStart, weekEnd}) => {
       return absent
     }
 
-
-
-
   return (
 
-        <div classname="PieChart" style ={{height: '80%', display: 'block', margin: '0 auto 20px auto', width: '65vw'}}>
+        <div className="PieChart" style ={{height: '80%', display: 'block', margin: '0 auto 20px auto', width: '65vw'}}>
           Total Attendance Statistics
           <PieChart present = {present} absent = {absent} />
         </div>

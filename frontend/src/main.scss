@@ -17,6 +17,14 @@ html {
   background-color: $beige !important ;
 }
 
+// .pages {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-family: $font1;
+//   text-align: center;
+// }
+
 h2 {
   font-family: $font1;
   font-weight: 700;
@@ -35,7 +43,9 @@ h2 {
 }
 
 /*LOG IN PAGE*/
-.Login {
+/*AND SOME STUDENT PAGE*/
+.Login,
+.submit-code {
   background-color: $paleblue;
   margin: auto;
   width: 50%;
@@ -55,6 +65,7 @@ h2 {
   ::placeholder {
     color: white;
     font-family: $font2;
+    text-align: center;
   }
 
   input {
@@ -67,6 +78,24 @@ h2 {
     margin-bottom: 20px;
     padding-left: 20px;
     width: 100%;
+  }
+}
+
+/*STUDENT PAGE*/
+.submit-code {
+  height: fit-content;
+
+  h2 {
+    margin-top: 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .Login,
+  .submit-code {
+    width: 100vw;
+    margin: 0;
+    height: fit-content;
   }
 }
 
@@ -138,9 +167,17 @@ ol {
 
 .tab1 {
   background-color: $green1 !important;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
+}
+
+.studentstab {
+  background-color: $green1 !important;
+  padding: 10px
+}
+
+.attendancezone {
+  margin: 5px;
+  background-color: $beige;
+  padding: 8px
 }
 
 .module-picker {
