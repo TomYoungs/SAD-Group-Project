@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 let userList = [];
 let staffList =[];
 let moduleList =[];
+let academicSession =[];
 //for ease all users will have the same password TestPassword1!
 //and the email for all users will be there name plus @gmail.com
 let hash = ("$2a$10$Rpr1p7cM/20GfnEYQDgJIe98qkVNJ2KZxYc7V88nNAtnYNj7gjhKq");
@@ -68,7 +69,7 @@ let  moduleDetails =
   name: "Jeff's Academic Advisor session",
   Tutors:[user._id.toString()]
 }
-moduleList.push(moduleDetails);
+academicSession.push(moduleDetails);
 db.modules.insert(moduleDetails);
 //creates course lead
 user =
@@ -144,7 +145,7 @@ user =
   email: "jack"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[1]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
+  Modules:[academicSession[0]._id.toString(),moduleList[1]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -155,7 +156,7 @@ user =
   email: "richard"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[1]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
+  Modules:[moduleList[0]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -166,7 +167,7 @@ user =
   email: "john"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[1]._id.toString(),moduleList[3]._id.toString(),moduleList[4]._id.toString()]
+  Modules:[moduleList[0]._id.toString(),moduleList[3]._id.toString(),moduleList[4]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -177,7 +178,7 @@ user =
   email: "ben"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[1]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
+  Modules:[moduleList[0]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -188,7 +189,7 @@ user =
   email: "matt"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[1]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
+  Modules:[moduleList[0]._id.toString(),moduleList[4]._id.toString(),moduleList[5]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -285,6 +286,31 @@ for (x =0; x< userList.length; x++){
     db.attendances.insert(attendance);
   }
 }
+//generates attendance report for academic session
+attendance =
+{
+  moduleID:academicSession[0]._id.toString(),
+  userID:userList[0]._id.toString(),
+  attendance:[
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    true,
+    false,
+    false,
+    false,
+    true,
+  ]
+}
+db.attendances.insert(attendance);
+
+
+
+
 
 //generates 2 admin users
 for (admin_id =0; admin_id< 2; admin_id++){
