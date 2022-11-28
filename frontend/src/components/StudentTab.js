@@ -10,7 +10,7 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
   // const [moduleID, setmoduleID] = useState(null);
   const {studentAttendance, attendance} = useStudentAttendance()
   
-  let items = [1, 2, 3, 4, 5, 6, 7, 8];
+  let items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 
   const handleSubmit = async (userID, moduleID) => {
