@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 //controller functions
-const {loginUser, registerUser, updateUser, createUser, getAllUsers, modulesUsers} = require('../controllers/userController')
+const {loginUser, registerUser, updateUser, createUser, getAllUsers, modulesUsers, deleteUser} = require('../controllers/userController')
 
 //get all users
 router.get('/getallusers', getAllUsers)    //new change
@@ -21,5 +21,7 @@ router.post("/createuser", createUser);
 
 //get a modules users
 router.get("/modulesusers/:id", modulesUsers);
+
+router.delete("/deleteuser/:email", deleteUser);
 
 module.exports = router;

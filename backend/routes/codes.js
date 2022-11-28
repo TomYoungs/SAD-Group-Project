@@ -6,6 +6,8 @@ const {
   getallCodes,
   getaCode,
   createaCode,
+  updateacode,
+  deleteacode,
 } = require("../controllers/codesController");
 
 const requireAuth = require('../middleware/requireAuth')
@@ -21,5 +23,11 @@ router.post("/getacode", getaCode);
 
 //create a new code
 router.post("/createacode", createaCode);
+
+//create a new code
+router.patch("/updateacode", updateacode);
+
+//create a new code
+router.delete("/deleteacode", deleteacode);
 
 module.exports = router;

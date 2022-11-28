@@ -144,7 +144,7 @@ const modulesUsers = async (req, res) => {
     return res.status(404).json({ error: "no modules found" });
   }
 
-  async function getTutorUsers(module, index){ 
+  async function getTutorUsers(module, index){
     return await User.find({ Modules: module._id})
   }
 
@@ -156,7 +156,7 @@ const modulesUsers = async (req, res) => {
     return res.status(404).json({ error: "No users found" });
   }
 
-  
+
   const filtTutorUsers = tutorusers.filter(el => {
     return !(el.every(element => element === (undefined || null || '')));
   })
@@ -164,6 +164,20 @@ const modulesUsers = async (req, res) => {
   res.status(200).json(filtTutorUsers)
 }
 
+const deleteUser = async (req, res) => {
+  const { email } = req.params;
+
+  if (!email) {
+    return res.status(404).json({ error: "please enter all fields" });
+  }
+
+  try {
+    const user = await User.findOneAndDelete({ email: email });
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 module.exports = {
 
@@ -173,4 +187,5 @@ module.exports = {
   createUser,
   getAllUsers,
   modulesUsers,
+  deleteUser,
 };
