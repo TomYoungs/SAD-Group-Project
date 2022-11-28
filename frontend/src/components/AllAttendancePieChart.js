@@ -12,7 +12,7 @@ const AllAttendancePieChart = ({modules, weekStart, weekEnd}) => {
    const fetchAttendances = async (module) => {
      const urls =[]
     {modules &&modules.map((module) => (
-       urls.push('/api/attendance/getByModuleIdForCharts/'+module._id)
+       urls.push('/api/attendance/getbymoduleidforcharts/'+module._id)
       ))}
       const response = Promise.all(urls.map(url =>
                    fetch(url ,{

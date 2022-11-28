@@ -2,9 +2,9 @@ const Attendancemodel = require("../models/attendancemodel"); //change file name
 const mongoose = require("mongoose");
 
 // @desc Get all Attendances
-// @route GET /getall
+// @route GET /getallattendance
 // @access Public
-const getAttendances = async (req, res) => {
+const getAllAttendance = async (req, res) => {
   const attendances = await Attendancemodel.find({});
   if(!attendances){
     res.status(404).json({ error: "no attendances found"})
@@ -13,14 +13,14 @@ const getAttendances = async (req, res) => {
 };
 
 // @desc Get a Attendance with a attendance ID
-// @route GET /getByObjectId/:id
+// @route GET /getattendancebyid/:id 
 // @access Public
-const getAttendanceByObjectId = async (req, res) => {
+const getAttendanceById = async (req, res) => {
   const { id } = req.params;
 };
 
 // @desc Get a Attendance with a module ID
-// @route GET /getByModuleId/:id
+// @route GET /getbymoduleid/:id
 // @access Public
 const getAttendanceByModuleId = async (req, res) => {
   const { id } = req.params;
@@ -41,7 +41,7 @@ const getAttendanceByModuleId = async (req, res) => {
 };
 
 // @desc Get a Attendance with a user ID
-// @route GET /getByUserId/:id
+// @route GET /getbyuserid/:id
 // @access Public
 const getAttendanceByUserId = async (req, res) => {
   const { id } = req.params;
@@ -162,8 +162,8 @@ const getByUserIDmoduleID = async (req, res) => {
 }
 
 module.exports = {
-  getAttendances,
-  getAttendanceByObjectId,
+  getAllAttendance,
+  getAttendanceById,
   getAttendanceByModuleId,
   getAttendanceByUserId,
   getByUserIDmoduleID,

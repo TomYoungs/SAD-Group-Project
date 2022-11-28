@@ -5,16 +5,15 @@ const router = express.Router();
 const {
   updateUser,
   createUser,
-  getUsers,
+  getAllUsers,
   modulesUsers,
 } = require("../controllers/userController");
 
-const requireAuth = require('../middleware/requireAuth')
-
-router.use(requireAuth)
-
 //get all users
-router.get("/getall", getUsers);
+router.get("/getallusers", getAllUsers); //new change
+
+//require a valid token
+router.use(requireAuth);
 
 //update Route
 router.patch("/updateuser", updateUser);
