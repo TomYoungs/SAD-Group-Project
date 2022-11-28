@@ -19,8 +19,8 @@ db.attendances.remove({});
 let  user =
 {
   _id: ObjectId(),
-  name: "Namdi",
-  email: "namdi" +"@gmail.com",
+  name: "Nnamdi",
+  email: "nnamdi" +"@gmail.com",
   password: hash,
   role: 1,
   Modules:[]
