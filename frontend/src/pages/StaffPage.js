@@ -1,35 +1,26 @@
 // import { ModulePicker } from "../components/ModulePicker";
 // import { WeekPicker } from "../components/WeekPicker";
 import ModuleDetails from "../components/ModuleDetails";
-import PieChart from "../components/PieChart";
 import AllAttendancePieChart from "../components/AllAttendancePieChart";
 import { useEffect, useState } from "react";
-import { useGenerateCode } from "../hooks/useGenerateCode";
 import Tabs from "../components/Tabs";
 import { useAuthContext } from '../hooks/useAuthContext'
+import StudentTab from "../components/StudentTab";
+import CodeTab from "../components/CodeTab";
+
 
 const StaffPage = () => {
-  let items = [1, 2, 3, 4, 5, 6, 7, 8];
   const [modules, setModule] = useState(null);
+  const [tutorsUsers, setTutorsUsers] = useState(null);
   const userid = JSON.parse(localStorage.getItem("user")).id;
   const userToken =JSON.parse(localStorage.getItem("user")).token;
   const [moduleID, setModuleID] = useState("");
   const [codeID, setCodeID] = useState("");
   const [weekID, setWeekID] = useState("");
+  let items = [1, 2, 3, 4, 5, 6, 7, 8];
+
   const [attendanceWeekStart, setAttendanceWeekStartID] = useState(0);
   const [attendanceWeekEnd, setAttendanceWeekEndID] = useState(8);
-  const { generateCode, error, isLoading } = useGenerateCode();
-
-  const handleGenerate = async (e) => {
-    e.preventDefault();
-    // console.log("TEST")
-    // console.log(modules[0]._id)
-    // console.log(moduleID)
-    // console.log(weekID)
-    setCodeID(await generateCode(moduleID, weekID));
-    setModuleID("");
-    setWeekID("");
-  };
 
   useEffect(() => {
     const fetchModules = async () => {
@@ -46,7 +37,20 @@ const StaffPage = () => {
       }
     };
 
+    const fetchModulesStudents = async () => {
+      const response = await fetch("/api/user/modulesusers/" + userid, {
+        method: "GET",
+      });
+      const json = await response.json();
+
+      if (response.ok) {
+        setTutorsUsers(json);
+      }
+    };
+
+    //search for users based on moduleID
     fetchModules();
+    fetchModulesStudents();
   }, []);
 
   return (
@@ -60,60 +64,13 @@ const StaffPage = () => {
       <div id="staffTabs">
         <Tabs>
           <div label="Today's Code">
-            <div className="default-tab tab1">
-              <form className="module-picker" onSubmit={handleGenerate}>
-                <h2>Generate Code</h2>
-                <div className="module-selector">
-                  <label>Choose one of your Modules:</label>
-                  <select
-                    onChange={(e) => {
-                      const selectedModule = e.target.value;
-                      setModuleID(selectedModule);
-                    }}
-                  >
-                    <option key="empty" value=""></option>
-                    {modules &&
-                      modules.map((module) => (
-                        <option key={module._id} value={module._id}>
-                          {module.name}
-                        </option>
-                      ))}
-                  </select>
-                </div>
-
-                <div className="week-selector">
-                  <label>Choose a week:</label>
-                  <select
-                    onChange={(e) => {
-                      const selectedWeek = e.target.value;
-                      setWeekID(selectedWeek);
-                    }}
-                  >
-                    <option key="empty" value=""></option>
-                    {items.map((item) => (
-                      <option key={item} value={item}>
-                        Week: {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <button
-                  className="default-button"
-                  type="submit"
-                  disabled={isLoading}
-                >
-                  Generate
-                </button>
-                {error && <div className="error">{error}</div>}
-                {codeID && <div className="generated-code">{codeID}</div>}
-              </form>
-            </div>
+            <CodeTab modules={modules} />
           </div>
           <div label="Modules">
             <div className="default-tab tab2">
               <div className="module-info">
-                <div class="week-selector-container">
-                  <div class="week-selector-item">
+                <div className="week-selector-container">
+                  <div className="week-selector-item">
                     <p>Starting Week</p>
                     <select
                       onChange={(e) => {
@@ -129,7 +86,7 @@ const StaffPage = () => {
                       ))}
                     </select>
                   </div>
-                  <div class="week-selector-item">
+                  <div className="week-selector-item">
                     <p>Ending Week</p>
                     <select
                       onChange={(e) => {
@@ -181,7 +138,9 @@ const StaffPage = () => {
             </div>
           </div>
           <div label="Students">
-            Nothing to see here, this tab is <em>extinct</em>!
+            {tutorsUsers && (
+              <StudentTab modules={modules} tutorsUsers={tutorsUsers} />
+            )}
           </div>
         </Tabs>
       </div>
