@@ -12,15 +12,16 @@ const StudentPage = () => {
     }
 
     return (
-        <form className="Submit Code" onSubmit={handleSubmit}>
-            <h2>Report attendance</h2>
+        <form className="submit-code" onSubmit={handleSubmit}>
+            <h2>Report Attendance</h2>
             
             <input 
                 type="code"
                 onChange={(e) => setCode(e.target.value)}
                 value={code}
+                placeholder="attendance code"
             />
-            <button disabled={isLoading} className="submitCodeButton">Submit Code</button>
+            <button className='default-button' disabled={isLoading}>Submit</button>
             {error && <div className='error'>{error}</div>}
         </form>
     )
