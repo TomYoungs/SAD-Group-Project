@@ -22,7 +22,6 @@ const getaCode = async (req, res) => {
   }
 
   const resultcode = await Codes.findOne({ codeID });
-
   if (!resultcode) {
     return res.status(404).json({ error: "invalid code" });
   }
@@ -52,8 +51,50 @@ const createaCode = async (req, res) => {
   }
 };
 
+const updateacode = async (req, res) => {
+  const { _id, moduleID, weekID, expires} = req.body;
+
+  if (!_id || !moduleID || !weekID) {
+    return res.status(404).json({ error: "please enter all fields" });
+  }
+
+  const codeID = Math.random().toString(36).slice(6)
+  try {
+    const code = await Codes.findOneAndUpdate(
+      { _id: _id },
+      {
+        codeID: codeID,
+        moduleID: moduleID,
+        weekID: weekID,
+        expires: expires,
+      },
+      {new: true}
+    );
+    res.status(200).json(code);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const deleteacode = async (req, res) => {
+  const { _id } = req.body;
+
+  if (!_id) {
+    return res.status(404).json({ error: "please enter all fields" });
+  }
+
+  try {
+    const code = await Codes.findOneAndDelete({ _id: _id });
+    res.status(200).json(code);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getallCodes,
   getaCode,
   createaCode,
+  updateacode,
+  deleteacode,
 };
