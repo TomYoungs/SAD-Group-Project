@@ -13,7 +13,8 @@ const StaffPage = () => {
   const [modules, setModule] = useState(null);
   const [tutorsUsers, setTutorsUsers] = useState(null);
   const userid = JSON.parse(localStorage.getItem("user")).id;
-  const userToken =JSON.parse(localStorage.getItem("user")).token;
+  const role = JSON.parse(localStorage.getItem("user")).role;
+  const userToken = JSON.parse(localStorage.getItem("user")).token;
   const [moduleID, setModuleID] = useState("");
   const [codeID, setCodeID] = useState("");
   const [weekID, setWeekID] = useState("");
@@ -27,8 +28,8 @@ const StaffPage = () => {
       const response = await fetch("/api/module/getausersmodule/" + userid, {
         method: "GET",
         headers: {
-                    'Authorization': `Bearer ${userToken}`
-                }
+          'Authorization': `Bearer ${userToken}`
+        }
       });
       const json = await response.json();
 
@@ -41,8 +42,8 @@ const StaffPage = () => {
       const response = await fetch("/api/user/modulesusers/" + userid, {
         method: "GET",
         headers: {
-                    'Authorization': `Bearer ${userToken}`
-                }
+          'Authorization': `Bearer ${userToken}`
+        }
       });
       const json = await response.json();
 
@@ -51,11 +52,60 @@ const StaffPage = () => {
       }
     };
 
+    
     //search for users based on moduleID
     fetchModules();
     fetchModulesStudents();
+    displayTeacherCodes(role)
   }, []);
+  function displayTeacherCodes(props) {
+    var res = <></>;
 
+    if (props === 1)
+    {
+      res = <div label="Today's Code">
+      <CodeTab modules={modules} />
+    </div>
+    }
+
+    return res;
+  }
+
+  function displayStudents(props) {
+    var res = <></>;
+
+    if (props === 3)
+    {
+      res = <div label="Students">
+      {tutorsUsers && (
+        <StudentTab modules={modules} tutorsUsers={tutorsUsers} />
+      )}
+    </div>
+    }
+
+    return res;
+  }
+
+  function displayTitle(props) {
+    var role;
+    switch (props)
+    {
+      case 1:
+        role="Tutor"
+        break
+      case 2:
+        role="Academic Advisor"
+        break
+      case 3:
+        role="Module Leader"
+        break
+    }
+    
+    var res = <h1>Welcome to the {role} Page!</h1>
+
+    return res;
+  }
+  
   return (
     <>
       <head>
@@ -64,11 +114,10 @@ const StaffPage = () => {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </head>
+      {displayTitle(role)}
       <div id="staffTabs">
         <Tabs>
-          <div label="Today's Code">
-            <CodeTab modules={modules} />
-          </div>
+          {displayTeacherCodes(role)}
           <div label="Modules">
             <div className="default-tab tab2">
               <div className="module-info">
@@ -140,11 +189,7 @@ const StaffPage = () => {
               </div>
             </div>
           </div>
-          <div label="Students">
-            {tutorsUsers && (
-              <StudentTab modules={modules} tutorsUsers={tutorsUsers} />
-            )}
-          </div>
+          {displayStudents(role)}
         </Tabs>
       </div>
     </>

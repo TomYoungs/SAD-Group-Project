@@ -14,7 +14,7 @@ export const Navbar = () => {
   return (
    <header>
     <div className="container">
-        <Link to="/">
+        <Link to="/login">
             <h1>Class Scheduler📝</h1>
         </Link>
         <nav>
