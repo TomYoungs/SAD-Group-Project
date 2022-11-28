@@ -7,13 +7,16 @@ const {
   getAttendanceByObjectId,
   getAttendanceByModuleId,
   getAttendanceByUserId,
-  getAttendanceByUserAndModuleId,
+  getByUserIDmoduleID,
   getAttendanceByModuleIdForCharts,
   updateUserAttendance,
   createAttendance,
   deleteAttendance
 } = require("../controllers/attendanceController");
 
+const requireAuth = require('../middleware/requireAuth')
+
+router.use(requireAuth)
 //Get all attendances
 router.get("/getall", getAttendances);
 
@@ -25,10 +28,10 @@ router.get('/getByModuleId/:id', getAttendanceByModuleId)
 //get all attendances with a module id
 router.get('/getByModuleIdForCharts/:id', getAttendanceByModuleIdForCharts)
 //get all attendances with a User id
-router.get("/getByUserId/:id", getAttendanceByUserId);
+router.get("/getbyuserid/:id", getAttendanceByUserId);
 
 //get all attendances with a User id & a module id
-router.get('/getByUserIdModuleID/:userID/:moduleID', getAttendanceByUserAndModuleId)
+router.post('/getbyuseridmoduleid', getByUserIDmoduleID)
 
 //update attendace using a userID moduleID & weekID
 router.patch("/updateuserattendance", updateUserAttendance);
