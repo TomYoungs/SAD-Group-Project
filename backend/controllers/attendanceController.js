@@ -84,7 +84,6 @@ const updateUserAttendance = async (req, res) => {
     return res.status(404).json({ error: "missing values" });
   }
 
-  console.log("HERE");
   const attendance = await Attendancemodel.findOne({ moduleID: moduleID });
 
   if (!attendance) {

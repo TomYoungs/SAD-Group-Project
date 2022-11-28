@@ -2,7 +2,8 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 
-const userRoutes = require('./routes/user')
+const userLockedRoutes = require('./routes/userLocked')
+const userPublicRoutes = require('./routes/userPublic')
 const attendanceRoutes = require('./routes/attendance')
 const moduleRoutes = require('./routes/module')
 const codesRoutes = require('./routes/codes')
@@ -21,7 +22,8 @@ app.use((req, res, next) => {
 })
 
 //routes
-app.use('/api/user', userRoutes)
+app.use('/api/userLocked', userLockedRoutes)
+app.use('/api/userPublic', userPublicRoutes)
 app.use('/api/attendance', attendanceRoutes)
 app.use('/api/module', moduleRoutes)
 app.use('/api/codes', codesRoutes)
