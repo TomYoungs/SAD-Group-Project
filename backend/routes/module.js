@@ -4,6 +4,9 @@ const router = express.Router()
 //controller functions
 const { getAllModules, getModulesById, createModule, deleteModule, updateModule, getModulesByTutor, getaUsersModule } = require('../controllers/moduleController')
 
+const requireAuth = require('../middleware/requireAuth')
+
+router.use(requireAuth)
 
 router.get('/getallmodules', getAllModules)
 
