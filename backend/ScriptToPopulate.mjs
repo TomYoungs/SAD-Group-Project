@@ -144,7 +144,7 @@ user =
   email: "jack"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[0]._id.toString(),moduleList[1]._id.toString(),moduleList[2]._id.toString()]
+  Modules:[moduleList[0]._id.toString(),moduleList[1]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -199,7 +199,7 @@ user =
   email: "jacob"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[1]._id.toString(),moduleList[1]._id.toString(),moduleList[5]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[2]._id.toString(),moduleList[5]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
@@ -210,7 +210,7 @@ user =
   email: "tom"+"@gmail.com",
   password: hash,
   role: 0,
-  Modules:[moduleList[1]._id.toString(),moduleList[1]._id.toString(),moduleList[2]._id.toString()]
+  Modules:[moduleList[1]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
 }
 userList.push(user);
 db.users.insert(user);
