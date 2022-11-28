@@ -7,6 +7,7 @@ import Tabs from "../components/Tabs";
 import { useAuthContext } from '../hooks/useAuthContext'
 import StudentTab from "../components/StudentTab";
 import CodeTab from "../components/CodeTab";
+import { Doughnut } from "react-chartjs-2";
 
 
 const StaffPage = () => {
@@ -39,7 +40,7 @@ const StaffPage = () => {
     };
 
     const fetchModulesStudents = async () => {
-      const response = await fetch("/api/user/modulesusers/" + userid, {
+      const response = await fetch("/api/userLocked/modulesusers/" + userid, {
         method: "GET",
         headers: {
           'Authorization': `Bearer ${userToken}`
@@ -52,7 +53,7 @@ const StaffPage = () => {
       }
     };
 
-    
+
     //search for users based on moduleID
     fetchModules();
     fetchModulesStudents();
@@ -61,52 +62,135 @@ const StaffPage = () => {
   function displayTeacherCodes(props) {
     var res = <></>;
 
-    if (props === 1)
-    {
+    if (props === 1 || props === 2) {
       res = <div label="Today's Code">
-      <CodeTab modules={modules} />
-    </div>
+        <CodeTab modules={modules} />
+      </div>
+    }
+
+    return res;
+  }
+
+  function displayModules(props) {
+    var res = <></>
+
+    if (props != 2) {
+      res = <div label="Modules">
+        <div className="default-tab tab2">
+          <div className="module-info">
+            <div className="week-selector-container">
+              <div className="week-selector-item">
+                <p>Starting Week</p>
+                <select
+                  onChange={(e) => {
+                    const selectedWeek = e.target.value - 1;
+                    setAttendanceWeekStartID(selectedWeek);
+                  }}
+                >
+                  <option key="empty" value=""></option>
+                  {items.map((item) => (
+                    <option key={item} value={item}>
+                      Week: {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="week-selector-item">
+                <p>Ending Week</p>
+                <select
+                  onChange={(e) => {
+                    const selectedWeek = e.target.value - 1;
+                    setAttendanceWeekEndID(selectedWeek);
+                  }}
+                >
+                  <option key="empty" value=""></option>
+                  {items.map((item) => (
+                    <option key={item} value={item}>
+                      Week: {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="module-list">
+              {modules &&
+                modules.map((module) => (
+                  <ModuleDetails
+                    key={module._id}
+                    module={module}
+                    weekStart={attendanceWeekStart}
+                    weekEnd={attendanceWeekEnd}
+                  />
+                ))}
+            </div>
+            <div className="attendance-pie">
+              {modules && (
+                <AllAttendancePieChart
+                  key={[attendanceWeekStart, attendanceWeekEnd]}
+                  modules={modules}
+                  weekStart={attendanceWeekStart}
+                  weekEnd={attendanceWeekEnd}
+                />
+              )}
+            </div>
+            <div className="attendance-pie-mobile">
+              {modules && (
+                <AllAttendancePieChart
+                  key={[attendanceWeekStart, attendanceWeekEnd]}
+                  modules={modules}
+                  weekStart={attendanceWeekStart}
+                  weekEnd={attendanceWeekEnd}
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
     }
 
     return res;
   }
 
   function displayStudents(props) {
-    var res = <></>;
+    // var res = <></>; DONT DELETE THESE !!!
+    // if (props === 1)
+    // {
+    //   res = <div label="Students">
+    //   {tutorsUsers && (
+    //     <StudentTab modules={modules} tutorsUsers={tutorsUsers} />
+    //   )}
+    // </div>
+    // }
 
-    if (props === 3)
-    {
-      res = <div label="Students">
+    var res = <div label="Students">
       {tutorsUsers && (
         <StudentTab modules={modules} tutorsUsers={tutorsUsers} />
       )}
     </div>
-    }
 
     return res;
   }
 
   function displayTitle(props) {
     var role;
-    switch (props)
-    {
+    switch (props) {
       case 1:
-        role="Tutor"
+        role = "Tutor"
         break
       case 2:
-        role="Academic Advisor"
+        role = "Academic Advisor"
         break
       case 3:
-        role="Module Leader"
+        role = "Module Leader"
         break
     }
-    
+
     var res = <h1>Welcome to the {role} Page!</h1>
 
     return res;
   }
-  
-  return (
+
+  return (//if the empty tags below are removed it breaks. no idea why
     <>
       <head>
         <meta
@@ -118,77 +202,7 @@ const StaffPage = () => {
       <div id="staffTabs">
         <Tabs>
           {displayTeacherCodes(role)}
-          <div label="Modules">
-            <div className="default-tab tab2">
-              <div className="module-info">
-                <div className="week-selector-container">
-                  <div className="week-selector-item">
-                    <p>Starting Week</p>
-                    <select
-                      onChange={(e) => {
-                        const selectedWeek = e.target.value - 1;
-                        setAttendanceWeekStartID(selectedWeek);
-                      }}
-                    >
-                      <option key="empty" value=""></option>
-                      {items.map((item) => (
-                        <option key={item} value={item}>
-                          Week: {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="week-selector-item">
-                    <p>Ending Week</p>
-                    <select
-                      onChange={(e) => {
-                        const selectedWeek = e.target.value - 1;
-                        setAttendanceWeekEndID(selectedWeek);
-                      }}
-                    >
-                      <option key="empty" value=""></option>
-                      {items.map((item) => (
-                        <option key={item} value={item}>
-                          Week: {item}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="module-list">
-                  {modules &&
-                    modules.map((module) => (
-                      <ModuleDetails
-                        key={module._id}
-                        module={module}
-                        weekStart={attendanceWeekStart}
-                        weekEnd={attendanceWeekEnd}
-                      />
-                    ))}
-                </div>
-                <div className="attendance-pie">
-                  {modules && (
-                    <AllAttendancePieChart
-                      key={[attendanceWeekStart, attendanceWeekEnd]}
-                      modules={modules}
-                      weekStart={attendanceWeekStart}
-                      weekEnd={attendanceWeekEnd}
-                    />
-                  )}
-                </div>
-                <div className="attendance-pie-mobile">
-                  {modules && (
-                    <AllAttendancePieChart
-                      key={[attendanceWeekStart, attendanceWeekEnd]}
-                      modules={modules}
-                      weekStart={attendanceWeekStart}
-                      weekEnd={attendanceWeekEnd}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
+          {displayModules(role)}
           {displayStudents(role)}
         </Tabs>
       </div>
