@@ -12,7 +12,7 @@ export const useRegister = () => {
         setError(null)
 
         //proxy to localhost:4000
-        const response = await fetch('/api/user/register', {
+        const response = await fetch('/api/userLocked/register', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({name, email, password})
