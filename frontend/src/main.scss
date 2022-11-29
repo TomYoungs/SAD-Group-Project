@@ -26,7 +26,8 @@ html {
   background-color: $beige !important ;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: $font1;
   font-weight: 700;
 }
@@ -100,7 +101,8 @@ header {
 /*LOG IN PAGE*/
 /*AND SOME STUDENT PAGE*/
 .Login,
-.submit-code {
+.submit-code,
+.sign-up {
   background-color: $paleblue;
   margin: auto;
   width: 50%;
@@ -124,19 +126,19 @@ header {
   }
 
   input {
-      background-color: $green1;
-      border-radius: 20px;
-      border: 1px solid #ddd;
-      box-sizing: border-box;
-      color: white;
-      font-family: $font2;
-      height: 40px;
-      margin-bottom: 20px;
-      padding-left: 20px;
-      padding: 10px;
-      text-align: center;
-      width: 100%;
-    }
+    background-color: $green1;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    color: white;
+    font-family: $font2;
+    height: 40px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+  }
 }
 
 /*STUDENT PAGE*/
@@ -403,11 +405,11 @@ ol {
 
 /*ERRORS*/
 div.error {
-    background: #ffefef;
-    border-radius: 20px;
-    border: 1px solid $errorred;
-    color: $errorred;
-    margin: 20px 30px 0 40px;
-    padding: 10px;
-    text-align: center;
-  }
+  background: #ffefef;
+  border-radius: 20px;
+  border: 1px solid $errorred;
+  color: $errorred;
+  margin: 20px 30px 0 40px;
+  padding: 10px;
+  text-align: center;
+}
