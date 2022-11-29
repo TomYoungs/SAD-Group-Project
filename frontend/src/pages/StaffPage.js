@@ -199,7 +199,7 @@ const StaffPage = () => {
         ></meta>
       </head>
       {displayTitle(role)}
-      <div id="staffTabs">
+      <div id="staff-tabs">
         <Tabs>
           {displayTeacherCodes(role)}
           {displayModules(role)}

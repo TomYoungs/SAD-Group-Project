@@ -24,7 +24,7 @@ const StudentPage = () => {
       <button className="default-button" disabled={isLoading}>
         Submit
       </button>
-      {error && <div className="error">{error} Double check your code is valid and not expired</div>}
+      {error && <div className="error">{error}</div>}
       {accepted && (
         <div>
           {accepted === "yes" ? (
