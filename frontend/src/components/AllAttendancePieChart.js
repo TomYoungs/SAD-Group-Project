@@ -4,92 +4,90 @@ import PieChart from '../components/PieChart'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 
-const AllAttendancePieChart = ({modules, weekStart, weekEnd}) => {
+const AllAttendancePieChart = ({ modules, weekStart, weekEnd }) => {
   const [present, setPresent] = useState(0)
   const [absent, setAbsent] = useState(0)
   const { user } = useAuthContext()
   useEffect(() => {
-   const fetchAttendances = async (module) => {
-     const urls =[]
-    {modules &&modules.map((module) => (
-       urls.push('/api/attendance/getbymoduleidforcharts/'+module._id)
-      ))}
+    const fetchAttendances = async (module) => {
+      const urls = []
+      {
+        modules && modules.map((module) => (
+          urls.push('/api/attendance/getbymoduleidforcharts/' + module._id)
+        ))
+      }
       const response = Promise.all(urls.map(url =>
-                   fetch(url ,{
-                     headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${user.token}` },
-                   })
-                      .then(checkStatus)  // check the response of our APIs
-                      .then(parseJSON)    // parse it to Json
-                      .catch(error => console.log('There was a problem!', error))
-              )).then(data => {
-                setPresent(getPresentInModuels(data))
-                setAbsent(getAbsentInModuel(data))
-              })
+        fetch(url, {
+          headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${user.token}` },
+        })
+          .then(checkStatus)  // check the response of our APIs
+          .then(parseJSON)    // parse it into Json
+          .catch(error => console.log('There was a problem!', error))
+      )).then(data => {
+        setPresent(getPresentInModuels(data))
+        setAbsent(getAbsentInModuel(data))
+      })
 
 
 
-   }
-   if (user) {
-        fetchAttendances()
-   }
-   }, [user])
-   function checkStatus(response) {
-         if (response.ok) {
-             return Promise.resolve(response);
-         } else {
-             return Promise.reject(new Error(response.statusText));
-         }
-     }
-
-   function parseJSON(response) {
-       return response.json();
-   }
-
-    function getPresentInModuels (attendance) {
-      //code for getting data from database
-
-      let present = 0;
-      //code to calculate number of students present in a given moduel here
-      for (let x in attendance) {
-         for (let y in attendance[x]) {
-           for (let z in attendance[x][y]) {
-             if ((attendance[x][y][z] == true) && (z<=weekEnd)&& (z>=weekStart)) {
-               present++
-             }
-           }
-         }
-       }
-
-      return present
     }
-    function getAbsentInModuel  (attendance) {
-      //code for getting data from database
+    if (user) {
+      fetchAttendances()
+    }
+  }, [user])
+  function checkStatus(response) {
+    if (response.ok) {
+      return Promise.resolve(response);
+    } else {
+      return Promise.reject(new Error(response.statusText));
+    }
+  }
 
-     let absent = 0
-     //code to calculate number of students absent in a given moduel here
-     for (let x in attendance) {
-        for (let y in attendance[x]) {
-          for (let z in attendance[x][y]) {
-            if ((attendance[x][y][z] == false) && (z<=weekEnd)&& (z>=weekStart)) {
-              absent++
-            }
+  function parseJSON(response) {
+    return response.json();
+  }
+
+  function getPresentInModuels(attendance) {
+    //code for getting data from database
+
+    let present = 0;
+    //code to calculate number of students present in a given moduel here
+    for (let x in attendance) {
+      for (let y in attendance[x]) {
+        for (let z in attendance[x][y]) {
+          if ((attendance[x][y][z] == true) && (z <= weekEnd) && (z >= weekStart)) {
+            present++
           }
         }
       }
-      console.log(weekEnd);
-      return absent
     }
+
+    return present
+  }
+  function getAbsentInModuel(attendance) {
+    //code for getting data from database
+
+    let absent = 0
+    //code to calculate number of students absent in a given module here
+    for (let x in attendance) {
+      for (let y in attendance[x]) {
+        for (let z in attendance[x][y]) {
+          if ((attendance[x][y][z] == false) && (z <= weekEnd) && (z >= weekStart)) {
+            absent++
+          }
+        }
+      }
+    }
+    console.log(weekEnd);
+    return absent
+  }
 
   return (
 
-        <div className="PieChart" style ={{height: '80%', display: 'block', margin: '0 auto 20px auto', width: '65vw'}}>
-          Total Attendance Statistics
-          <PieChart present = {present} absent = {absent} />
-        </div>
-        // <div classname="PieChart" style ={{width:'80%', height:'80%'}}>
-        //   Total Attendance Statistics
-        //   <PieChart present = {present} absent = {absent} />
-        // </div>
+    <div className="PieChart" style={{ height: '80%', display: 'block', margin: '0 auto 20px auto', width: '65vw' }}>
+      Total Attendance Statistics
+      <PieChart present={present} absent={absent} />
+    </div>
   )
 }
 

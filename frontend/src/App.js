@@ -31,14 +31,14 @@ function App() {
               element={
                 !user ? (
                   <Login />
-                ) : //if there is a user, performs checks below, role being 0 means student, 4 means admin, rest are a tutor
-                user.role === 0 ? (
-                  <StudentPage />
-                ) : user.role === 4 ? (
-                  <Navigate to="/adminpage" />
-                ) : (
-                  <Navigate to="/staffpage" />
-                )
+                ) : //if there is a user, performs checks below, role being 0 means student, 4 means admin, rest are a tutor (1 = regular tutor, 2 = Academic Advisor, 3 = Course Leader)
+                  user.role === 0 ? (
+                    <StudentPage />
+                  ) : user.role === 4 ? (
+                    <Navigate to="/adminpage" />
+                  ) : (
+                    <Navigate to="/staffpage" />
+                  )
               }
             />
             <Route
@@ -71,7 +71,7 @@ function App() {
                 !user ? (
                   <Login />
                 ) : user.role === 4 ? (
-                  <AdminPage/>
+                  <AdminPage />
                 ) : (
                   <Navigate to="/login" />
                 )

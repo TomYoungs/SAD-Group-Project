@@ -1,9 +1,9 @@
 import React from 'react'
 
-const AllModuleDetails = ({module}) => {
+const AllModuleDetails = ({ module }) => {
   return (
     <div className='all-module-details'>
-        <h4>{module.name}</h4>
+      <h4>{module.name}</h4>
     </div>
   )
 }

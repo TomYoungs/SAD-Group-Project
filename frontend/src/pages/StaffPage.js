@@ -7,8 +7,6 @@ import Tabs from "../components/Tabs";
 import { useAuthContext } from '../hooks/useAuthContext'
 import StudentTab from "../components/StudentTab";
 import CodeTab from "../components/CodeTab";
-import { Doughnut } from "react-chartjs-2";
-
 
 const StaffPage = () => {
   const [modules, setModule] = useState(null);
@@ -16,9 +14,6 @@ const StaffPage = () => {
   const userid = JSON.parse(localStorage.getItem("user")).id;
   const role = JSON.parse(localStorage.getItem("user")).role;
   const userToken = JSON.parse(localStorage.getItem("user")).token;
-  const [moduleID, setModuleID] = useState("");
-  const [codeID, setCodeID] = useState("");
-  const [weekID, setWeekID] = useState("");
   let items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   const [attendanceWeekStart, setAttendanceWeekStartID] = useState(0);
@@ -152,16 +147,6 @@ const StaffPage = () => {
   }
 
   function displayStudents(props) {
-    // var res = <></>; DONT DELETE THESE !!!
-    // if (props === 1)
-    // {
-    //   res = <div label="Students">
-    //   {tutorsUsers && (
-    //     <StudentTab modules={modules} tutorsUsers={tutorsUsers} />
-    //   )}
-    // </div>
-    // }
-
     var res = <div label="Students">
       {tutorsUsers && (
         <StudentTab modules={modules} tutorsUsers={tutorsUsers} />
@@ -190,7 +175,7 @@ const StaffPage = () => {
     return res;
   }
 
-  return (//if the empty tags below are removed it breaks. no idea why
+  return (
     <>
       <head>
         <meta
@@ -211,6 +196,3 @@ const StaffPage = () => {
 };
 
 export default StaffPage;
-
-//dropdown of modules
-//week selector

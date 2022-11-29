@@ -1,9 +1,8 @@
 const Home = () => {
-    return (
-        <p>
-          nothing to see here
-        </p>
-    )
+  return (
+    <p>
+    </p>
+  )
 }
 
 export default Home
