@@ -49,50 +49,67 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
 
   return (
     <>
-      <div className="week-selector-item">
-        <p>Ending Week</p>
-        <select
-          onChange={(e) => {
-            const selectedWeek = e.target.value - 1;
-            setAttendanceWeekEndID(selectedWeek);
-          }}
-        >
-          <option key="empty" value=""></option>
-          {items.map((item) => (
-            <option key={item} value={item}>
-              Week: {item}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="studentstab">
-        {tutorsUsers &&
-          tutorsUsers.map((users, index) => (
-            <div>
-              <h3 key={index}>{modules[index].name}</h3>
-              {users.map((user, counter) => (
-                <p
-                  key={counter}
-                  onClick={() => {
-                    handleSubmit(user._id, modules[index]._id);
-                    setSelectedUser(user);
-                  }}
-                >
-                  {user.name}
-                </p>
-              ))}
+      <div className="default-tab tab3">
+        <div className="students-info">
+          <div className="week-selector-container">
+            <div className="week-selector-item">
+              <p>Ending Week</p>
+              <select
+                onChange={(e) => {
+                  const selectedWeek = e.target.value - 1;
+                  setAttendanceWeekEndID(selectedWeek);
+                }}
+              >
+                <option key="empty" value=""></option>
+                {items.map((item) => (
+                  <option key={item} value={item}>
+                    Week: {item}
+                  </option>
+                ))}
+              </select>
             </div>
-          ))}
-        <div>
-          {selectedUser && (
-            <div className="attendancezone">
-              <h2>{selectedUser.name}</h2>
-              <PieChart
-                present={getPresentInModule(attendance)}
-                absent={getAbsentInModule(attendance)}
-              />
-            </div>
-          )}
+          </div>
+          <div className="students-list">
+          {tutorsUsers &&
+            tutorsUsers.map((users, index) => (
+              <div className="students-in-module">
+                <h3 key={index}>{modules[index].name}</h3>
+                {users.map((user, counter) => (
+                  <p
+                    key={counter}
+                    onClick={() => {
+                      handleSubmit(user._id, modules[index]._id);
+                      setSelectedUser(user);
+                    }}
+                  >
+                    {user.name}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className="attendance-pie">
+            {selectedUser && (
+              <div className="attendancezone">
+                <h2>{selectedUser.name}</h2>
+                <PieChart
+                  present={getPresentInModule(attendance)}
+                  absent={getAbsentInModule(attendance)}
+                />
+              </div>
+            )}
+          </div>
+          <div className="attendance-pie-mobile">
+            {selectedUser && (
+              <div>
+                <h2>{selectedUser.name}</h2>
+                <PieChart
+                  present={getPresentInModule(attendance)}
+                  absent={getAbsentInModule(attendance)}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

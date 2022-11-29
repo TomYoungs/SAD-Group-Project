@@ -36,6 +36,9 @@ h2 {
   margin: auto;
   border-radius: 20px;
   width: 100px;
+  border: 0;
+  padding: 10px;
+  cursor: pointer;
 
   display: flex;
   justify-content: center;
@@ -169,15 +172,8 @@ ol {
   background-color: $green1 !important;
 }
 
-.studentstab {
-  background-color: $green1 !important;
-  padding: 10px
-}
-
-.attendancezone {
-  margin: 5px;
-  background-color: $beige;
-  padding: 8px
+.tab3 {
+  background-color: $green3 !important;
 }
 
 .module-picker {
@@ -213,7 +209,7 @@ ol {
 
   .module-list {
     overflow-y: scroll;
-    height: 60vh;
+    height: 55vh;
   }
 
   .individual-module {
@@ -235,7 +231,7 @@ ol {
 
   .attendance-pie {
     width: 350px;
-    height: 60vh;
+    height: 55vh;
     margin: 10px;
     background-color: $beige;
     display: flex;
@@ -252,13 +248,52 @@ ol {
   }
 }
 
+.students-info {
+  display: flex;
+  font-family: $font2;
+  overflow: auto;
+
+  .students-list {
+    overflow-y: scroll;
+    height: 55vh;
+  }
+
+  .students-in-module {
+    background-color: $beige;
+    border-bottom: black 1px solid;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+  }
+
+  .attendance-pie {
+    width: 350px;
+    height: 55vh;
+    margin: 10px;
+    background-color: $beige;
+    display: flex;
+    border-radius: 20px;
+    border: $beige 10px solid;
+  }
+
+  .students-in-module:first-child {
+    border-radius: 20px 20px 0 0;
+  }
+
+  .students-in-module:last-child {
+    border-radius: 0 0 20px 20px;
+  }
+}
+
 @media only screen and (min-width: 801px) {
-  .module-info {
+  .module-info,
+  .students-info {
     display: flex;
     font-family: $font2;
     width: 95%;
 
-    .module-list {
+    .module-list,
+    .students-list {
       flex: 1;
       max-width: 1000px;
       width: 75%;
@@ -284,13 +319,18 @@ ol {
     border: $beige 5px solid;
   }
 
-  .module-list {
+  .module-list,
+  .students-list {
     width: 85vw;
     margin-top: 20px;
     border-radius: 20px;
   }
 
   .module-info {
+    display: block;
+  }
+
+  .students-info {
     display: block;
   }
 

@@ -49,15 +49,7 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
 }
-form button {
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
-}
+
 div.error {
   padding: 10px;
   background: #ffefef;
