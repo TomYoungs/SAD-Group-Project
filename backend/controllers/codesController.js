@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 // @desc Get all codes
 // @route GET /getallcodes
 // @access Public
-const getallCodes = async (req, res) => {
+const getAllCodes = async (req, res) => {
   const codes = await Codes.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(codes);
@@ -13,9 +13,9 @@ const getallCodes = async (req, res) => {
 
 //TODO: currently a post needs to be updated
 // @desc Get a codes
-// @route POST /getacode
+// @route POST /getACode
 // @access Public
-const getaCode = async (req, res) => {
+const getACode = async (req, res) => {
   const { codeID } = req.body;
   if (!codeID) {
     return res.status(404).json({ error: "please enter code" });
@@ -30,9 +30,9 @@ const getaCode = async (req, res) => {
 };
 
 // @desc Create a code
-// @route POST /getacode
+// @route POST /getACode
 // @access Public
-const createaCode = async (req, res) => {
+const createACode = async (req, res) => {
   const { moduleID, weekID } = req.body;
 
   if (!moduleID || !weekID) {
@@ -51,7 +51,7 @@ const createaCode = async (req, res) => {
   }
 };
 
-const updateacode = async (req, res) => {
+const updateACode = async (req, res) => {
   const { _id, moduleID, weekID, expires} = req.body;
 
   if (!_id || !moduleID || !weekID) {
@@ -76,7 +76,7 @@ const updateacode = async (req, res) => {
   }
 };
 
-const deleteacode = async (req, res) => {
+const deleteACode = async (req, res) => {
   const { _id } = req.body;
 
   if (!_id) {
@@ -92,9 +92,9 @@ const deleteacode = async (req, res) => {
 };
 
 module.exports = {
-  getallCodes,
-  getaCode,
-  createaCode,
-  updateacode,
-  deleteacode,
+  getAllCodes,
+  getACode,
+  createACode,
+  updateACode,
+  deleteACode,
 };
