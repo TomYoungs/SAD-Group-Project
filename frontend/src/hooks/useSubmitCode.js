@@ -1,6 +1,4 @@
 import { useState } from "react";
-
-import { useAuthContext } from "./useAuthContext";
 export const useSubmitCode = () => {
   const [error, setError] = useState(null);
   const [accepted, setAccepted] = useState(null);
@@ -19,6 +17,7 @@ export const useSubmitCode = () => {
       },
       body: JSON.stringify({ codeID }),
     });
+
     const json = await coderesponse.json();
 
     if (!coderesponse.ok) {
@@ -44,7 +43,7 @@ export const useSubmitCode = () => {
           body: JSON.stringify({ userID, moduleID, weekID }),
         }
       );
-      const resjson = await attendanceresponse.json();
+
       if (!attendanceresponse.ok) {
         setIsLoading(false);
         setError(json.error);

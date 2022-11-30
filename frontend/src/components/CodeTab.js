@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGenerateCode } from "../hooks/useGenerateCode";
 
 export const CodeTab = ({ modules }) => {

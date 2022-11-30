@@ -23,10 +23,11 @@ body {
 
 .App,
 html {
-  background-color: $beige !important ;
+  background-color: $beige !important;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: $font1;
   font-weight: 700;
 }
@@ -124,19 +125,19 @@ header {
   }
 
   input {
-      background-color: $green1;
-      border-radius: 20px;
-      border: 1px solid #ddd;
-      box-sizing: border-box;
-      color: white;
-      font-family: $font2;
-      height: 40px;
-      margin-bottom: 20px;
-      padding-left: 20px;
-      padding: 10px;
-      text-align: center;
-      width: 100%;
-    }
+    background-color: $green1;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    color: white;
+    font-family: $font2;
+    height: 40px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+  }
 }
 
 /*STUDENT PAGE*/
@@ -149,6 +150,7 @@ header {
 }
 
 @media only screen and (max-width: 500px) {
+
   .Login,
   .submit-code {
     width: 100vw;
@@ -157,7 +159,7 @@ header {
   }
 }
 
-/*Chrome auto-fill fixes*/
+/*Chrome auto-fill*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -342,6 +344,7 @@ ol {
 }
 
 @media only screen and (min-width: 801px) {
+
   .module-info,
   .students-info {
     display: flex;
@@ -403,11 +406,11 @@ ol {
 
 /*ERRORS*/
 div.error {
-    background: #ffefef;
-    border-radius: 20px;
-    border: 1px solid $errorred;
-    color: $errorred;
-    margin: 20px 30px 0 40px;
-    padding: 10px;
-    text-align: center;
-  }
+  background: #ffefef;
+  border-radius: 20px;
+  border: 1px solid $errorred;
+  color: $errorred;
+  margin: 20px 30px 0 40px;
+  padding: 10px;
+  text-align: center;
+}

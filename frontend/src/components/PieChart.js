@@ -13,7 +13,6 @@ const PieChart = (AttendanceForModule) => {
   const data= {
   datasets: [{
       data: [AttendanceForModule.present, AttendanceForModule.absent],
-      //ToDo green and red look ugly maybe check with others for better schema?
       backgroundColor:[
         'Green',
         'LightGreen',
