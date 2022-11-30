@@ -37,7 +37,9 @@ const Register = () => {
         value={password}
         placeholder="password"
       />
-      <button className="default-button" disabled={isLoading}>Sign up</button>
+      <button className="default-button" disabled={isLoading}>
+        Sign up
+      </button>
       {error && <div className="error">{error}</div>}
     </form>
   );
