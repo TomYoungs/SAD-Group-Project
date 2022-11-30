@@ -101,10 +101,9 @@ const getModulesByTutor = async (req, res) => {
 
 
 // @desc get a module based on userid (a teacher)
-// @route GET /getausersmodule
+// @route GET /getAusersmodule
 // @access Public
-const getaUsersModule = async (req, res) => {
-  //TODO: might need a check of 'role'
+const getAUsersModule = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "invalid userID" });
@@ -128,6 +127,6 @@ module.exports = {
   updateModule,
   getModulesByTutor,
 
-  getaUsersModule
+  getAUsersModule
 
 };

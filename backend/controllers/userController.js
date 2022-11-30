@@ -55,8 +55,6 @@ const registerUser = async (req, res) => {
 };
 
 
-//TODO: use auth since now update is fully open!
-
 // @desc Update a user
 // @route PATCH /updateuser
 // @access Public

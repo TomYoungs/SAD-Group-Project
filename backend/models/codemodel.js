@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 //lines 10-12 used as example. Taken from https://tecadmin.net/get-current-date-time-javascript/
 const hoursBeforeDeletion = 2
 var today = new Date();
-//var deletionHour = ((today.getHours()+hoursBeforeDeletion < 24) ? deletionHour=(today.getHours()+hoursBeforeDeletion) : console.error("ERROR"))
 const month = today.toLocaleString('default', { month: 'long', timezone: 'UTC' });
 // const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 // const expireTime = today.getHours()+2 + ":" + today.getMinutes() + ":" + today.getSeconds();
