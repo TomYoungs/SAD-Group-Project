@@ -3,8 +3,8 @@ const router = express.Router();
 
 
 const {
-  getAttendances,
-  getAttendanceByObjectId,
+  getAllAttendance,
+  getAttendanceById,
   getAttendanceByModuleId,
   getAttendanceByUserId,
   getByUserIDmoduleID,
@@ -14,16 +14,19 @@ const {
   deleteAttendance
 } = require("../controllers/attendanceController");
 
+const requireAuth = require('../middleware/requireAuth')
+
+router.use(requireAuth)
 //Get all attendances
-router.get("/getall", getAttendances);
+router.get("/getallattendance", getAllAttendance);
 
 //Get a attendances with a attendance id
-router.get("/getbyobjectid/:id", getAttendanceByObjectId);
+router.get("/getattendancebyid/:id", getAttendanceById);
 
 //get all attendances with a module id
-router.get('/getByModuleId/:id', getAttendanceByModuleId)
+router.get('/getbymoduleid/:id', getAttendanceByModuleId)
 //get all attendances with a module id
-router.get('/getByModuleIdForCharts/:id', getAttendanceByModuleIdForCharts)
+router.get('/getbymoduleidforcharts/:id', getAttendanceByModuleIdForCharts)
 //get all attendances with a User id
 router.get("/getbyuserid/:id", getAttendanceByUserId);
 
@@ -37,7 +40,7 @@ router.patch("/updateuserattendance", updateUserAttendance);
 router.post("/createattendance", createAttendance)
 
 //delete a attendance
-router.delete("/deleteattendance/:id", deleteAttendance)
+router.delete("/deleteattendancebyid/:id", deleteAttendance)
 
 
 

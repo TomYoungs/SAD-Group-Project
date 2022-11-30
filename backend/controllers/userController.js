@@ -1,5 +1,6 @@
 const User = require("../models/usermodel");
 const Module = require("../models/modulemodel");
+const Attendance = require("../models/attendancemodel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
@@ -9,7 +10,7 @@ const createToken = (_id) => {
 };
 
 // get all Modules
-const getUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
   const users = await User.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(users);
@@ -144,7 +145,7 @@ const modulesUsers = async (req, res) => {
     return res.status(404).json({ error: "no modules found" });
   }
 
-  async function getTutorUsers(module, index){ 
+  async function getTutorUsers(module, index){
     return await User.find({ Modules: module._id})
   }
 
@@ -156,7 +157,7 @@ const modulesUsers = async (req, res) => {
     return res.status(404).json({ error: "No users found" });
   }
 
-  
+
   const filtTutorUsers = tutorusers.filter(el => {
     return !(el.every(element => element === (undefined || null || '')));
   })
@@ -164,6 +165,23 @@ const modulesUsers = async (req, res) => {
   res.status(200).json(filtTutorUsers)
 }
 
+const deleteUser = async (req, res) => {
+  const { _id } = req.params;
+
+  if (!_id) {
+    return res.status(404).json({ error: "please enter all fields" });
+  }
+
+  try {
+    const user = await User.findOneAndDelete({ _id: _id });
+    const attendance = await Attendance.deleteMany({ userID: _id });
+    const modules = await Module.updateMany({},
+      { $pull: { Tutors: _id }});
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 module.exports = {
 
@@ -171,6 +189,7 @@ module.exports = {
   registerUser,
   updateUser,
   createUser,
-  getUsers,
+  getAllUsers,
   modulesUsers,
+  deleteUser,
 };

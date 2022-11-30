@@ -2,14 +2,17 @@ const express = require('express')
 const router = express.Router()
 
 //controller functions
-const { getModules, getaModule, createModule, deleteModule, updateModule, getModulesByTutor, getaUsersModule } = require('../controllers/moduleController')
+const { getAllModules, getModulesById, createModule, deleteModule, updateModule, getModulesByTutor, getaUsersModule } = require('../controllers/moduleController')
 
+const requireAuth = require('../middleware/requireAuth')
 
-router.get('/getmodules', getModules)
+router.use(requireAuth)
 
-router.get('/getamodule/:id', getaModule)
+router.get('/getallmodules', getAllModules)
 
-router.get('/getModulesByTutor/:tutor', getModulesByTutor)
+router.get('/getbyid/:id', getModulesById)
+
+router.get('/getbytutor/:tutor', getModulesByTutor)
 
 router.post('/createmodule', createModule)
 
@@ -17,7 +20,7 @@ router.delete('/deletemodule', deleteModule)
 
 router.patch('/updatemodule', updateModule)
 
-router.get('/getausersmodule/:id', getaUsersModule)
+router.get('/getbyuser/:id', getaUsersModule)
 
 
 module.exports = router
