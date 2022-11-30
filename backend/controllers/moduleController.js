@@ -1,15 +1,16 @@
 const Module = require("../models/modulemodel");
+const User = require("../models/usermodel");
 const mongoose = require("mongoose");
 
 // get all Modules
-const getModules = async (req, res) => {
+const getAllModules = async (req, res) => {
   const modules = await Module.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(modules);
 };
 
 // get a single module
-const getaModule = async (req, res) => {
+const getModulesById = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -50,7 +51,9 @@ const deleteModule = async (req, res) => {
   }
 
   const module = await Module.findOneAndDelete({ _id: id });
-
+  const attendance = await Attendance.deleteMany({ moduleID: _id });
+  const user = await User.updateMany({},
+    { $pull: { Modules: id }});
   if (!module) {
     return res.status(404).json({ error: "No such module" });
   }
@@ -98,10 +101,9 @@ const getModulesByTutor = async (req, res) => {
 
 
 // @desc get a module based on userid (a teacher)
-// @route GET /getausersmodule
+// @route GET /getAusersmodule
 // @access Public
-const getaUsersModule = async (req, res) => {
-  //TODO: might need a check of 'role'
+const getAUsersModule = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "invalid userID" });
@@ -118,13 +120,13 @@ const getaUsersModule = async (req, res) => {
 
 
 module.exports = {
-  getModules,
-  getaModule,
+  getAllModules,
+  getModulesById,
   createModule,
   deleteModule,
   updateModule,
   getModulesByTutor,
 
-  getaUsersModule
+  getAUsersModule
 
 };

@@ -5,26 +5,28 @@ $green3: #8a9c90;
 $green4: #abbcaf;
 $beige: #eae1cc;
 $paleblue: #9ccbc4;
+$errorred: #e7195a;
+$defaultblue: #1aac83;
 
 $font1: "Montserrat", sans-serif;
 $font2: "Cabin", sans-serif;
 
 /*FONTS*/
 @import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
+
+/*LAYOUT*/
+body {
+  margin: 0;
+  font-family: "Poppins";
+}
 
 .App,
 html {
-  background-color: $beige !important ;
+  background-color: $beige !important;
 }
 
-// .pages {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-family: $font1;
-//   text-align: center;
-// }
-
+h1,
 h2 {
   font-family: $font1;
   font-weight: 700;
@@ -36,16 +38,70 @@ h2 {
   margin: auto;
   border-radius: 20px;
   width: 100px;
+  border: 0;
+  padding: 10px;
+  cursor: pointer;
 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.pages {
+  max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+/*HOMEPAGE*/
+.home {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 100px;
+}
+
+/*NAVBAR*/
+nav {
+  display: flex;
+  align-items: center;
+  font-family: $font1;
+  font-weight: 600;
+
+  a {
+    margin-left: 10px;
+  }
+
+  .default-button {
+    display: inline-block;
+  }
+
+  .email-address {
+    padding: 0 10px;
+  }
+}
+
+/*HEADER*/
+header {
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+}
+
 /*LOG IN PAGE*/
 /*AND SOME STUDENT PAGE*/
 .Login,
-.submit-code {
+.submit-code,
+.sign-up {
   background-color: $paleblue;
   margin: auto;
   width: 50%;
@@ -69,14 +125,17 @@ h2 {
   }
 
   input {
-    border-radius: 20px;
-    box-sizing: border-box;
     background-color: $green1;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
     color: white;
     font-family: $font2;
     height: 40px;
     margin-bottom: 20px;
     padding-left: 20px;
+    padding: 10px;
+    text-align: center;
     width: 100%;
   }
 }
@@ -91,15 +150,23 @@ h2 {
 }
 
 @media only screen and (max-width: 500px) {
+
   .Login,
-  .submit-code {
+  .submit-code,
+  .sign-up {
     width: 100vw;
     margin: 0;
     height: fit-content;
   }
+
+  nav {
+    .email-address {
+      display: none;
+    }
+  };
 }
 
-/*Chrome auto-fill fixes*/
+/*Chrome auto-fill*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -136,6 +203,7 @@ input:-webkit-autofill:active {
   list-style: none;
   // margin-bottom: -1px;
   padding: 0.5rem 0.75rem;
+  font-family: $font2;
 }
 
 .tab-list-active {
@@ -169,15 +237,8 @@ ol {
   background-color: $green1 !important;
 }
 
-.studentstab {
-  background-color: $green1 !important;
-  padding: 10px
-}
-
-.attendancezone {
-  margin: 5px;
-  background-color: $beige;
-  padding: 8px
+.tab3 {
+  background-color: $green3 !important;
 }
 
 .module-picker {
@@ -213,7 +274,7 @@ ol {
 
   .module-list {
     overflow-y: scroll;
-    height: 60vh;
+    height: 55vh;
   }
 
   .individual-module {
@@ -235,7 +296,7 @@ ol {
 
   .attendance-pie {
     width: 350px;
-    height: 60vh;
+    height: 55vh;
     margin: 10px;
     background-color: $beige;
     display: flex;
@@ -252,13 +313,53 @@ ol {
   }
 }
 
+.students-info {
+  display: flex;
+  font-family: $font2;
+  overflow: auto;
+
+  .students-list {
+    overflow-y: scroll;
+    height: 55vh;
+  }
+
+  .students-in-module {
+    background-color: $beige;
+    border-bottom: black 1px solid;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+  }
+
+  .attendance-pie {
+    width: 350px;
+    height: 55vh;
+    margin: 10px;
+    background-color: $beige;
+    display: flex;
+    border-radius: 20px;
+    border: $beige 10px solid;
+  }
+
+  .students-in-module:first-child {
+    border-radius: 20px 20px 0 0;
+  }
+
+  .students-in-module:last-child {
+    border-radius: 0 0 20px 20px;
+  }
+}
+
 @media only screen and (min-width: 801px) {
-  .module-info {
+
+  .module-info,
+  .students-info {
     display: flex;
     font-family: $font2;
     width: 95%;
 
-    .module-list {
+    .module-list,
+    .students-list {
       flex: 1;
       max-width: 1000px;
       width: 75%;
@@ -284,13 +385,18 @@ ol {
     border: $beige 5px solid;
   }
 
-  .module-list {
+  .module-list,
+  .students-list {
     width: 85vw;
     margin-top: 20px;
     border-radius: 20px;
   }
 
   .module-info {
+    display: block;
+  }
+
+  .students-info {
     display: block;
   }
 
@@ -303,4 +409,15 @@ ol {
   .week-selector-item {
     padding: 0 20px;
   }
+}
+
+/*ERRORS*/
+div.error {
+  background: #ffefef;
+  border-radius: 20px;
+  border: 1px solid $errorred;
+  color: $errorred;
+  margin: 20px 30px 0 40px;
+  padding: 10px;
+  text-align: center;
 }

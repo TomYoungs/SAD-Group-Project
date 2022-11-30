@@ -1,5 +1,3 @@
-const bcrypt = require('bcrypt');
-const mongoose = require("mongoose");
 
 
 let userList = [];
