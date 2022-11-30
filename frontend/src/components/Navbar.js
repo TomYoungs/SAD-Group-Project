@@ -18,11 +18,11 @@ export const Navbar = () => {
           <h1>Class Scheduler📝</h1>
         </Link>
         <nav>
-          {user && (
-            <div>
-              <span>{user.email}</span>
-              <button onClick={handleClick}>logout</button>
-            </div>
+          { user && (
+          <div>
+            <span className='email-address'>{user.email}</span>
+            <button className='default-button' onClick={handleClick}>logout</button>
+          </div>
           )}
           {!user && (
             <div>
