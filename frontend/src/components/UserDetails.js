@@ -8,7 +8,7 @@ const AllUserDetails = () => {
     const { user } = useAuthContext()
     useEffect(() => {
         const fetchUsers = async () => {
-            const response = await fetch('/api/user/getall', {
+            const response = await fetch('/api/userlocked/getallusers', {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
