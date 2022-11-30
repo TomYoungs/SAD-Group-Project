@@ -17,21 +17,20 @@ const Register = () => {
     <form className="sign-up" onSubmit={handleSubmit}>
       <h2>Register</h2>
 
-      {/* <label>Full Name:</label> */}
       <input
         type="name"
         onChange={(e) => setName(e.target.value)}
         value={name}
         placeholder="full name"
       />
-      {/* <label>Email:</label> */}
+
       <input
         type="email"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
         placeholder="email address"
       />
-      {/* <label>Password:</label> */}
+
       <input
         type="password"
         onChange={(e) => setPassword(e.target.value)}

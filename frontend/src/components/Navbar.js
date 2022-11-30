@@ -20,8 +20,8 @@ export const Navbar = () => {
         <nav>
           { user && (
           <div>
-            <span>{user.email}</span>
-            <button onClick={handleClick}>logout</button>
+            <span className='email-address'>{user.email}</span>
+            <button className='default-button' onClick={handleClick}>logout</button>
           </div>
           )}
           {!user && (

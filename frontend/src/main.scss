@@ -64,20 +64,19 @@ h2 {
 nav {
   display: flex;
   align-items: center;
+  font-family: $font1;
+  font-weight: 600;
 
   a {
     margin-left: 10px;
   }
 
-  button {
-    background: #fff;
-    color: $defaultblue;
-    border: 2px solid $defaultblue;
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-family: "Poppins";
-    cursor: pointer;
-    font-size: 1em;
+  .default-button {
+    display: inline-block;
+  }
+
+  .email-address {
+    padding: 0 10px;
   }
 }
 
@@ -158,6 +157,12 @@ header {
     margin: 0;
     height: fit-content;
   }
+
+  nav {
+    .email-address {
+      display: none;
+    }
+  };
 }
 
 /*Chrome auto-fill fixes*/
