@@ -31,8 +31,8 @@ db.users.insert(user);
  user =
 {
   _id: ObjectId(),
-  name: "Geoff",
-  email: "geoff"+"@gmail.com",
+  name: "Mohammed",
+  email: "mohammedlecturer"+"@gmail.com",
   password: hash,
   role: 1,
   Modules:[]
@@ -54,8 +54,8 @@ db.users.insert(user);
 user =
 {
   _id: ObjectId(),
-  name: "Jeff",
-  email: "jeff"+"@gmail.com",
+  name: "Mohammed",
+  email: "mohammedacademicadvisor"+"@gmail.com",
   password: hash,
   role: 2,
   Modules:[]
@@ -66,7 +66,7 @@ db.users.insert(user);
 let  moduleDetails =
 {
   _id: ObjectId(),
-  name: "Jeff's Academic Advisor session",
+  name: "Mohammed's Academic Advisor session",
   Tutors:[user._id.toString()]
 }
 academicSession.push(moduleDetails);
@@ -75,8 +75,8 @@ db.modules.insert(moduleDetails);
 user =
 {
   _id: ObjectId(),
-  name: "Josh",
-  email: "josh"+"@gmail.com",
+  name: "Nathan",
+  email: "nathan"+"@gmail.com",
   password: hash,
   role: 3,
   Modules:[]
@@ -88,8 +88,8 @@ db.users.insert(user);
 moduleDetails =
 {
   _id: ObjectId(),
-  name: "Computer Science",
-  Tutors:[staffList[0]._id.toString(),staffList[1]._id.toString()]
+  name: "Algorithms and Data Structures",
+  Tutors:[staffList[0]._id.toString(),staffList[1]._id.toString(),staffList[4]._id.toString()]
 }
 moduleList.push(moduleDetails);
 db.modules.insert(moduleDetails);
@@ -97,15 +97,15 @@ moduleDetails =
 {
   _id: ObjectId(),
   name: "Maths",
-  Tutors:[staffList[1]._id.toString(),staffList[2]._id.toString()]
+  Tutors:[staffList[1]._id.toString(),staffList[2]._id.toString(),staffList[4]._id.toString()]
 }
 moduleList.push(moduleDetails);
 db.modules.insert(moduleDetails);
 moduleDetails =
 {
   _id: ObjectId(),
-  name: "Art",
-  Tutors:[staffList[0]._id.toString(),staffList[2]._id.toString()]
+  name: "Algorithms and Data Structures 2",
+  Tutors:[staffList[0]._id.toString(),staffList[2]._id.toString(),staffList[4]._id.toString()]
 }
 moduleList.push(moduleDetails);
 db.modules.insert(moduleDetails);
@@ -113,7 +113,7 @@ moduleDetails =
 {
   _id: ObjectId(),
   name: "Functional Programming",
-  Tutors:[staffList[0]._id.toString(),staffList[1]._id.toString()]
+  Tutors:[staffList[0]._id.toString(),staffList[1]._id.toString(),staffList[4]._id.toString()]
 }
 moduleList.push(moduleDetails);
 db.modules.insert(moduleDetails);
@@ -121,7 +121,7 @@ moduleDetails =
 {
   _id: ObjectId(),
   name: "Software Design",
-  Tutors:[staffList[1]._id.toString(),staffList[2]._id.toString()]
+  Tutors:[staffList[1]._id.toString(),staffList[2]._id.toString(),staffList[4]._id.toString()]
 }
 moduleList.push(moduleDetails);
 db.modules.insert(moduleDetails);
@@ -129,7 +129,7 @@ moduleDetails =
 {
   _id: ObjectId(),
   name: "Games Design",
-  Tutors:[staffList[0]._id.toString(),staffList[2]._id.toString()]
+  Tutors:[staffList[0]._id.toString(),staffList[2]._id.toString(),staffList[4]._id.toString()]
 }
 moduleList.push(moduleDetails);
 db.modules.insert(moduleDetails);
@@ -141,8 +141,8 @@ db.modules.insert(moduleDetails);
 user =
 {
   _id: ObjectId(),
-  name: "Jack",
-  email: "jack"+"@gmail.com",
+  name: "Layla",
+  email: "layla"+"@gmail.com",
   password: hash,
   role: 0,
   Modules:[academicSession[0]._id.toString(),moduleList[1]._id.toString(),moduleList[2]._id.toString(),moduleList[3]._id.toString()]
