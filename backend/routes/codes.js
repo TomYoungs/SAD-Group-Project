@@ -17,7 +17,6 @@ router.use(requireAuth)
 //get all codes route
 router.get("/getallcodes", getAllCodes);
 
-//TODO: needs to be updated to work with :id and not be a POST
 //get a spesific code based on codeID (seed not _id)
 router.post("/getacode", getACode);
 

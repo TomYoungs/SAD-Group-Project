@@ -93,7 +93,6 @@ const updateUserAttendance = async (req, res) => {
   const weeks = attendance.attendance;
   weeks[weekID - 1] = true;
 
-  //TODO: may change names
   const updateuserattendance = await Attendancemodel.findOneAndUpdate(
     { _id: attendance._id },
     {

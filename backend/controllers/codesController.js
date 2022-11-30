@@ -11,7 +11,6 @@ const getAllCodes = async (req, res) => {
   res.status(200).json(codes);
 };
 
-//TODO: currently a post needs to be updated
 // @desc Get a codes
 // @route POST /getACode
 // @access Public
@@ -39,9 +38,6 @@ const createACode = async (req, res) => {
     return res.status(404).json({ error: "please enter all fields" });
   }
 
-  //TODO: check if module ID exists
-
-  //TODO: check if seed is unique
   const codeID = Math.random().toString(36).slice(6)
   try {
     const code = await Codes.create({ codeID, moduleID, weekID });

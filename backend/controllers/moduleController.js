@@ -104,7 +104,6 @@ const getModulesByTutor = async (req, res) => {
 // @route GET /getAusersmodule
 // @access Public
 const getAUsersModule = async (req, res) => {
-  //TODO: might need a check of 'role'
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "invalid userID" });

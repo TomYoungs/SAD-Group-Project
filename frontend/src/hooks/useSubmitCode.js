@@ -27,7 +27,6 @@ export const useSubmitCode = () => {
     }
     if (coderesponse.ok) {
       setIsLoading(false);
-      //TODO: update this to be better
       const userID = JSON.parse(localStorage.getItem("user")).id;
       const moduleID = json.moduleID;
       const weekID = json.weekID;
