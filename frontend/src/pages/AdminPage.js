@@ -27,7 +27,6 @@ const AdminPage = () => {
         }
     }, [])
 
-    //need to be styled prob in tabs so each are easily distinguishable
     return (
         <div className="admin-page">
             <div className='modules'>

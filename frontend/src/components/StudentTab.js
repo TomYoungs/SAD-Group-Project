@@ -6,8 +6,7 @@ import PieChart from "./PieChart";
 export const StudentTab = ({ modules, tutorsUsers }) => {
   const [attendanceWeekEndID, setAttendanceWeekEndID] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
-  // const [userID, setUserID] = useState(null);
-  // const [moduleID, setmoduleID] = useState(null);
+
   const { studentAttendance, attendance } = useStudentAttendance();
 
   let items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -17,10 +16,8 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
   };
 
   const getPresentInModule = (attendance) => {
-    //code for getting data from database
-
     let present = 0;
-    //code to calculate number of students present in a given moduel here
+    //Calculate number of students present in a given module
     for (let x in attendance) {
       for (let y in attendance[x]) {
         if (attendance[x][y] === true && y <= attendanceWeekEndID && y >= 1) {
@@ -32,10 +29,8 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
     return present;
   };
   const getAbsentInModule = (attendance) => {
-    //code for getting data from database
-
     let absent = 0;
-    //code to calculate number of students absent in a given moduel here
+    //Calculate number of students absent in a given module
     for (let x in attendance) {
       for (let y in attendance[x]) {
         if (attendance[x][y] === false && y <= attendanceWeekEndID && y >= 1) {
@@ -117,4 +112,3 @@ export const StudentTab = ({ modules, tutorsUsers }) => {
 };
 
 export default StudentTab;
-//get attendance of user based off UserID and ModuleID

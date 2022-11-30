@@ -23,7 +23,7 @@ body {
 
 .App,
 html {
-  background-color: $beige !important ;
+  background-color: $beige !important;
 }
 
 h1,
@@ -150,6 +150,7 @@ header {
 }
 
 @media only screen and (max-width: 500px) {
+
   .Login,
   .submit-code,
   .sign-up {
@@ -165,7 +166,7 @@ header {
   };
 }
 
-/*Chrome auto-fill fixes*/
+/*Chrome auto-fill*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -350,6 +351,7 @@ ol {
 }
 
 @media only screen and (min-width: 801px) {
+
   .module-info,
   .students-info {
     display: flex;
